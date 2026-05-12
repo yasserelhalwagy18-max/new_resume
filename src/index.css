@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Vazirmatn", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, serif;
+  
+  /* Color Palette - Warm Monochrome Cinematic Minimalism */
+  --color-bg-primary: #08090A;
+  --color-bg-elevated: #111111;
+  --color-bg-secondary: #171717;
+  --color-text-primary: #F3F1EB;
+  --color-text-secondary: #8B8B8B;
+  --color-border-soft: rgba(255, 255, 255, 0.08);
+  --color-accent-ivory: #D6C7A8;
+  --color-accent-olive: #5E6654;
+  --color-accent-amber: #C9945F;
+  --color-shadow-deep: rgba(0, 0, 0, 0.45);
+}
+
+/* CONTRAST COMPLIANCE:
+   #F3F1EB: 17.64:1 - any size
+   #D6C7A8: 11.95:1 - any size
+   #C9945F: 7.2:1 - 18px+ or bold 14px+
+   #8B8B8B: 5.85:1 - 18px+ only, never for small labels
+*/
+
+/* Global Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #08090A;
+  height: -webkit-fill-available;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #08090A;
+  color: #F3F1EB;
+  line-height: 2.1;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+}
+
+/* Cinematic Film Grain Texture - Global */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Subtle Vignette */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+/* Typography System - Persian First */
+h1, h2, h3, h4, h5, h6 {
+  color: #F3F1EB;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: normal;
+  margin: 0;
+}
+
+/* RTL Default Styling */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 700;
+}
+
+[dir="rtl"] p {
+  line-height: 2.2;
+  max-width: 640px;
+}
+
+/* LTR for English */
+[dir="ltr"] {
+  text-align: left;
+}
+
+[dir="ltr"] h1, [dir="ltr"] h2, [dir="ltr"] h3 {
+  font-family: "Inter", sans-serif;
+}
+
+/* Persian Typography Specifics */
+.fa-text {
+  font-feature-settings: "ss01";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Prevent letter-spacing on Persian/Arabic */
+[dir="rtl"] .tracking-widest,
+[dir="rtl"] .tracking-wider,
+[dir="rtl"] .tracking-wide,
+[dir="rtl"] .tracking-normal,
+[dir="rtl"] .tracking-tight,
+[dir="rtl"] .tracking-tighter {
+  letter-spacing: normal !important;
+}
+
+/* Font Sizes - Persian Editorial Scale */
+.text-hero-display {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 1.35;
+}
+
+.text-section-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.35;
+}
+
+.text-subhead {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.4;
+}
+
+[dir="rtl"] .text-subhead {
+  line-height: 1.6;
+}
+
+.text-lead {
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  line-height: 1.8;
+}
+
+[dir="rtl"] .text-lead {
+  line-height: 2.0;
+}
+
+.text-body-lg {
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .text-body-lg {
+    font-size: 16px;
+  }
+}
+
+/* Links & Interactive */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #D6C7A8;
+}
+
+/* Scrollbar - Minimal */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08090A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3A3A3A;
+}
+
+/* Focus States - Accessible */
+:focus-visible {
+  outline: 2px solid #D6C7A8;
+  outline-offset: 4px;
+}
+
+/* Selection */
+::selection {
+  background-color: #D6C7A8;
+  color: #0A0A0A;
+  text-shadow: 0 0 10px rgba(214, 199, 168, 0.3);
+}
+
+/* Utility Classes */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.bg-primary {
+  background-color: #08090A;
+}
+
+.bg-elevated {
+  background-color: #111111;
+}
+
+.bg-secondary {
+  background-color: #171717;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+@supports (height: 100dvh) {
+  .min-h-screen {
+    min-height: 100dvh;
+  }
+}
+
+@supports not (height: 100dvh) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+.text-primary {
+  color: #F3F1EB;
+}
+
+.text-secondary {
+  color: #8B8B8B;
+}
+
+.border-soft {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.accent-ivory {
+  color: #D6C7A8;
+}
+
+.accent-olive {
+  color: #5E6654;
+}
+
+.accent-amber {
+  color: #C9945F;
+}
+
+/* Animation Easing - Slow Confidence */
+.ease-cinematic {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Card Background */
+.card-bg {
+  background-color: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-bg:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background-color: #171717;
+}
+
+/* Button Styles - Restrained, No Jump */
+.btn-primary {
+  background-color: #D6C7A8;
+  color: #0A0A0A;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-primary:hover {
+  background-color: #E5D5B8;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: #F3F1EB;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Section Spacing - Editorial Breathing Room with Rhythm Variation */
+.section-padding {
+  padding-top: clamp(120px, 14vw, 200px);
+  padding-bottom: clamp(120px, 14vw, 200px);
+}
+
+.section-padding-mobile {
+  padding-top: clamp(80px, 10vw, 120px);
+  padding-bottom: clamp(80px, 10vw, 120px);
+}
+
+@media (min-width: 768px) {
+  .section-padding-mobile {
+    padding-top: clamp(120px, 14vw, 200px);
+    padding-bottom: clamp(120px, 14vw, 200px);
+  }
+}
+
+/* Mezzo sections - intentional stillness */
+.section-mezzo {
+  padding-top: clamp(160px, 18vw, 180px);
+  padding-bottom: clamp(120px, 18vw, 180px);
+}
+
+/* Compressed sections - for rhythm variation */
+.section-compressed {
+  padding-top: clamp(80px, 10vw, 120px);
+  padding-bottom: clamp(80px, 10vw, 120px);
+}
+
+/* Forte sections - extra breathing room */
+.section-forte {
+  padding-top: clamp(200px, 15vw, 320px);
+  padding-bottom: clamp(160px, 15vw, 320px);
+}
+
+/* Glass Surface Material */
+.glass-surface {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Accent Glow System */
+.accent-glow {
+  box-shadow: 0 0 20px rgba(214, 199, 168, 0.15), 0 0 60px rgba(214, 199, 168, 0.08);
+}
+

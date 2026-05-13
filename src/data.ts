@@ -355,6 +355,7 @@ export const portfolioData = {
       linkedinUrl: "https://linkedin.com/in/mohammad-sadegh-shahid",
       githubUrl: "https://github.com/mohammadsadeghshahid",
       whatsappUrl: "https://wa.me/989369913228",
+      telegramUrl: "https://t.me/placeholder",
     },
     footer: {
       tagline:
@@ -670,6 +671,7 @@ export const portfolioData = {
       linkedinUrl: "https://linkedin.com/in/mohammad-sadegh-shahid",
       githubUrl: "https://github.com/mohammadsadeghshahid",
       whatsappUrl: "https://wa.me/989369913228",
+      telegramUrl: "https://t.me/placeholder",
     },
     footer: {
       tagline:

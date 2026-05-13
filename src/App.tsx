@@ -8,6 +8,7 @@ import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { Experience } from "./components/Experience";
 import { Projects } from "./components/Projects";
+import { Breath } from "./components/Breath";
 import { VisualWorks } from "./components/VisualWorks";
 import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
@@ -70,6 +71,7 @@ export default function App() {
         <HumanMoment lang={lang} />
         <About lang={lang} />
         <Projects lang={lang} />
+        <Breath lang={lang} />
         <Experience lang={lang} />
         <VisualWorks lang={lang} />
         <Testimonials lang={lang} />

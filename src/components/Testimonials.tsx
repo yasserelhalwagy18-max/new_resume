@@ -15,7 +15,6 @@ interface TestimonialItem {
   company: string;
   role: string;
   text: string;
-  result: string;
 }
 
 interface TestimonialsData {
@@ -99,15 +98,6 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
               >
                 "{item.text}"
               </p>
-
-              <div className="bg-amber-500/5 border border-amber-500/10 rounded-2xl p-4 mb-8">
-                <span className="block text-[12px] uppercase tracking-[0.2em] text-amber-500 mb-1">
-                  {lang === "en" ? "Result" : "نتیجه"}
-                </span>
-                <p className="text-white/80 text-sm font-medium">
-                  {item.result}
-                </p>
-              </div>
 
               <div className="flex items-center gap-4 mt-auto">
                 <div

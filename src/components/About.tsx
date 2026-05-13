@@ -1,11 +1,177 @@
-import { memo } from "react";
-import { motion } from "motion/react";
+
+import { memo, useRef, useState, useEffect } from "react";
+import { motion, useMotionValue, useTransform, useScroll } from "motion/react";
 import { portfolioData, Language } from "../data";
 import { WordReveal } from "./WordReveal";
 
+const TiltCard = ({ children, className = "" }: { children: import("react").ReactNode, className?: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const rotateX = useTransform(y, [-100, 100], [10, -10]);
+  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+
+  const handleMouseMove = (e: import("react").MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set(e.clientX - centerX);
+    y.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 2 }}
+      className={`relative rounded-2xl bg-white/[0.02] border border-white/[0.08] p-8 overflow-hidden group ${className}`}
+    >
+      <div style={{ transform: "translateZ(30px)" }} className="h-full">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
+
+const Node1 = () => {
+  return (
+    <div className="h-full flex items-center justify-center relative">
+      <motion.svg
+        viewBox="0 0 100 100"
+        className="w-32 h-32"
+        whileHover={{ scale: 1.1, rotate: 15 }}
+        transition={{ type: "spring", stiffness: 150, damping: 15, mass: 2 }}
+      >
+        <motion.circle cx="50" cy="50" r="40" fill="transparent" stroke="#f59e0b" strokeWidth="2" strokeDasharray="10 5"
+            animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}/>
+        <motion.rect x="35" y="35" width="30" height="30" fill="#f59e0b" rx="4"
+            whileHover={{ scale: 0.8, rotate: -45 }} transition={{ type: "spring", stiffness: 150, damping: 15, mass: 2 }}/>
+      </motion.svg>
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <span className="text-amber-500 text-xs font-mono font-bold mix-blend-difference">Aa</span>
+      </div>
+    </div>
+  );
+};
+
+const Node2 = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end center"],
+  });
+
+  const codeString = `import { eq } from 'drizzle-orm';\nimport { users } from './schema';\n\nconst getUser = async (id: number) => {\n  return await db.select()\n    .from(users)\n    .where(eq(users.id, id));\n};`;
+
+  const charCount = useTransform(scrollYProgress, [0, 1], [0, codeString.length]);
+  const [displayedCode, setDisplayedCode] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = charCount.on("change", (latest) => {
+      setDisplayedCode(codeString.slice(0, Math.round(latest)));
+    });
+    return unsubscribe;
+  }, [charCount, codeString]);
+
+  return (
+    <div ref={containerRef} className="h-full bg-[#0a0a0a] rounded-lg p-4 font-mono text-xs text-white/70 overflow-hidden relative border border-white/[0.05]">
+      <div className="flex gap-1.5 mb-3" dir="ltr">
+        <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+        <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+      </div>
+      <pre className="whitespace-pre-wrap leading-relaxed" dir="ltr">
+        {displayedCode}
+        <motion.span
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.8, repeat: Infinity }}
+          className="inline-block w-2 h-3.5 bg-amber-500 ml-1 align-middle"
+        />
+      </pre>
+    </div>
+  );
+};
+
+const Node3 = () => {
+  return (
+    <div className="h-full relative overflow-hidden rounded-xl bg-white/[0.02]">
+      {/* Wireframe Grid */}
+      <div className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-px bg-white/[0.05]">
+        {Array.from({ length: 16 }).map((_, i) => (
+          <div key={i} className="bg-[#08090A] flex items-center justify-center">
+            <span className="text-[8px] text-white/20 font-mono">0{i.toString(16)}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* High-fidelity Image Reveal */}
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/photo-1507238691740-187a5b1d37b8.webp')" }}
+        initial={{ clipPath: "circle(0% at 50% 50%)" }}
+        whileHover={{ clipPath: "circle(150% at 50% 50%)" }}
+        transition={{ type: "spring", stiffness: 150, damping: 15, mass: 2 }}
+      />
+    </div>
+  );
+};
+
+const Node4 = () => {
+  const [isAligned, setIsAligned] = useState(false);
+
+  const particles = Array.from({ length: 25 });
+
+  return (
+    <div
+      className="h-full relative overflow-hidden flex items-center justify-center"
+      onMouseEnter={() => setIsAligned(true)}
+      onMouseLeave={() => setIsAligned(false)}
+      onClick={() => setIsAligned(!isAligned)}
+    >
+      <div className="relative w-32 h-32">
+        {particles.map((_, i) => {
+          const row = Math.floor(i / 5);
+          const col = i % 5;
+          const targetX = (col - 2) * 20;
+          const targetY = (row - 2) * 20;
+
+          const randomX = (Math.random() - 0.5) * 200;
+          const randomY = (Math.random() - 0.5) * 200;
+
+          return (
+            <motion.div
+              key={i}
+              className="absolute left-1/2 top-1/2 w-2 h-2 bg-white/40 rounded-sm"
+              initial={{ x: randomX, y: randomY, rotate: Math.random() * 360, opacity: 0.2 }}
+              animate={{
+                x: isAligned ? targetX : randomX,
+                y: isAligned ? targetY : randomY,
+                rotate: isAligned ? 0 : Math.random() * 360,
+                scale: isAligned ? 1 : Math.random() * 1.5 + 0.5,
+                opacity: isAligned ? 1 : 0.4,
+                backgroundColor: isAligned ? "rgba(245, 158, 11, 0.8)" : "rgba(255, 255, 255, 0.2)"
+              }}
+              transition={{ type: "spring", stiffness: 150, damping: 15, mass: 2 }}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 export const About = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].about;
-  const capT = portfolioData[lang].capabilities;
+  const poeticQuote = portfolioData[lang].humanMoment.quote;
   const isFa = lang === "fa";
 
   return (
@@ -25,74 +191,40 @@ export const About = memo(({ lang }: { lang: Language }) => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 1.2 }}
-        className="max-w-3xl relative z-10"
+        className="max-w-4xl relative z-10"
       >
         <WordReveal
           text={t.title}
-          className={`text-5xl md:text-6xl font-light mb-24 text-[#F3F1EB] ${isFa ? 'tracking-normal' : 'tracking-tight'}`}
+          className={`text-5xl md:text-6xl font-light mb-16 text-[#F3F1EB] ${isFa ? 'tracking-normal' : 'tracking-tight'}`}
         />
 
-        {/* Capability Blocks - Moved to Top */}
-        <div className="mb-32">
-          <span className="text-xs uppercase tracking-widest text-amber-500 mb-12 block">
-            {isFa ? "چگونه کار می‌کنم" : "How I Work"}
-          </span>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-lg md:text-xl text-white/60 font-light italic mb-16 max-w-2xl"
+        >
+          "{poeticQuote}"
+        </motion.p>
 
-          <div className="relative">
-            <div className="flex md:grid md:grid-cols-2 gap-6 lg:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory no-scrollbar pb-8 md:pb-0">
-              {capT.blocks.map((block, index) => (
-                <motion.div
-                  key={block.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{
-                    duration: 0.8,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: index * 0.1
-                  }}
-                  className="min-w-[85vw] md:min-w-0 snap-center group p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:bg-white/[0.03] hover:border-white/[0.12] transition-all duration-500"
-                >
-                  <div className="mb-6 text-amber-500/40">
-                    {index === 0 && <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/></svg>}
-                    {index === 1 && <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>}
-                    {index === 2 && <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>}
-                    {index === 3 && <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>}
-                  </div>
-                  <h3 className="text-sm font-medium text-[#F3F1EB] mb-3 tracking-wide">
-                    {block.title}
-                  </h3>
-                  <p className="text-xs text-white/60 leading-relaxed">
-                    {block.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+        {/* 2x2 Interactive Proof Surfaces Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-24">
+          <TiltCard className="h-64 md:h-80">
+            <Node1 />
+          </TiltCard>
 
-            <div className="md:hidden absolute right-0 top-0 bottom-8 w-16 bg-gradient-to-l from-[#08090A] to-transparent pointer-events-none rtl:right-auto rtl:left-0 rtl:bg-gradient-to-r" />
+          <TiltCard className="h-64 md:h-80">
+            <Node2 />
+          </TiltCard>
 
-            <p className="md:hidden text-center text-[11px] text-white/60 uppercase tracking-widest mt-4 animate-pulse">
-              {isFa ? "→ برای دیدن بیشتر بکشید" : "Swipe to see more →"}
-            </p>
-          </div>
-        </div>
+          <TiltCard className="h-64 md:h-80">
+            <Node3 />
+          </TiltCard>
 
-        <div className={`space-y-20 text-[1.1rem] ${isFa ? 'leading-[2.2]' : 'leading-[1.8]'} text-white/80 font-light`}>
-          {t.paragraphs?.map((p, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{
-                duration: 1,
-                delay: i * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              {p}
-            </motion.p>
-          ))}
+          <TiltCard className="h-64 md:h-80">
+            <Node4 />
+          </TiltCard>
         </div>
 
         {/* Signature Line */}
@@ -101,11 +233,10 @@ export const About = memo(({ lang }: { lang: Language }) => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mt-24 pt-8 border-t border-white/[0.08] text-xs tracking-widest text-white/60"
+          className="pt-8 border-t border-white/[0.08] text-xs tracking-widest text-white/60"
         >
           {t.location}
         </motion.div>
-
       </motion.div>
     </section>
   );

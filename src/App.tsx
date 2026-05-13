@@ -38,7 +38,7 @@ export default function App() {
       sessionStorage.setItem('hasVisited', 'true');
     }
   }, [isLoading]);
-/////
+
   return (
     <div
       className="min-h-screen selection:bg-[#D6C7A8] selection:text-[#0A0A0A] bg-[#08090A]"

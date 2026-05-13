@@ -216,12 +216,12 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
         // Lens Interaction
         const dx = p.x - effectiveCenterX;
         const dy = p.y - effectiveCenterY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const distSq = dx * dx + dy * dy;
 
         let displayOpacity = p.opacity;
         let displaySize = p.size;
 
-        if (dist < 200) {
+        if (distSq < 40000) { // 200^2
           displayOpacity *= 1.4; // +40%
           displaySize *= 1.2;    // +20%
         }

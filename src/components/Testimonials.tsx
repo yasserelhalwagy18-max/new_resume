@@ -4,8 +4,28 @@ import { portfolioData, Language } from "../data";
 import { Quote } from "lucide-react";
 import { WordReveal } from "./WordReveal";
 
+interface TestimonialStat {
+  label: string;
+  value: string;
+}
+
+interface TestimonialItem {
+  id: number;
+  name: string;
+  company: string;
+  role: string;
+  text: string;
+  result: string;
+}
+
+interface TestimonialsData {
+  title: string;
+  stats: TestimonialStat[];
+  items: TestimonialItem[];
+}
+
 export const Testimonials = memo(({ lang }: { lang: Language }) => {
-  const t = portfolioData[lang].testimonials;
+  const t = portfolioData[lang].testimonials as unknown as TestimonialsData;
   const isFa = lang === "fa";
 
   return (
@@ -39,7 +59,7 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
           </motion.h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
-            {(t as any).stats.map((stat: any, index: number) => (
+            {t.stats.map((stat, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -85,7 +105,7 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
                   {lang === "en" ? "Result" : "نتیجه"}
                 </span>
                 <p className="text-white/80 text-sm font-medium">
-                  {(item as any).result}
+                  {item.result}
                 </p>
               </div>
 
@@ -99,7 +119,7 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
                 <div>
                   <h3 className="text-white font-medium">{item.name}</h3>
                   <p className="text-white/50 text-xs uppercase tracking-widest">
-                    {(item as any).role} &middot; {(item as any).company}
+                    {item.role} &middot; {item.company}
                   </p>
                 </div>
               </div>

@@ -1,9 +1,10 @@
 import { useState, useEffect, memo, useMemo } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "motion/react";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate } from "motion/react";
 import { ArrowDownRight, ArrowDownLeft } from "lucide-react";
 import { portfolioData, Language } from "../data";
 import { CinematicParticles } from "./CinematicParticles";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { heavySpring } from "../utils/physics";
 
 export const Hero = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].hero;
@@ -18,14 +19,18 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
   const springY = useSpring(mouseY, springConfig);
 
   // Parallax shifts
-  const layer2X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 4}%`);
-  const layer2Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 4}%`);
-  const layer3X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 3}%`);
-  const layer3Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 3}%`);
-  const layer1X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 1.6}%`);
-  const layer1Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 1.6}%`);
-  const layer4X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 1}%`);
-  const layer4Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 1}%`);
+  const layer2X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 20}%`);
+  const layer2Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 20}%`);
+  const layer3X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 15}%`);
+  const layer3Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 15}%`);
+  const layer1X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 8}%`);
+  const layer1Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 8}%`);
+  const layer4X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 5}%`);
+  const layer4Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 5}%`);
+
+  const springXPercent = useTransform(springX, (v) => v * 100);
+  const springYPercent = useTransform(springY, (v) => v * 100);
+  const maskImage = useMotionTemplate`radial-gradient(600px circle at ${springXPercent}% ${springYPercent}%, black 0%, transparent 100%)`;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -45,7 +50,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
     <section className="min-h-screen flex items-center pt-[72px] px-6 relative overflow-hidden section-forte bg-[#08090A]" style={{ minHeight: '100dvh' }}>
       {/* Layer 4: Dust Field (Canvas) */}
       <motion.div
-        style={{ x: layer4X, y: layer4Y }}
+        style={{ x: layer4X, y: layer4Y, WebkitMaskImage: maskImage, maskImage }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.8 }}
@@ -66,8 +71,9 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.8 }}
         className="absolute inset-0 z-[2] pointer-events-none hidden lg:block"
+        style={{ WebkitMaskImage: maskImage, maskImage }}
       >
-        <div className="absolute start-[20%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]">
 
           {/* Layer 1: God Rays */}
           <motion.div
@@ -121,37 +127,30 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
       </motion.div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        {/* Empty left side on desktop to let visual breathe */}
-        <div className="hidden lg:block h-1" />
-
-        {/* Right Side — Text */}
-        <div className="flex flex-col items-start text-left rtl:text-right">
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center max-w-7xl mx-auto px-6">
+        {/* Centered Text Container */}
+        <div className="flex flex-col items-center text-center w-full">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
+            transition={{ ...heavySpring, delay: 0.2 }}
             className={`text-[12px] md:text-xs text-amber-500/70 uppercase tracking-widest mb-8 block ${isFa ? "tracking-normal" : ""}`}
           >
             {t.role}
           </motion.span>
 
           <h1
-            className={`${isFa ? "text-[clamp(2.8rem, 7vw, 5rem)]" : "text-hero-display"} text-[#F3F1EB] text-4xl pb-6 ${isFa ? "leading-[1.45]" : "leading-[1.1]"}`}
+            className={`text-[clamp(4rem,10vw,8rem)] leading-[1] text-[#F3F1EB] pb-6`}
             dir={isFa ? "rtl" : "ltr"}
           >
             <span className="sr-only">{t.title}</span>
             <div className="flex flex-col" aria-hidden="true">
               {titleLines.map((line, index) => (
-                <span key={index} className="inline-block overflow-hidden">
+                <span key={index} className={`inline-block overflow-hidden ${isFa && index > 0 ? "-mt-4 md:-mt-8" : ""}`}>
                   <motion.span
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.8,
-                      ease: [0.16, 1, 0.3, 1],
-                      delay: 0.6 + (index * 0.6)
-                    }}
+                    transition={{ ...heavySpring, delay: 0.4 + (index * 0.2) }}
                     className="inline-block"
                   >
                   {index === 0 && !isFa ? (
@@ -168,20 +167,11 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
             </div>
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className={`text-white/70 max-w-[460px] leading-[1.8] mb-12 ${isFa ? "text-[15px] md:text-base leading-[2.2]" : "text-[15px] md:text-body-lg"}`}
-          >
-            {t.description}
-          </motion.p>
-
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap gap-5"
+            transition={{ ...heavySpring, delay: 0.8 }}
+            className="flex justify-center w-full"
           >
             <a href="#projects" className="btn-primary group">
               {t.ctaPrimary}
@@ -190,9 +180,6 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
               ) : (
                 <ArrowDownRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:translate-y-px" />
               )}
-            </a>
-            <a href="#contact" className="btn-ghost">
-              {t.ctaSecondary}
             </a>
           </motion.div>
         </div>

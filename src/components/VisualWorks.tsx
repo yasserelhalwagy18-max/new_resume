@@ -88,7 +88,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
                           {lang === "en" ? "Tools" : "ابزارها"}
                         </span>
                       </div>
-                      <p className="text-xs font-mono text-white/70">
+                      <p className="text-xs font-mono text-white/60">
                         {item.tools}
                       </p>
                     </div>
@@ -108,7 +108,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
 
                   <button
                     onClick={() => toggleExpand(item.id)}
-                    className="w-full py-4 px-6 rounded-xl border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.02] transition-all flex items-center justify-between text-xs uppercase tracking-widest text-white/70 hover:text-white/80"
+                    className="w-full py-4 px-6 rounded-xl border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.02] transition-all flex items-center justify-between text-xs uppercase tracking-widest text-white/50 hover:text-white/80"
                   >
                     <span>{isExpanded ? item.closeBtn : item.detailsBtn}</span>
                     <motion.div animate={{ rotate: isExpanded ? 180 : 0 }}>

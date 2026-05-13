@@ -21,40 +21,38 @@ describe('useScrollVelocity', () => {
       damping: 15,
     });
 
-    expect((result.current.skew as any).source).toBeDefined();
-    expect((result.current.skew as any).fn).toBeDefined();
-    expect((result.current.filter as any).source).toBeDefined();
-    expect((result.current.filter as any).fn).toBeDefined();
+    expect((result.current as any).source).toBeDefined();
+    expect((result.current as any).fn).toBeDefined();
   });
 
   it('calculates the correct skew values without hitting the clamp limit', () => {
     const { result } = renderHook(() => useScrollVelocity(2));
-    const skewTransformFn = (result.current.skew as any).fn;
+    const transformFn = (result.current as any).fn;
 
-    expect(skewTransformFn(1000)).toBe(0.5);
-    expect(skewTransformFn(-1000)).toBe(-0.5);
-    expect(skewTransformFn(0)).toBe(0);
+    expect(transformFn(1000)).toBe(0.5);
+    expect(transformFn(-1000)).toBe(-0.5);
+    expect(transformFn(0)).toBe(0);
   });
 
   it('clamps the positive skew value correctly', () => {
     const { result } = renderHook(() => useScrollVelocity(1));
-    const skewTransformFn = (result.current.skew as any).fn;
+    const transformFn = (result.current as any).fn;
 
-    expect(skewTransformFn(4000)).toBe(1);
+    expect(transformFn(4000)).toBe(1);
   });
 
   it('clamps the negative skew value correctly', () => {
     const { result } = renderHook(() => useScrollVelocity(1));
-    const skewTransformFn = (result.current.skew as any).fn;
+    const transformFn = (result.current as any).fn;
 
-    expect(skewTransformFn(-4000)).toBe(-1);
+    expect(transformFn(-4000)).toBe(-1);
   });
 
   it('uses default clamp value of 2', () => {
     const { result } = renderHook(() => useScrollVelocity());
-    const skewTransformFn = (result.current.skew as any).fn;
+    const transformFn = (result.current as any).fn;
 
-    expect(skewTransformFn(6000)).toBe(2);
-    expect(skewTransformFn(-6000)).toBe(-2);
+    expect(transformFn(6000)).toBe(2);
+    expect(transformFn(-6000)).toBe(-2);
   });
 });

@@ -124,7 +124,7 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
                   <Mail size={20} aria-hidden="true" />
                 </div>
                 <div className="flex flex-col items-start rtl:items-end">
-                  <span className="text-sm text-white/70">
+                  <span className="text-sm text-white/60">
                     {isEn ? "Email" : "ایمیل"}
                   </span>
                   <span
@@ -147,7 +147,7 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
                   <Phone size={20} aria-hidden="true" />
                 </div>
                 <div className="flex flex-col items-start rtl:items-end">
-                  <span className="text-sm text-white/70">
+                  <span className="text-sm text-white/60">
                     {isEn ? "WhatsApp" : "واتساپ"}
                   </span>
                   <span
@@ -166,7 +166,7 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
-                className="p-4 bg-white/5 border border-white/10 text-white/70 hover:text-amber-500 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all duration-300 focus:outline-none rounded-2xl"
+                className="p-4 bg-white/5 border border-white/10 text-white/60 hover:text-amber-500 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all duration-300 focus:outline-none rounded-2xl"
               >
                 <Linkedin size={22} aria-hidden="true" />
               </a>
@@ -175,7 +175,7 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
-                className="p-4 bg-white/5 border border-white/10 text-white/70 hover:text-amber-500 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all duration-300 focus:outline-none rounded-2xl"
+                className="p-4 bg-white/5 border border-white/10 text-white/60 hover:text-amber-500 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all duration-300 focus:outline-none rounded-2xl"
               >
                 <Github size={22} aria-hidden="true" />
               </a>
@@ -376,7 +376,7 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
               >
                 شروع گفتگو در واتس‌اپ
               </a>
-              <div className="flex flex-col items-center gap-3 mt-4 text-white/70 font-light">
+              <div className="flex flex-col items-center gap-3 mt-4 text-white/60 font-light">
                 <a href={`mailto:${t.email}`} className="hover:text-amber-500 transition-colors" dir="ltr">
                   {t.email}
                 </a>

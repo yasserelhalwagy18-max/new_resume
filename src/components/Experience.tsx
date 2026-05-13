@@ -124,7 +124,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                     </span>
                     <motion.div
                       animate={{ rotate: isExpanded ? 180 : 0 }}
-                      className="text-white/70"
+                      className="text-white/60"
                     >
                       <ChevronDown size={16} aria-hidden="true" />
                     </motion.div>
@@ -132,7 +132,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                   <h3 className="text-subhead font-light mb-1 text-white">
                     {item.role}
                   </h3>
-                  <span className="text-sm font-medium text-white/70 block mb-4">
+                  <span className="text-sm font-medium text-white/60 block mb-4">
                     {item.company}
                   </span>
 
@@ -179,7 +179,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                   <h4 className="text-[#F3F1EB] font-medium text-lg mb-3 tracking-wide">
                     {step.title}
                   </h4>
-                  <p className="text-white/70 text-sm leading-relaxed">
+                  <p className="text-white/60 text-sm leading-relaxed">
                     {step.desc}
                   </p>
                 </motion.div>
@@ -206,7 +206,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                     return (
                       <div
                         key={focusIdx}
-                        className="p-2 bg-white/[0.03] rounded-lg text-white/70 group-hover:text-amber-500/60 transition-colors"
+                        className="p-2 bg-white/[0.03] rounded-lg text-white/20 group-hover:text-amber-500/60 transition-colors"
                         title={aboutT.coreFocus[focusIdx]}
                       >
                         <Icon size={16} />
@@ -217,7 +217,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                 <h4 className="text-lg font-medium text-amber-500/80 mb-3">
                   {cat.name}
                 </h4>
-                <p className="text-white/70 text-sm md:text-base leading-relaxed">
+                <p className="text-white/60 text-sm md:text-base leading-relaxed">
                   {cat.items}
                 </p>
 
@@ -225,7 +225,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                   {expertiseToFocusMap[i]?.map((focusIdx) => (
                     <span
                       key={focusIdx}
-                      className="text-[11px] uppercase tracking-widest text-white/70 border border-white/[0.12] px-2 py-1 rounded"
+                      className="text-[11px] uppercase tracking-widest text-white/60 border border-white/[0.12] px-2 py-1 rounded"
                     >
                       {aboutT.coreFocus[focusIdx]}
                     </span>

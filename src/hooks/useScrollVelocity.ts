@@ -13,5 +13,17 @@ export const useScrollVelocity = (clampValue: number = 2) => {
     return Math.max(Math.min(skewVal, clampValue), -clampValue);
   });
 
-  return skew;
+  const filter = useTransform(smoothVelocity, (v) => {
+    const absV = Math.abs(v);
+    if (absV < 500) return "none";
+
+    // Calculate intensity based on velocity (max at ~3000)
+    const intensity = Math.min((absV - 500) / 2500, 1);
+
+    // Chromatic aberration / RGB split effect
+    const offset = intensity * 4; // max 4px offset
+    return `drop-shadow(-${offset}px 0 0 rgba(255, 0, 0, ${intensity * 0.5})) drop-shadow(${offset}px 0 0 rgba(0, 255, 255, ${intensity * 0.5}))`;
+  });
+
+  return { skew, filter };
 };

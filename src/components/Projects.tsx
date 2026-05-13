@@ -15,7 +15,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
   const [direction, setDirection] = useState(0);
   const isFa = lang === "fa";
   const prefersReduced = usePrefersReducedMotion();
-  const scrollSkew = useScrollVelocity(prefersReduced ? 0 : 2);
+  const { skew: scrollSkew } = useScrollVelocity(prefersReduced ? 0 : 2);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -134,7 +134,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-white/60 text-[15px] leading-relaxed max-w-[420px]"
+            className="text-white/70 text-[15px] leading-relaxed max-w-[420px]"
           >
             {lang === "en"
               ? "Selected case studies in creative development and AI-driven design."
@@ -453,7 +453,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                         transition={{ duration: 0 }}
                         className="pt-6 border-t border-white/10 text-left rtl:text-right"
                       >
-                        <span className="block text-xs uppercase tracking-widest text-white/50 mb-4">
+                        <span className="block text-xs uppercase tracking-widest text-white/70 mb-4">
                           {lang === "en" ? "Technologies" : "فناوری‌ها"}
                         </span>
                         <div className="flex flex-wrap gap-2 rtl:justify-start">

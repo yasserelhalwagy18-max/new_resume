@@ -62,7 +62,7 @@ export const About = memo(({ lang }: { lang: Language }) => {
                   <h3 className="text-sm font-medium text-[#F3F1EB] mb-3 tracking-wide">
                     {block.title}
                   </h3>
-                  <p className="text-xs text-white/60 leading-relaxed">
+                  <p className="text-xs text-white/70 leading-relaxed">
                     {block.description}
                   </p>
                 </motion.div>
@@ -71,7 +71,7 @@ export const About = memo(({ lang }: { lang: Language }) => {
 
             <div className="md:hidden absolute right-0 top-0 bottom-8 w-16 bg-gradient-to-l from-[#08090A] to-transparent pointer-events-none rtl:right-auto rtl:left-0 rtl:bg-gradient-to-r" />
 
-            <p className="md:hidden text-center text-[11px] text-white/60 uppercase tracking-widest mt-4 animate-pulse">
+            <p className="md:hidden text-center text-[11px] text-white/70 uppercase tracking-widest mt-4 animate-pulse">
               {isFa ? "→ برای دیدن بیشتر بکشید" : "Swipe to see more →"}
             </p>
           </div>
@@ -101,7 +101,7 @@ export const About = memo(({ lang }: { lang: Language }) => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mt-24 pt-8 border-t border-white/[0.08] text-xs tracking-widest text-white/60"
+          className="mt-24 pt-8 border-t border-white/[0.08] text-xs tracking-widest text-white/70"
         >
           {t.location}
         </motion.div>

@@ -25,9 +25,9 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
             className="w-12 h-12 rounded-full border border-white/[0.12] flex items-center justify-center hover:border-amber-500/30 hover:bg-amber-500/5 transition-all group"
             aria-label="Back to top"
           >
-            <ArrowUp size={20} className="text-white/60 group-hover:text-amber-500 transition-colors" />
+            <ArrowUp size={20} className="text-white/70 group-hover:text-amber-500 transition-colors" />
           </button>
-          <p className="text-sm text-white/60 font-light tracking-widest">
+          <p className="text-sm text-white/70 font-light tracking-widest">
             <span dir={lang === 'fa' ? 'rtl' : 'ltr'}>
               {portfolioData[lang].footer.copyright.replace(
                 "{year}",

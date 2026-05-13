@@ -29,6 +29,10 @@
   box-sizing: border-box;
 }
 
+html, body, * {
+  cursor: none;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -96,14 +100,21 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
+[dir="rtl"] h1, [dir="rtl"] h2 {
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
 [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3 {
   text-wrap: balance;
 }
 
 [dir="rtl"] p {
-  line-height: 2.2;
+  font-weight: 400;
+  line-height: 2.35;
   max-width: 640px;
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 
 [dir="ltr"] {
@@ -256,7 +267,7 @@ a:hover {
 }
 
 .text-secondary {
-  color: #8B8B8B;
+  color: rgba(243, 241, 235, 0.65);
 }
 
 .border-soft {

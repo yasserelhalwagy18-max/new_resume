@@ -106,8 +106,17 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
 
                 {/* Content card */}
                 <div
-                  className="flex-1 bg-white/[0.03] border border-white/[0.08] p-6 rounded-2xl hover:bg-white/[0.05] transition-colors cursor-pointer text-left rtl:text-right"
+                  className="flex-1 bg-white/[0.03] border border-white/[0.08] p-6 rounded-2xl hover:bg-white/[0.05] transition-colors cursor-pointer text-left rtl:text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/50"
                   onClick={() => toggleExpand(item.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isExpanded}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      toggleExpand(item.id);
+                    }
+                  }}
                 >
                   <div className="flex justify-between items-start mb-3">
                     <span className="text-[12px] uppercase tracking-widest text-amber-500 font-medium">

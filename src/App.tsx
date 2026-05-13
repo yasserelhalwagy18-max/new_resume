@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useScroll, useSpring, motion, AnimatePresence } from "motion/react";
 import { Language, portfolioData } from "./data";
+import { useScrollVelocity } from "./hooks/useScrollVelocity";
 import { LoadingSequence } from "./components/LoadingSequence";
 import { HumanMoment } from "./components/HumanMoment";
 import { Header } from "./components/Header";
@@ -12,6 +13,40 @@ import { VisualWorks } from "./components/VisualWorks";
 import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+
+function CustomCursor() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 w-4 h-4 bg-white rounded-full pointer-events-none z-[9999]"
+      style={{
+        mixBlendMode: "difference",
+        translateX: position.x - 8,
+        translateY: position.y - 8,
+      }}
+      animate={{
+        x: position.x - 8,
+        y: position.y - 8,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 28,
+        mass: 0.5,
+      }}
+    />
+  );
+}
 
 export default function App() {
   // Default to Persian based on user request priority
@@ -26,6 +61,8 @@ export default function App() {
     damping: 30,
     restDelta: 0.001,
   });
+
+  const { filter: mainFilter } = useScrollVelocity();
 
   useEffect(() => {
     // Set text direction based on chosen language
@@ -45,6 +82,7 @@ export default function App() {
       dir={lang === "fa" ? "rtl" : "ltr"}
       lang={lang}
     >
+      <CustomCursor />
       <a href="#about" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70] focus:px-4 focus:py-2 focus:bg-[#D6C7A8] focus:text-[#0A0A0A] focus:rounded-lg">
         {lang === 'fa' ? 'پرش به محتوا' : 'Skip to content'}
       </a>
@@ -65,7 +103,10 @@ export default function App() {
 
       <Header lang={lang} setLang={setLang} />
 
-      <main className={isLoading ? "opacity-0" : "opacity-100 transition-opacity duration-1000"}>
+      <motion.main
+        style={{ filter: mainFilter }}
+        className={isLoading ? "opacity-0" : "opacity-100 transition-opacity duration-1000"}
+      >
         <Hero lang={lang} />
         <HumanMoment lang={lang} />
         <About lang={lang} />
@@ -74,7 +115,7 @@ export default function App() {
         <VisualWorks lang={lang} />
         <Testimonials lang={lang} />
         <Contact lang={lang} />
-      </main>
+      </motion.main>
 
       <Footer lang={lang} />
     </div>

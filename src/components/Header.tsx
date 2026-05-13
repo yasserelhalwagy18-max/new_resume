@@ -56,7 +56,7 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
       </motion.div>
       
       {/* Navigation - Center */}
-      <nav aria-label="Main Navigation" className="hidden md:flex gap-4 lg:gap-8 text-xs lg:text-sm text-white/60">
+      <nav aria-label="Main Navigation" className="hidden md:flex gap-4 lg:gap-8 text-xs lg:text-sm text-white/70">
         <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-white transition-colors relative group">
           {t.about}
           <span className="absolute bottom-[-4px] start-1/2 w-0 h-[1px] bg-[#D6C7A8] transition-all duration-300 group-hover:w-full group-hover:start-0"></span>
@@ -85,12 +85,12 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
 
       {/* Language Switch - Right in RTL */}
       <div className="flex items-center gap-4 relative">
-        <motion.div className="hidden md:block absolute end-full me-4 top-1/2 -translate-y-1/2 font-mono text-[10px] text-white/30 whitespace-nowrap">
+        <motion.div className="hidden md:block absolute end-full me-4 top-1/2 -translate-y-1/2 font-mono text-[10px] text-white/70 whitespace-nowrap">
           {timeDisplay}
         </motion.div>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-white/60 hover:text-white transition-colors focus:outline-none"
+          className="md:hidden p-2 text-white/70 hover:text-white transition-colors focus:outline-none"
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
@@ -111,7 +111,7 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
         onClick={() => setLang(lang === 'en' ? 'fa' : 'en')}
         aria-label={`Switch language to ${lang === 'en' ? 'Persian' : 'English'}`}
         whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-2 text-xs text-white/50 border border-white/[0.15] rounded-full px-3 py-1.5 hover:bg-white/[0.08] transition-colors focus:outline-none focus:ring-1 focus:ring-[#D6C7A8]/50 overflow-hidden relative"
+        className="flex items-center gap-2 text-xs text-white/70 border border-white/[0.15] rounded-full px-3 py-1.5 hover:bg-white/[0.08] transition-colors focus:outline-none focus:ring-1 focus:ring-[#D6C7A8]/50 overflow-hidden relative"
       >
         <AnimatePresence mode="wait">
           <motion.span

@@ -1,6 +1,6 @@
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { portfolioData, Language } from "../data";
+import { portfolioData, Language, VisualItem } from "../data";
 import { ChevronDown, Wrench, Lightbulb, Target } from "lucide-react";
 import { WordReveal } from "./WordReveal";
 
@@ -44,7 +44,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {t.items.map((item, i) => {
+          {(t.items as VisualItem[]).map((item, i) => {
             const isExpanded = expandedId === item.id;
             return (
               <motion.div
@@ -60,10 +60,10 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
                 className="flex flex-col border border-white/[0.08] rounded-3xl bg-white/[0.03] overflow-hidden group"
               >
                 {/* Immediate Visual Reveal */}
-                {"images" in item && Array.isArray((item as any).images) && (
+                {"images" in item && Array.isArray(item.images) && (
                   <div className="relative aspect-[16/10] overflow-hidden border-b border-white/[0.08]">
                     <img
-                      src={(item as any).images[0]}
+                      src={item.images[0]}
                       alt={item.title}
                       onError={(e) => {
                         e.currentTarget.src = '/fallback-image.jpg';
@@ -137,10 +137,10 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
                             </p>
 
                             {/* Secondary Image if exists */}
-                            {(item as any).images.length > 1 && (
+                            {item.images.length > 1 && (
                               <div className="mt-8 rounded-xl overflow-hidden border border-white/[0.08]">
                                 <img
-                                  src={(item as any).images[1]}
+                                  src={item.images[1]}
                                   alt={`${item.title} secondary`}
                                   onError={(e) => {
                                     e.currentTarget.style.display = 'none';

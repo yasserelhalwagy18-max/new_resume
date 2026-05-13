@@ -17,6 +17,17 @@ export interface ProjectItem {
   images: string[];
 }
 
+export interface VisualItem {
+  id: number;
+  title: string;
+  tools: string;
+  concept: string;
+  impact: string;
+  images: string[];
+  detailsBtn: string;
+  closeBtn: string;
+}
+
 export const portfolioData = {
   en: {
     nav: {

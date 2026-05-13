@@ -77,19 +77,22 @@ export const About = memo(({ lang }: { lang: Language }) => {
           </div>
         </div>
 
-        <div className={`space-y-20 text-[1.1rem] md:text-2xl ${isFa ? 'leading-[2.2]' : 'leading-[1.8]'} text-white/80 font-light`}>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-30px" }}
-            transition={{
-              duration: 1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="italic text-white"
-          >
-            {t.statement}
-          </motion.p>
+        <div className={`space-y-20 text-[1.1rem] ${isFa ? 'leading-[2.2]' : 'leading-[1.8]'} text-white/80 font-light`}>
+          {t.paragraphs?.map((p, i) => (
+            <motion.p
+              key={i}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{
+                duration: 1,
+                delay: i * 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              {p}
+            </motion.p>
+          ))}
         </div>
 
         {/* Signature Line */}

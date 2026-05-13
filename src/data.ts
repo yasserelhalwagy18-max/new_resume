@@ -7,7 +7,13 @@ export interface ProjectItem {
   link?: string;
   role: string;
   stack: string[];
+  problem: string;
+  solution: string;
+  result: string;
   impact: string;
+  details: string;
+  readMore: string;
+  readLess: string;
   images: string[];
 }
 
@@ -65,7 +71,12 @@ export const portfolioData = {
     },
     about: {
       title: "Approach",
-      statement: "I engineer cinematic digital experiences where code, motion, and strategy converge. No noise. Just impact.",
+      paragraphs: [
+        "I'm obsessed with the moment a user forgets they're looking at a screen. That happens when photography, motion, and code stop fighting each other and start telling one story together.",
+        "I treat digital experiences like film reels. Rhythm. Atmosphere. Tension. Emotional clarity. These matter more than visual complexity. A slow fade can be more powerful than a thousand animations.",
+        "AI isn't a tool I use. It's a voice I argue with. The best ideas come from that friction — when the machine suggests something absurd and I have to prove why the human way matters.",
+        "Performance is aesthetics. Restraint is confidence. And precision — the kind you feel before you understand it — is the only thing that separates being seen from being remembered.",
+      ],
       location:
         "Based in Iran • Available for selective international projects",
       coreFocus: [
@@ -127,7 +138,18 @@ export const portfolioData = {
             "Next.js",
             "Brand Identity",
           ],
-          impact: "+30% engagement and enterprise-grade security.",
+          problem:
+            "The client needed a highly secure, performant, and custom-tailored content management system that existing off-the-shelf solutions couldn't provide without significant overhead or security compromises.",
+          solution:
+            "Architected a custom headless CMS from the ground up with a block-based editor and granular security controls, paired with a high-performance frontend.",
+          result:
+            "Achieved near-perfect Lighthouse scores, 100% automated deployment, and an enterprise-grade security posture with real-time SEO capabilities.",
+          impact:
+            "Cut their content chaos in half and made them look like the Tesla of solar energy in Iran.",
+          details:
+            "This overarching project required a full brand identity creation from scratch and translating it into a performant web presence. Concurrently, I designed and built a custom headless CMS featuring a block-based architecture, nested pages, content slots, auto-saving drafts, and a Tiptap rich-text editor integrated with a powerful media library. Emphasized security through granular RBAC, JWT revocation, HttpOnly secure cookies, CSRF protection, file upload magic-number validation, and comprehensive audit logs. Architected the backend using Drizzle ORM on MariaDB, enabling seamless SSG hydration and maximum performance. Established fully automated deployments to cPanel via GitHub Actions.",
+          readMore: "Read More",
+          readLess: "Show Less",
           images: [
             "/images/photo-1498050108023-c5249f4df085.webp",
             "/images/photo-1555421689-491a97ff2040.webp",
@@ -142,7 +164,18 @@ export const portfolioData = {
           year: "2022 - 2024",
           role: "Frontend Developer & UI/UX Designer",
           stack: ["React", "UI/UX", "Component Thinking", "Internal Systems"],
-          impact: "-30% task time across 5 internal platforms.",
+          problem:
+            "Fragmented internal tools with inconsistent UX led to decreased productivity and higher training costs for new employees.",
+          solution:
+            "Developed a standardized component library and redesigned core internal systems with a focus on usability and data visualization.",
+          result:
+            "Reduced task completion time by 30% and unified the visual language across 5+ internal platforms.",
+          impact:
+            "Turned their internal tools from a daily headache into something their team actually wanted to use.",
+          details:
+            "Designed and developed numerous front-end interfaces for internal organizational tools. The focus was heavily on component reusability, maintaining a clean UI/UX standard across different systems, and improving overall operational efficiency.",
+          readMore: "Read More",
+          readLess: "Show Less",
           images: [
             "/images/photo-1551288049-bebda4e38f71.webp",
             "/images/photo-1547658719-da2b51169166.webp",
@@ -159,7 +192,18 @@ export const portfolioData = {
             "UI/UX",
             "Web Development",
           ],
-          impact: "Brand and website launched in 8 weeks.",
+          problem:
+            "A new brand required a complete visual identity and digital presence from zero to launch in a very tight timeframe.",
+          solution:
+            "Executed a rapid design-to-development workflow, creating a modular brand system and a responsive web platform simultaneously.",
+          result:
+            "Successfully launched the brand identity and website within 2 months, establishing a strong market presence from day one.",
+          impact:
+            "Launched a complete brand-to-website pipeline in 8 weeks, turning a concept into a market-ready identity that secured early customer traction.",
+          details:
+            "Starting with just a core concept, I crafted a complete visual identity and graphical assets. This brand foundation was then seamlessly integrated into the UI/UX design and full front-end development of their main website.",
+          readMore: "Read More",
+          readLess: "Show Less",
           images: [
             "/images/photo-1626785774573-4b799315345d.webp",
             "/images/photo-1561070791-2526d30994b5.webp",
@@ -282,14 +326,16 @@ export const portfolioData = {
           name: "Head of Digital",
           company: "AFS (Tehran)",
           role: "Client",
-          text: "He elevated our entire digital presence and branded output.",
+          text: "Sadegh combines deep technical frontend knowledge with an eagle eye for design. He elevated our entire digital presence and branded output.",
+          result: "30% increase in user engagement.",
         },
         {
           id: 2,
           name: "Product Lead",
           company: "Rafed (Qom)",
           role: "Collaborator",
-          text: "A true asset to any product team.",
+          text: "His ability to craft cohesive, reusable components while maintaining high-quality UX is remarkable. A true asset to any product team.",
+          result: "Halved development time for new features.",
         },
       ],
     },
@@ -356,7 +402,12 @@ export const portfolioData = {
     },
     about: {
       title: "رویکرد",
-      statement: "من تجربه‌های دیجیتال را مهندسی می‌کنم. جایی که کد، موشن و استراتژی به هم می‌رسند. بدون هیاهو، فقط تأثیر.",
+      paragraphs: [
+        "من شیفته لحظه‌ای هستم که کاربر فراموش می‌کند به یک صفحه نمایش خیره شده است. این زمانی اتفاق می‌افتد که عکاسی، موشن و کد دست از جنگیدن با هم برمی‌دارند و با هم یک رویای مشترک را روایت می‌کنند.",
+        "من با تجربه‌های دیجیتال مانند پلان‌های سینمایی برخورد می‌کنم. ریتم، اتمسفر، تعلیق و وضوح احساسی؛ این‌ها بیش از پیچیدگی‌های بصری اهمیت دارند. گاهی یک فیدِ آرام، قدرتمندتر از هزاران انیمیشن است.",
+        "هوش مصنوعی برای من صرفاً یک ابزار نیست؛ صدایی است که با آن بحث می‌کنم. بهترین ایده‌ها از دل همین اصطکاک بیرون می‌آیند — وقتی ماشین پیشنهادی پوچ می‌دهد و من باید ثابت کنم چرا نگاه انسانی هنوز مهم است.",
+        "عملکرد، عین زیبایی است. خویشتن‌داری، نشانه اعتمادبه‌نفس. و دقت — از آن نوعی که قبل از درک کردن، حسش می‌کنید — تنها چیزی است که مرز بین دیده شدن و به یاد ماندن را تعیین می‌کند.",
+      ],
       location: "مستقر در قم • آماده برای پروژه‌های منتخب دورکاری و هیبرید",
       coreFocus: [
         "توسعه سمت کاربر (Front-End)",
@@ -416,7 +467,18 @@ export const portfolioData = {
             "Next.js",
             "هویت برند",
           ],
-          impact: "استقرار ۱۰۰٪ خودکار و امنیت در سطح سازمانی.",
+          problem:
+            "مشتری به یک سیستم مدیریت محتوای کاملاً سفارشی، با امنیت بالا و کارایی فوق‌العاده نیاز داشت که راه‌حل‌های آماده موجود نمی‌توانستند بدون پیچیدگی‌های زیاد یا ضعف‌های امنیتی آن را برآورده کنند.",
+          solution:
+            "معماری یک CMS Headless اختصاصی از پایه با ویرایشگر بلوک‌محور و کنترل‌های امنیتی دقیق، همراه با یک فرانت‌اند با کارایی بالا.",
+          result:
+            "دستیابی به امتیازهای عالی در Lighthouse، استقرار ۱۰۰٪ خودکار و وضعیت امنیتی در سطح سازمانی با قابلیت‌های سئو بلادرنگ.",
+          impact:
+            "هرج و مرج محتوایی آن‌ها را به نصف رساندم و تصویری همچون تسلای انرژی خورشیدی در ایران برایشان ساختم.",
+          details:
+            "این پروژه نیازمند خلق هویت برند از پایه بود که به طراحی یک حضور دیجیتال کارآمد منجر شد. هم‌زمان، معماری یک سیستم مدیریت محتوا با قابلیت‌های پیشرفته شامل ساختار بلاک‌بیس، مدیریت صفحات تودرتو، اسلات‌های محتوا، ذخیره خودکار پیش‌نویس‌ها و پیاده‌سازی ادیتور Tiptap همراه با مدیریت یکپارچه مدیا انجام شد. امنیت سیستم به‌شدت مورد توجه قرار گرفت و به‌وسیله RBAC، کوکی‌های دور از دسترس مرورگر، جلوگیری از حملات پیشرفته، اعتبارسنجی فایل‌های آپلودی مبتنی‌بر ساختار باینری، و لاگ‌های کامل کاربری تضمین شد. بک‌اند با استفاده از Drizzle و MariaDB بازطراحی شد که بستر پیاده‌سازی SSG و بهبود راندمان را فراهم آورد. سیستم CI/CD اتوماتیک نیز با گیت‌هاب اکشنز پیاده‌سازی شد.",
+          readMore: "بیشتر بخوانید",
+          readLess: "بستن",
           images: [
             "/images/photo-1498050108023-c5249f4df085.webp",
             "/images/photo-1555421689-491a97ff2040.webp",
@@ -431,7 +493,18 @@ export const portfolioData = {
           year: "۱۴۰۰ - ۱۴۰۲",
           role: "توسعه‌دهنده سمت کاربر (Front-End) و طراح UI/UX",
           stack: ["React", "UI/UX", "مبتنی بر کامپوننت", "سیستم‌های داخلی"],
-          impact: "کاهش ۳۰ درصدی زمان وظایف در ۵ پلتفرم.",
+          problem:
+            "ابزارهای داخلی پراکنده با تجربه کاربری نامنظم که منجر به کاهش بهره‌وری و هزینه‌های آموزشی بالا برای کارمندان جدید می‌شد.",
+          solution:
+            "توسعه یک کتابخانه کامپوننت استاندارد و بازطراحی سیستم‌های داخلی اصلی با تمرکز بر قابلیت استفاده و بصری‌سازی داده‌ها.",
+          result:
+            "کاهش ۳۰ درصدی زمان انجام وظایف و یکپارچه‌سازی زبان بصری در بیش از ۵ پلتفرم داخلی.",
+          impact:
+            "ابزارهای داخلی‌شان را از یک سردرد روزمره به چیزی تبدیل کردم که تیم واقعاً دوست داشت از آن استفاده کند.",
+          details:
+            "طراحی و توسعه چندین رابط کاربری برای ابزارهای سازمانی با تمرکز شدید بر قابلیت استفاده مجدد کامپوننت‌ها حفظ استانداردهای UI/UX و بهبود راندمان کلی سیستم.",
+          readMore: "بیشتر بخوانید",
+          readLess: "بستن",
           images: [
             "/images/photo-1551288049-bebda4e38f71.webp",
             "/images/photo-1547658719-da2b51169166.webp",
@@ -443,7 +516,18 @@ export const portfolioData = {
           year: "۱۴۰۳",
           role: "طراح ارشد و توسعه‌دهنده وب",
           stack: ["هویت برند", "طراحی گرافیک", "UI/UX", "توسعه وب"],
-          impact: "راه‌اندازی کامل برند و وب‌سایت در ۸ هفته.",
+          problem:
+            "یک برند جدید به هویت بصری کامل و حضور دیجیتال از صفر تا راه‌اندازی در یک بازه زمانی بسیار فشرده نیاز داشت.",
+          solution:
+            "اجرای سریع فرآیند طراحی تا توسعه، خلق یک سیستم برند مدولار و یک پلتفرم وب واکنش‌گرا به طور همزمان.",
+          result:
+            "راه‌اندازی موفق هویت برند و وب‌سایت در مدت ۲ ماه و ایجاد حضور قوی در بازار از روز اول.",
+          impact:
+            "راه‌اندازی یک خط کامل از برند تا وب‌سایت در ۸ هفته، تبدیل یک ایده به هویتی آماده برای بازار که جذب مشتری اولیه را تضمین کرد.",
+          details:
+            "شروع کار از یک ایده اولیه برای طراحی هویت بصری جامع و گرافیکی بود. سپس این پایه بصری برای طراحی کامل UI/UX و فرانت‌اند وبسایت اصلی پیاده‌سازی و یکپارچه شد.",
+          readMore: "بیشتر بخوانید",
+          readLess: "بستن",
           images: [
             "/images/photo-1626785774573-4b799315345d.webp",
             "/images/photo-1561070791-2526d30994b5.webp",
@@ -557,14 +641,16 @@ export const portfolioData = {
           name: "مدیر دیجیتال",
           company: "AFS (تهران)",
           role: "کارفرما",
-          text: "او تمام حضور دیجیتال و خروجی برند ما را ارتقا داد.",
+          text: "صادق دانش عمیق فنی فرانت‌اند را با دیدگاهی دقیق در طراحی ترکیب می‌کند. او تمام حضور دیجیتال و خروجی برند ما را ارتقا داد.",
+          result: "۳۰٪ افزایش در تعامل کاربران.",
         },
         {
           id: 2,
           name: "سرپرست محصول",
           company: "رافد (قم)",
           role: "همکار",
-          text: "یک مهره ارزشمند برای هر تیم محصول.",
+          text: "توانایی او در ساخت کامپوننت‌های منسجم و قابل استفاده مجدد و در عین حال حفظ تجربه کاربری با کیفیت بالا، قابل توجه است. یک مهره ارزشمند برای هر تیم محصول.",
+          result: "کاهش ۵۰٪ زمان توسعه ویژگی‌های جدید.",
         },
       ],
     },

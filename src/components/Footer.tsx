@@ -1,6 +1,7 @@
 import React from 'react';
 import { portfolioData, Language } from '../data';
 import { ArrowUp } from 'lucide-react';
+import { toPersianNumbers } from '../utils/typography';
 
 interface FooterProps {
   lang: Language;
@@ -27,10 +28,10 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
             <ArrowUp size={20} className="text-white/60 group-hover:text-amber-500 transition-colors" />
           </button>
           <p className="text-sm text-white/60 font-light tracking-widest">
-            <span dir="ltr">
+            <span dir={lang === 'fa' ? 'rtl' : 'ltr'}>
               {portfolioData[lang].footer.copyright.replace(
                 "{year}",
-                String(new Date().getFullYear()),
+                lang === 'fa' ? toPersianNumbers(new Date().getFullYear()) : String(new Date().getFullYear()),
               )}
             </span>
           </p>

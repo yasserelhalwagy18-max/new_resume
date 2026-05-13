@@ -6,7 +6,7 @@ export const HumanMoment = memo(({ lang }: { lang: Language }) => {
   const quote = portfolioData[lang].humanMoment.quote;
 
   return (
-    <section className="py-[40vh] px-6">
+    <section className="section-forte px-6">
       <div className="max-w-3xl mx-auto border-y border-white/[0.08] py-12">
         <motion.p
           initial={{ opacity: 0 }}

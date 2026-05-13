@@ -96,9 +96,14 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3 {
+  text-wrap: balance;
+}
+
 [dir="rtl"] p {
   line-height: 2.2;
   max-width: 640px;
+  text-wrap: balance;
 }
 
 /* LTR for English */

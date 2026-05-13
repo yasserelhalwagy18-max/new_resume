@@ -181,7 +181,6 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Use logical center if not provided, otherwise use provided (and handle RTL if relative)
-      // Actually, let's make it relative if it's < 1
       const relX = centerX !== undefined ? (centerX > 1 ? centerX / canvas.width : centerX) : 0.5;
       const relY = centerY !== undefined ? (centerY > 1 ? centerY / canvas.height : centerY) : 0.5;
 

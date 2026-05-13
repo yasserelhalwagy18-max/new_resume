@@ -70,7 +70,7 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
                 <div className="text-section-title font-light text-amber-500 mb-2">
                   {stat.value}
                 </div>
-                <div className="text-xs uppercase tracking-widest text-white/60">
+                <div className="text-xs uppercase tracking-widest text-white/70">
                   {stat.label}
                 </div>
               </motion.div>
@@ -108,7 +108,7 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
                 </div>
                 <div>
                   <h3 className="text-white font-medium">{item.name}</h3>
-                  <p className="text-white/50 text-xs uppercase tracking-widest">
+                  <p className="text-white/70 text-xs uppercase tracking-widest">
                     {item.role} &middot; {item.company}
                   </p>
                 </div>

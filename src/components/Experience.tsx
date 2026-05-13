@@ -148,6 +148,37 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
           })}
         </div>
 
+        {/* Process Section */}
+        {portfolioData[lang].process && (
+          <div className="border-t border-white/[0.08] pt-32 mb-32">
+            <h3 className="text-xl md:text-2xl font-light tracking-tight pb-12 text-white text-center">
+              {portfolioData[lang].process.title}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {portfolioData[lang].process.steps.map((step, index) => (
+                <motion.div
+                  key={step.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  className="bg-white/[0.02] border border-white/[0.08] p-8 rounded-2xl text-center hover:bg-white/[0.04] hover:border-white/[0.12] transition-all duration-300"
+                >
+                  <div className="w-12 h-12 rounded-full border border-amber-500/30 flex items-center justify-center mx-auto mb-6 bg-amber-500/5 text-amber-500 font-serif italic text-lg">
+                    {isFa ? step.id.toLocaleString("fa-IR") : `0${step.id}`}
+                  </div>
+                  <h4 className="text-[#F3F1EB] font-medium text-lg mb-3 tracking-wide">
+                    {step.title}
+                  </h4>
+                  <p className="text-white/60 text-sm leading-relaxed">
+                    {step.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Combined Expertise & Focus Areas Section */}
         <div className="border-t border-white/[0.08] pt-32">
           <h3 className="text-xl md:text-2xl font-light tracking-tight pb-4 text-white">

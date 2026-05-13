@@ -74,7 +74,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
             style={{ x: layer1X, y: layer1Y }}
             animate={prefersReduced ? {} : { rotate: 360 }}
             transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 flex items-center justify-center opacity-[0.08] mix-blend-screen will-change-transform"
+            className="absolute inset-0 hidden md:flex items-center justify-center opacity-[0.08] mix-blend-screen will-change-transform"
           >
             <div
               className="w-full h-full rounded-full"
@@ -98,7 +98,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
               <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/[0.03] to-transparent pointer-events-none" />
 
               {/* Chromatic Aberration Pseudo-element */}
-              <div className="absolute -inset-[1px] rounded-full mix-blend-screen opacity-50">
+              <div className="absolute -inset-[1px] hidden md:block rounded-full mix-blend-screen opacity-50">
                 <div className="absolute inset-0 rounded-full border-l-2 border-red-500/20 -translate-x-[2px]" />
                 <div className="absolute inset-0 rounded-full border-r-2 border-cyan-500/20 translate-x-[2px]" />
               </div>

@@ -294,6 +294,14 @@ export const portfolioData = {
         },
       ],
     },
+    process: {
+      title: "How I Work",
+      steps: [
+        { id: 1, title: 'Discovery & Strategy', desc: 'Understanding your exact needs and drawing a clear roadmap.' },
+        { id: 2, title: 'Design & Decoupage', desc: 'Creating visual identity and user interface with the highest standards.' },
+        { id: 3, title: 'Development & Execution', desc: 'Flawless coding, final testing, and project delivery.' }
+      ]
+    },
     testimonials: {
       title: "Client & Collaborator Testimonials",
       stats: [
@@ -600,6 +608,14 @@ export const portfolioData = {
           closeBtn: "بستن",
         },
       ],
+    },
+    process: {
+      title: 'مسیر انجام کار',
+      steps: [
+        { id: 1, title: 'کشف و استراتژی', desc: 'فهمیدن دقیق نیاز شما و ترسیم نقشه راه.' },
+        { id: 2, title: 'طراحی و دکوپاژ', desc: 'خلق هویت بصری و رابط کاربری با بالاترین استاندارد.' },
+        { id: 3, title: 'توسعه و اجرا', desc: 'کدنویسی بی‌نقص، تست‌های نهایی و تحویل پروژه.' }
+      ]
     },
     testimonials: {
       title: "نظرات همکاران و کارفرمایان",

@@ -182,13 +182,14 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
             </div>
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-4 w-full order-1 lg:order-2"
-          >
-            <AnimatePresence>
-              {status === "success" && (
-                <motion.div
+          {isEn ? (
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4 w-full order-1 lg:order-2"
+            >
+              <AnimatePresence>
+                {status === "success" && (
+                  <motion.div
                   initial={{ opacity: 0, y: -20, height: 0 }}
                   animate={{ opacity: 1, y: 0, height: "auto" }}
                   exit={{ opacity: 0, y: -20, height: 0 }}
@@ -362,9 +363,29 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
                     />
                   </motion.div>
                 )}
-              </AnimatePresence>
-            </button>
-          </form>
+                </AnimatePresence>
+              </button>
+            </form>
+          ) : (
+            <div className="flex flex-col gap-6 w-full order-1 lg:order-2 justify-center">
+              <a
+                href={t.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary w-full py-5 text-lg justify-center shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                شروع گفتگو در واتس‌اپ
+              </a>
+              <div className="flex flex-col items-center gap-3 mt-4 text-white/60 font-light">
+                <a href={`mailto:${t.email}`} className="hover:text-amber-500 transition-colors" dir="ltr">
+                  {t.email}
+                </a>
+                <a href={`tel:${t.phone.replace(/\s+/g, '')}`} className="hover:text-amber-500 transition-colors" dir="ltr">
+                  {t.phone}
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </motion.div>
     </section>

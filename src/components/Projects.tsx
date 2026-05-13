@@ -241,7 +241,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
 
                     <div className="flex items-center">
                       <div className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500/5 border border-amber-500/10 text-xs uppercase tracking-widest text-amber-500/80 font-medium group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all duration-400">
-                        <span>{lang === "en" ? "View Details" : "مشاهده جزئیات"}</span>
+                        <span>{item.readMore}</span>
                         {isFa ? (
                           <ArrowUpLeft
                             size={14}
@@ -408,14 +408,41 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0 }}
-                        className="mb-8"
+                        className="grid grid-cols-1 gap-6 mb-8"
                       >
-                        <div className="border-l-2 border-amber-500/50 bg-amber-500/5 rounded-2xl p-6 md:p-8 text-left rtl:text-right">
+                        <div className="grid grid-cols-1 gap-4 mb-6">
+                          <div className="border-l-2 border-[#8B3A3A]/30 bg-[#8B3A3A]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
+                            <span className="block text-xs uppercase tracking-widest text-[#C98B8B] mb-2">
+                              {lang === "en" ? "Problem" : "مسئله"}
+                            </span>
+                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
+                              {item.problem}
+                            </p>
+                          </div>
+                          <div className="border-l-2 border-[#D6C7A8]/30 bg-[#D6C7A8]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
+                            <span className="block text-xs uppercase tracking-widest text-[#D6C7A8] mb-2">
+                              {lang === "en" ? "Solution" : "راهکار"}
+                            </span>
+                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
+                              {item.solution}
+                            </p>
+                          </div>
+                          <div className="border-l-2 border-[#5E6654]/30 bg-[#5E6654]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
+                            <span className="block text-xs uppercase tracking-widest text-[#8B9A7D] mb-2">
+                              {lang === "en" ? "Result" : "نتیجه"}
+                            </span>
+                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
+                              {item.result}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="bg-black/20 border border-white/10 rounded-2xl p-6 md:p-8 text-left rtl:text-right mb-8">
                           <span className="block text-xs uppercase tracking-widest text-amber-500 mb-3">
-                            {lang === "en" ? "Impact" : "تأثیر"}
+                            {lang === "en" ? "Deep Dive" : "جزئیات بیشتر"}
                           </span>
-                          <p className="text-white/90 text-lg md:text-xl font-light italic leading-relaxed">
-                            "{item.impact}"
+                          <p className="text-white/70 text-sm md:text-base leading-relaxed md:leading-loose whitespace-pre-wrap">
+                            {item.details}
                           </p>
                         </div>
                       </motion.div>

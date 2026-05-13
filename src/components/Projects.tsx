@@ -143,7 +143,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
         </div>
 
         {/* Projects Grid - More Breathing Room */}
-        <div style={{ skewY: scrollSkew }} className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-20">
+        <div style={{ skewY: scrollSkew }} className="group/board columns-1 md:columns-2 gap-6 space-y-6">
           {t.items.map((item, index) => {
             const isLast = index === t.items.length - 1;
             return (
@@ -152,7 +152,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
-                className={`group relative overflow-hidden flex flex-col p-6 md:p-10 lg:p-12 rounded-3xl card-bg border border-white/[0.08] transition-all duration-500 cursor-pointer focus:outline-none focus:ring-1 focus:ring-amber-500/30`}
+                className={`group relative overflow-hidden flex flex-col rounded-3xl card-bg border border-white/[0.08] transition-all duration-500 cursor-pointer focus:outline-none focus:ring-1 focus:ring-amber-500/30 break-inside-avoid group-hover/board:opacity-50 hover:!opacity-100`}
                 onClick={() => {
                   setSelectedProject(item.id);
                   setCurrentImageIndex(0);
@@ -177,84 +177,20 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                   className="absolute inset-0 bg-[#08090A] z-20 origin-top pointer-events-none"
                 />
 
-                <div className="flex flex-col-reverse md:flex-row md:justify-between items-start mb-12 gap-4 md:gap-0">
-                  <h3 className="text-subhead font-light pr-0 md:pr-8 rtl:pr-0 rtl:md:pl-8 text-[#F3F1EB]">
-                    {item.name}
-                  </h3>
-                  <div className="flex w-full md:w-auto justify-end gap-2 shrink-0 z-10 relative">
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-3 bg-white/5 rounded-full hover:bg-white/10 transition-colors"
-                      >
-                        {isFa ? <ArrowUpLeft size={18} /> : <ArrowUpRight size={18} />}
-                      </a>
-                    )}
-                  </div>
-                </div>
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl">
+                  {item.images && item.images.length > 0 && (
+                    <img
+                      src={item.images[0]}
+                      alt={item.name}
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    />
+                  )}
 
-                <div className="flex flex-col flex-grow">
-                  <p className="text-xs uppercase tracking-widest text-amber-500 mb-3">
-                    {item.role}
-                  </p>
-
-                  <p className="text-white/80 leading-relaxed mb-8 text-left rtl:text-right line-clamp-3 text-sm">
-                    {item.impact}
-                  </p>
-
-                  {/* Thumbnail Strip */}
-                  <div className="relative h-20 mb-8 overflow-hidden rounded-lg group/thumbs">
-                    <motion.div
-                      className="flex gap-2 h-full"
-                      whileHover={{ x: "-20%" }}
-                      transition={{ duration: 2, ease: "linear" }}
-                    >
-                      {item.images.slice(0, 3).map((img, i) => (
-                        <img
-                          key={i}
-                          src={img}
-                          alt=""
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                          className="h-full w-20 object-cover rounded-lg flex-shrink-0 grayscale group-hover/thumbs:grayscale-0 transition-all duration-500"
-                        />
-                      ))}
-                    </motion.div>
-                  </div>
-
-                  <div className="mt-auto">
-                    <div className="flex flex-wrap gap-2 mb-8 rtl:justify-start">
-                      {item.stack.map((tech) => (
-                        <span
-                          key={tech}
-                          dir="ltr"
-                          className="px-3 py-1 text-[12px] border border-white/[0.10] rounded-full text-white/70"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center">
-                      <div className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500/5 border border-amber-500/10 text-xs uppercase tracking-widest text-amber-500/80 font-medium group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all duration-400">
-                        <span>{item.readMore}</span>
-                        {isFa ? (
-                          <ArrowUpLeft
-                            size={14}
-                            className="transition-transform group-hover:-translate-x-[0.5px] group-hover:-translate-y-[0.5px]"
-                          />
-                        ) : (
-                          <ArrowUpRight
-                            size={14}
-                            className="transition-transform group-hover:translate-x-[0.5px] group-hover:-translate-y-[0.5px]"
-                          />
-                        )}
-                      </div>
-                    </div>
+                  {/* Custom Cursor Overlay / Centered 'View' Text */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none">
+                    <span className="px-6 py-3 bg-black/60 backdrop-blur-md rounded-full text-white text-sm uppercase tracking-widest border border-white/10 shadow-xl">
+                      {lang === "en" ? "View" : "مشاهده"}
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -266,14 +202,14 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
       {/* Modal Overlay */}
       <AnimatePresence>
         {selectedProject !== null && (
-          <div className="fixed inset-0 z-50 p-4 sm:p-6 flex items-center justify-center overflow-hidden">
+          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.1 }}
               onClick={() => setSelectedProject(null)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+              className="fixed inset-0 bg-black"
               aria-hidden="true"
             />
 
@@ -292,7 +228,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                       ? { type: "spring", stiffness: 300, damping: 30 }
                       : { type: "spring", stiffness: 400, damping: 25 }
                     }
-                    className="relative w-full max-w-5xl !bg-black/40 !backdrop-blur-2xl border border-white/[0.15] overflow-y-auto md:overflow-hidden rounded-3xl shadow-2xl flex flex-col md:flex-row my-auto max-h-[90vh] md:max-h-[80vh] z-10"
+                    className="absolute inset-0 w-full h-full flex flex-col z-10"
                   >
                     <button
                       onClick={() => setSelectedProject(null)}
@@ -304,7 +240,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
 
                     {/* Image Carousel */}
                     {item.images && item.images.length > 0 && (
-                      <div className="w-full md:w-1/2 relative bg-black/50 group/carousel aspect-video md:aspect-auto md:min-h-full flex-shrink-0 overflow-hidden border-b md:border-b-0 md:border-r rtl:md:border-r-0 rtl:md:border-l border-white/[0.08]">
+                      <div className="w-full h-full relative group/carousel overflow-hidden">
                         <AnimatePresence initial={false} custom={direction}>
                           <motion.img
                             key={currentImageIndex}
@@ -387,87 +323,30 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                       </div>
                     )}
 
-                    <div
-                      className={`flex-1 flex flex-col w-full ${item.images && item.images.length > 0 ? "md:w-1/2" : ""} p-6 md:p-12 overflow-visible md:overflow-y-auto bg-gradient-to-b from-transparent to-black/20 ps-12 lg:ps-0 lg:pe-12`}
-                    >
-                      <div className="mb-6 md:mb-8 ps-12 lg:ps-0 lg:pe-12">
-                        <h3 className="text-4xl md:text-5xl font-light mb-2">
-                          {item.name}
-                        </h3>
-                        <motion.p
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0 }}
-                          className="text-amber-500 text-sm uppercase tracking-widest mt-4 mb-2"
-                        >
-                          {item.role} &middot; {item.year}
-                        </motion.p>
-                      </div>
-
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0 }}
-                        className="grid grid-cols-1 gap-6 mb-8"
-                      >
-                        <div className="grid grid-cols-1 gap-4 mb-6">
-                          <div className="border-l-2 border-[#8B3A3A]/30 bg-[#8B3A3A]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#C98B8B] mb-2">
-                              {lang === "en" ? "Problem" : "مسئله"}
-                            </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
-                              {item.problem}
-                            </p>
-                          </div>
-                          <div className="border-l-2 border-[#D6C7A8]/30 bg-[#D6C7A8]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#D6C7A8] mb-2">
-                              {lang === "en" ? "Solution" : "راهکار"}
-                            </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
-                              {item.solution}
-                            </p>
-                          </div>
-                          <div className="border-l-2 border-[#5E6654]/30 bg-[#5E6654]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#8B9A7D] mb-2">
-                              {lang === "en" ? "Result" : "نتیجه"}
-                            </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
-                              {item.result}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="bg-black/20 border border-white/10 rounded-2xl p-6 md:p-8 text-left rtl:text-right mb-8">
-                          <span className="block text-xs uppercase tracking-widest text-amber-500 mb-3">
-                            {lang === "en" ? "Deep Dive" : "جزئیات بیشتر"}
-                          </span>
-                          <p className="text-white/70 text-sm md:text-base leading-relaxed md:leading-loose whitespace-pre-wrap">
-                            {item.details}
+                    {/* Bottom Floating Info */}
+                    <div className="absolute bottom-0 inset-x-0 p-8 pt-12 bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-md z-30 pointer-events-none border-t border-white/10 mix-blend-overlay">
+                      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-6 pointer-events-auto mix-blend-normal">
+                        <div>
+                          <h3 className="text-4xl md:text-5xl font-light mb-2 text-[#F3F1EB]">
+                            {item.name}
+                          </h3>
+                          <p className="text-amber-500 text-sm uppercase tracking-widest mt-2">
+                            {item.role} &middot; {item.year}
                           </p>
                         </div>
-                      </motion.div>
 
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0 }}
-                        className="pt-6 border-t border-white/10 text-left rtl:text-right"
-                      >
-                        <span className="block text-xs uppercase tracking-widest text-white/50 mb-4">
-                          {lang === "en" ? "Technologies" : "فناوری‌ها"}
-                        </span>
                         <div className="flex flex-wrap gap-2 rtl:justify-start">
                           {item.stack.map((tech) => (
                             <span
                               key={tech}
                               dir="ltr"
-                              className="px-4 py-2 text-xs md:text-sm border border-white/20 hover:border-white/40 transition-colors rounded-xl text-white/80 bg-white/5"
+                              className="px-4 py-2 text-xs md:text-sm border border-white/20 rounded-xl text-white/80 bg-white/5 backdrop-blur-md"
                             >
                               {tech}
                             </span>
                           ))}
                         </div>
-                      </motion.div>
+                      </div>
                     </div>
                   </motion.div>
                 );

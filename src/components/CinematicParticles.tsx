@@ -242,8 +242,9 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
           const p2 = particles[j];
           const d2x = p.x - p2.x;
           const d2y = p.y - p2.y;
-          const dist2 = Math.sqrt(d2x * d2x + d2y * d2y);
-          if (dist2 < 60) {
+          const distSq = d2x * d2x + d2y * d2y;
+          if (distSq < 3600) {
+            const dist2 = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.strokeStyle = `rgba(214, 199, 168, ${0.03 * (1 - dist2 / 60)})`;
             ctx.lineWidth = 0.5;

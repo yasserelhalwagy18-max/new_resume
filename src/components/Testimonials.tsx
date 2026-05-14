@@ -1,8 +1,9 @@
 import { memo } from "react";
 import { motion } from "motion/react";
-import { portfolioData, Language } from "../data";
+import { portfolioData } from "../data";
 import { Quote } from "lucide-react";
 import { WordReveal } from "./WordReveal";
+import { useDirection } from "./providers/DirectionProvider";
 
 interface TestimonialStat {
   label: string;
@@ -24,7 +25,8 @@ interface TestimonialsData {
   items: TestimonialItem[];
 }
 
-export const Testimonials = memo(({ lang }: { lang: Language }) => {
+export const Testimonials = memo(() => {
+  const { locale: lang } = useDirection();
   const t = portfolioData[lang].testimonials as unknown as TestimonialsData;
   const isFa = lang === "fa";
 

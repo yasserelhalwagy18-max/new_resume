@@ -1,15 +1,12 @@
 import React, { memo, useState } from 'react';
 import { Globe, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { portfolioData, Language } from '../data';
+import { portfolioData } from '../data';
 import { Logo } from './Logo';
+import { useDirection } from "./providers/DirectionProvider";
 
-interface HeaderProps {
-  lang: Language;
-  setLang: (lang: Language) => void;
-}
-
-export const Header = memo(({ lang, setLang }: HeaderProps) => {
+export const Header = memo(() => {
+  const { locale: lang, toggleLanguage: setLang } = useDirection();
   const t = portfolioData[lang].nav;
   const [mobileOpen, setMobileOpen] = useState(false);
   const { scrollY, scrollYProgress } = useScroll();
@@ -108,7 +105,7 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
         </button>
 
       <motion.button
-        onClick={() => setLang(lang === 'en' ? 'fa' : 'en')}
+        onClick={() => setLang()}
         aria-label={`Switch language to ${lang === 'en' ? 'Persian' : 'English'}`}
         whileTap={{ scale: 0.95 }}
         className="flex items-center gap-2 text-xs text-white/50 border border-white/[0.15] rounded-full px-3 py-1.5 hover:bg-white/[0.08] transition-colors focus:outline-none focus:ring-1 focus:ring-[#D6C7A8]/50 overflow-hidden relative"

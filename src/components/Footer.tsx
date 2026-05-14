@@ -1,13 +1,11 @@
 import React from 'react';
-import { portfolioData, Language } from '../data';
+import { portfolioData } from '../data';
 import { ArrowUp } from 'lucide-react';
 import { toPersianNumbers } from '../utils/typography';
+import { useDirection } from "./providers/DirectionProvider";
 
-interface FooterProps {
-  lang: Language;
-}
-
-export const Footer: React.FC<FooterProps> = ({ lang }) => {
+export const Footer: React.FC = () => {
+  const { locale: lang } = useDirection();
   return (
     <footer className="relative w-full py-24 px-6 border-t border-white/[0.08] mt-32 overflow-hidden bg-[#08090A]">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 md:gap-0 relative z-10">

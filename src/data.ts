@@ -39,10 +39,12 @@ export const portfolioData = {
       contact: "Contact",
     },
     hero: {
-      role: "Brand · Full-Stack · AI Systems",
-      title: "Unforgettable",
-      ctaPrimary: "View Work",
-      ctaSecondary: "Contact",
+      role: "Brand Identity Designer · Full-Stack Developer · AI Creative Systems",
+      title: "Most websites are forgettable.\nMine aren't.",
+      description:
+        "Digital experiences shot like cinema — where every transition earns trust and every detail converts attention into action.",
+      ctaPrimary: "View Projects",
+      ctaSecondary: "Start a Project",
     },
     capabilities: {
       blocks: [
@@ -69,7 +71,12 @@ export const portfolioData = {
     },
     about: {
       title: "Approach",
-      statement: "I engineer cinematic digital experiences where code, motion, and strategy converge. No noise. Just impact.",
+      paragraphs: [
+        "I'm obsessed with the moment a user forgets they're looking at a screen. That happens when photography, motion, and code stop fighting each other and start telling one story together.",
+        "I treat digital experiences like film reels. Rhythm. Atmosphere. Tension. Emotional clarity. These matter more than visual complexity. A slow fade can be more powerful than a thousand animations.",
+        "AI isn't a tool I use. It's a voice I argue with. The best ideas come from that friction — when the machine suggests something absurd and I have to prove why the human way matters.",
+        "Performance is aesthetics. Restraint is confidence. And precision — the kind you feel before you understand it — is the only thing that separates being seen from being remembered.",
+      ],
       location:
         "Based in Iran • Available for selective international projects",
       coreFocus: [
@@ -332,6 +339,11 @@ export const portfolioData = {
         },
       ],
     },
+    humanMoment: {
+      quote:
+        "I once spent three hours adjusting the easing on a button hover. Nobody will notice. Everybody will feel it.",
+      attribution: "",
+    },
     contact: {
       title: "Let's work together",
       message:
@@ -360,10 +372,12 @@ export const portfolioData = {
       contact: "تماس",
     },
     hero: {
-      role: "برند · فول‌استک · هوش مصنوعی",
-      title: "فراموش‌نشدنی",
-      ctaPrimary: "مشاهده آثار",
-      ctaSecondary: "تماس",
+      role: "طراح هویت برند · توسعه‌دهنده فول‌استک · سیستم‌های خلاقانه AI",
+      title: "اغلب وب‌سایت‌ها فراموش‌شدنی‌اند.\nمن فراموش‌نشدنی می‌سازم.",
+      description:
+        "تجربه‌های دیجیتالی با دکوپاژ سینمایی — جایی که هر ترنزیشن اعتماد می‌سازد و هر جزئیات، توجه را به عمل تبدیل می‌کند.",
+      ctaPrimary: "مشاهده پروژه‌ها",
+      ctaSecondary: "شروع یک پروژه",
     },
     capabilities: {
       blocks: [
@@ -388,7 +402,12 @@ export const portfolioData = {
     },
     about: {
       title: "رویکرد",
-      statement: "من تجربه‌های دیجیتال را مهندسی می‌کنم. جایی که کد، موشن و استراتژی به هم می‌رسند. بدون هیاهو، فقط تأثیر.",
+      paragraphs: [
+        "من شیفته لحظه‌ای هستم که کاربر فراموش می‌کند به یک صفحه نمایش خیره شده است. این زمانی اتفاق می‌افتد که عکاسی، موشن و کد دست از جنگیدن با هم برمی‌دارند و با هم یک رویای مشترک را روایت می‌کنند.",
+        "من با تجربه‌های دیجیتال مانند پلان‌های سینمایی برخورد می‌کنم. ریتم، اتمسفر، تعلیق و وضوح احساسی؛ این‌ها بیش از پیچیدگی‌های بصری اهمیت دارند. گاهی یک فیدِ آرام، قدرتمندتر از هزاران انیمیشن است.",
+        "هوش مصنوعی برای من صرفاً یک ابزار نیست؛ صدایی است که با آن بحث می‌کنم. بهترین ایده‌ها از دل همین اصطکاک بیرون می‌آیند — وقتی ماشین پیشنهادی پوچ می‌دهد و من باید ثابت کنم چرا نگاه انسانی هنوز مهم است.",
+        "عملکرد، عین زیبایی است. خویشتن‌داری، نشانه اعتمادبه‌نفس. و دقت — از آن نوعی که قبل از درک کردن، حسش می‌کنید — تنها چیزی است که مرز بین دیده شدن و به یاد ماندن را تعیین می‌کند.",
+      ],
       location: "مستقر در قم • آماده برای پروژه‌های منتخب دورکاری و هیبرید",
       coreFocus: [
         "توسعه سمت کاربر (Front-End)",
@@ -634,6 +653,11 @@ export const portfolioData = {
           result: "کاهش ۵۰٪ زمان توسعه ویژگی‌های جدید.",
         },
       ],
+    },
+    humanMoment: {
+      quote:
+        "یک بار سه ساعت را صرف تنظیم نرمیِ حرکتِ هاور یک دکمه کردم. هیچکس متوجه نخواهد شد. همه آن را حس خواهند کرد.",
+      attribution: "",
     },
     contact: {
       title: "همکاری",

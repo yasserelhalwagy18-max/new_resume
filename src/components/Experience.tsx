@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { portfolioData, Language } from "../data";
 import { WordReveal } from "./WordReveal";
 import {
-  ChevronDown,
   Code,
   Server,
   Layout,
@@ -122,12 +121,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                     <span className="text-[12px] uppercase tracking-widest text-amber-500 font-medium">
                       {item.date}
                     </span>
-                    <motion.div
-                      animate={{ rotate: isExpanded ? 180 : 0 }}
-                      className="text-white/60"
-                    >
-                      <ChevronDown size={16} aria-hidden="true" />
-                    </motion.div>
+
                   </div>
                   <h3 className="text-subhead font-light mb-1 text-white">
                     {item.role}
@@ -136,21 +130,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                     {item.company}
                   </span>
 
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <p className="text-white/70 leading-relaxed text-sm md:text-base border-t border-white/[0.08] pt-4 mt-2">
-                          {item.description}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+
                 </div>
               </motion.div>
             );

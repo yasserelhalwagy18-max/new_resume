@@ -410,41 +410,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                         transition={{ duration: 0 }}
                         className="grid grid-cols-1 gap-6 mb-8"
                       >
-                        <div className="grid grid-cols-1 gap-4 mb-6">
-                          <div className="border-l-2 border-[#8B3A3A]/30 bg-[#8B3A3A]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#C98B8B] mb-2">
-                              {lang === "en" ? "Problem" : "مسئله"}
-                            </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
-                              {item.problem}
-                            </p>
-                          </div>
-                          <div className="border-l-2 border-[#D6C7A8]/30 bg-[#D6C7A8]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#D6C7A8] mb-2">
-                              {lang === "en" ? "Solution" : "راهکار"}
-                            </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
-                              {item.solution}
-                            </p>
-                          </div>
-                          <div className="border-l-2 border-[#5E6654]/30 bg-[#5E6654]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#8B9A7D] mb-2">
-                              {lang === "en" ? "Result" : "نتیجه"}
-                            </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
-                              {item.result}
-                            </p>
-                          </div>
-                        </div>
 
-                        <div className="bg-black/20 border border-white/10 rounded-2xl p-6 md:p-8 text-left rtl:text-right mb-8">
-                          <span className="block text-xs uppercase tracking-widest text-amber-500 mb-3">
-                            {lang === "en" ? "Deep Dive" : "جزئیات بیشتر"}
-                          </span>
-                          <p className="text-white/70 text-sm md:text-base leading-relaxed md:leading-loose whitespace-pre-wrap">
-                            {item.details}
-                          </p>
-                        </div>
                       </motion.div>
 
                       <motion.div

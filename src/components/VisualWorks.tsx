@@ -126,7 +126,15 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
                         className="overflow-hidden"
                       >
                         <div className="pt-8 mt-8 border-t border-white/[0.08]">
-
+                           <div className="flex items-center gap-2 text-amber-500/80 mb-3">
+                              <Lightbulb size={12} aria-hidden="true" />
+                              <span className="font-medium text-[10px] uppercase tracking-widest">
+                                {lang === "en" ? "Concept" : "مفهوم"}
+                              </span>
+                            </div>
+                            <p className="text-sm leading-relaxed text-white/80">
+                              {item.concept}
+                            </p>
 
                             {/* Secondary Image if exists */}
                             {item.images.length > 1 && (

@@ -1,9 +1,11 @@
 import { memo } from "react";
 import { motion } from "motion/react";
-import { portfolioData, Language } from "../data";
+import { portfolioData } from "../data";
 import { WordReveal } from "./WordReveal";
+import { useDirection } from "./providers/DirectionProvider";
 
-export const About = memo(({ lang }: { lang: Language }) => {
+export const About = memo(() => {
+  const { locale: lang } = useDirection();
   const t = portfolioData[lang].about;
   const capT = portfolioData[lang].capabilities;
   const isFa = lang === "fa";

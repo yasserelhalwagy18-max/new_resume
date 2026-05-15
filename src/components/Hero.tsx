@@ -1,11 +1,13 @@
 import { useState, useEffect, memo, useMemo } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "motion/react";
 import { ArrowDownRight, ArrowDownLeft } from "lucide-react";
-import { portfolioData, Language } from "../data";
+import { portfolioData } from "../data";
 import { CinematicParticles } from "./CinematicParticles";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { useDirection } from "./providers/DirectionProvider";
 
-export const Hero = memo(({ lang }: { lang: Language }) => {
+export const Hero = memo(() => {
+  const { locale: lang } = useDirection();
   const t = portfolioData[lang].hero;
   const isFa = lang === "fa";
   const prefersReduced = usePrefersReducedMotion();

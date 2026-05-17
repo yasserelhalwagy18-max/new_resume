@@ -100,7 +100,7 @@ export const Contact = memo(() => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-sm uppercase tracking-widest mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[12px] uppercase tracking-widest mb-6"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             {isEn
@@ -228,7 +228,7 @@ export const Contact = memo(() => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="text-red-500 text-sm px-2"
+                    className="text-red-500 text-xs px-2"
                   >
                     {errors.name}
                   </motion.span>
@@ -257,7 +257,7 @@ export const Contact = memo(() => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="text-red-500 text-sm px-2"
+                    className="text-red-500 text-xs px-2"
                   >
                     {errors.email}
                   </motion.span>
@@ -288,7 +288,7 @@ export const Contact = memo(() => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="text-red-500 text-sm px-2"
+                    className="text-red-500 text-xs px-2"
                   >
                     {errors.phone}
                   </motion.span>
@@ -317,7 +317,7 @@ export const Contact = memo(() => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="text-red-500 text-sm px-2"
+                    className="text-red-500 text-xs px-2"
                   >
                     {errors.message}
                   </motion.span>

@@ -1,7 +1,6 @@
 import { memo } from "react";
 import { motion } from "motion/react";
 import { portfolioData, Language } from "../data";
-import { Quote } from "lucide-react";
 
 export const Testimonials = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].testimonials;
@@ -28,41 +27,40 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
           {t.title}
         </h2>
 
-        <div className="flex flex-col gap-16 md:gap-24">
-          {t.items.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.8, delay: index * 0.15 }}
-              className="relative"
-            >
-              {/* Large Quote Mark */}
-              <Quote
-                className="text-[#D4A017]/20 mb-6"
-                size={48}
-                strokeWidth={1}
-              />
+        <div className="flex flex-col gap-20 md:gap-28">
+          {t.items.map((item, index) => {
+            // Strip job titles, extract only company names. Data is formatted as: "Head of Digital, AFS" or "مدیر دیجیتال، AFS"
+            const nameParts = item.name.split(/,|،/);
+            const companyName = nameParts.length > 1 ? nameParts[nameParts.length - 1].trim() : item.name;
 
-              <blockquote
-                className={`text-2xl md:text-4xl font-light text-white/90 leading-snug mb-8 ${isFa ? "leading-[1.6]" : "leading-[1.3] tracking-tight"}`}
+            return (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.8, delay: index * 0.15 }}
+                className="relative"
               >
-                "{item.text}"
-              </blockquote>
+                <blockquote
+                  className={`text-2xl md:text-4xl font-light text-white/90 leading-snug mb-8 ${isFa ? "leading-[1.6]" : "leading-[1.3] tracking-tight"}`}
+                >
+                  {isFa ? `«${item.text}»` : `"${item.text}"`}
+                </blockquote>
 
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/20 flex items-center justify-center text-[#D4A017] text-sm font-bold">
-                  {item.name.charAt(0)}
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/20 flex items-center justify-center text-[#D4A017] text-sm font-bold">
+                    {companyName.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-white/80">
+                      {companyName}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-white/80">
-                    {item.name}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </motion.div>
     </section>

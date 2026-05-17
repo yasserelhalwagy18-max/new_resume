@@ -3,7 +3,7 @@ import { motion, useSpring, useMotionValue } from "motion/react";
 
 export const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
+  const [hoverState, setHoverState] = useState<'default' | 'button' | 'image' | 'rtl'>('default');
   const [isVisible, setIsVisible] = useState(false);
 
   const mouseX = useMotionValue(-100);
@@ -30,9 +30,13 @@ export const CustomCursor = () => {
       if (
         target.closest('a, button, [role="button"], input, textarea, [data-cursor="hover"]')
       ) {
-        setIsHovering(true);
+        setHoverState('button');
+      } else if (target.closest('img')) {
+        setHoverState('image');
+      } else if (target.closest('[dir="rtl"], [lang="fa"]')) {
+        setHoverState('rtl');
       } else {
-        setIsHovering(false);
+        setHoverState('default');
       }
     };
 
@@ -58,10 +62,10 @@ export const CustomCursor = () => {
         translateY: "-50%",
       }}
       animate={{
-        width: isHovering ? 40 : 12,
-        height: isHovering ? 40 : 12,
-        backgroundColor: isHovering ? "transparent" : "white",
-        border: isHovering ? "1px solid white" : "0px solid white",
+        width: hoverState === 'button' ? 0 : hoverState === 'image' ? 20 : hoverState === 'rtl' ? 4 : 12,
+        height: hoverState === 'button' ? 0 : hoverState === 'image' ? 20 : hoverState === 'rtl' ? 4 : 12,
+        backgroundColor: hoverState === 'button' ? "transparent" : hoverState === 'image' ? "transparent" : hoverState === 'rtl' ? "#D4A017" : "white",
+        border: hoverState === 'button' ? "0px solid transparent" : hoverState === 'image' ? "2px solid #2A9D8F" : "1px solid rgba(255, 255, 255, 0.2)",
       }}
       transition={{ type: "spring", stiffness: 250, damping: 20, mass: 0.5 }}
       className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full mix-blend-difference"

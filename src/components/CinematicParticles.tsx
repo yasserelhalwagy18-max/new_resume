@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef, memo, useState } from 'react';
 import { MotionValue } from 'motion/react';
 
 interface Particle {
@@ -102,16 +102,38 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestRef = useRef<number>(0);
   const hasInitialized = useRef(false);
+  const particlesRef = useRef<Particle[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    if (canvasRef.current) {
+      observer.observe(canvasRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!isVisible) {
+      cancelAnimationFrame(requestRef.current);
+      return;
+    }
 
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    let particles: Particle[] = [];
     const particleCount = 25;
 
     const resizeCanvas = () => {
@@ -134,9 +156,9 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
     };
 
     const initParticles = () => {
-      particles = [];
+      particlesRef.current = [];
       for (let i = 0; i < particleCount; i++) {
-        particles.push(createParticle(true));
+        particlesRef.current.push(createParticle(true));
       }
     };
 
@@ -181,7 +203,7 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
       const biasX = (mx - 0.5) * 0.1;
       const biasY = (my - 0.5) * 0.1;
 
-      particles.forEach((p, index) => {
+      particlesRef.current.forEach((p, index) => {
         // Organic drift using Simplex Noise 3D
         const t = time * 0.0005;
         const driftX = noise3D(p.x * 0.003 + biasX, p.y * 0.003, t + p.noiseOffset);
@@ -193,7 +215,7 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
 
         // Wrap around
         if (p.y < -50) {
-          particles[index] = createParticle(false);
+          particlesRef.current[index] = createParticle(false);
         } else if (p.y > canvas.height + 50) {
           p.y = -50;
         }
@@ -224,9 +246,9 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
 
         // Draw connections
         let connections = 0;
-        for (let j = index + 1; j < particles.length; j++) {
+        for (let j = index + 1; j < particlesRef.current.length; j++) {
           if (connections >= 3) break;
-          const p2 = particles[j];
+          const p2 = particlesRef.current[j];
           const d2x = p.x - p2.x;
           const d2y = p.y - p2.y;
           const dist2 = Math.sqrt(d2x * d2x + d2y * d2y);
@@ -275,7 +297,7 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
       clearTimeout(resizeTimeout);
       cancelAnimationFrame(requestRef.current);
     };
-  }, [centerX, centerY, mouseX, mouseY, isRTL]);
+  }, [centerX, centerY, mouseX, mouseY, isRTL, isVisible]);
 
   return (
     <canvas

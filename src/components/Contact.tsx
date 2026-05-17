@@ -1,8 +1,7 @@
 import React, { useState, useEffect, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { portfolioData } from "../data";
+import { portfolioData, Language } from "../data";
 import { WordReveal } from "./WordReveal";
-import { useDirection } from "./providers/DirectionProvider";
 import {
   Github,
   Linkedin,
@@ -12,8 +11,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-export const Contact = memo(() => {
-  const { locale: lang } = useDirection();
+export const Contact = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].contact;
 
   const [formData, setFormData] = useState({

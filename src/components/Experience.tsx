@@ -1,8 +1,7 @@
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { portfolioData } from "../data";
+import { portfolioData, Language } from "../data";
 import { WordReveal } from "./WordReveal";
-import { useDirection } from "./providers/DirectionProvider";
 import {
   ChevronDown,
   Code,
@@ -34,8 +33,7 @@ const expertiseToFocusMap: Record<number, number[]> = {
   3: [7], // AI Workflow -> AI-Assisted
 };
 
-export const Experience = memo(() => {
-  const { locale: lang } = useDirection();
+export const Experience = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].experience;
   const aboutT = portfolioData[lang].about;
   const skillsT = portfolioData[lang].skills;

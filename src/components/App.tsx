@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Language, portfolioData } from "./data";
-import { Header } from "./components/Header";
-import { Hero } from "./components/Hero";
-import { Projects } from "./components/Projects";
-import { VisualWorks } from "./components/VisualWorks";
-import { About } from "./components/About";
-import { Experience } from "./components/Experience";
-import { Testimonials } from "./components/Testimonials";
-import { Contact } from "./components/Contact";
+import { Language, portfolioData } from "../data";
+import { Header } from "./Header";
+import { Hero } from "./Hero";
+import { Projects } from "./Projects";
+import { VisualWorks } from "./VisualWorks";
+import { About } from "./About";
+import { Experience } from "./Experience";
+import { Testimonials } from "./Testimonials";
+import { Contact } from "./Contact";
 import { ArrowUp } from "lucide-react";
 
 export default function App() {

@@ -47,7 +47,7 @@ export const LoadingSequence = ({ onComplete }: LoadingSequenceProps) => {
             }}
             className="flex flex-col items-center"
           >
-            <Logo isDrawing={true} className="w-24 h-24 mb-8" />
+            <Logo className="w-24 h-24 mb-8" />
 
             {/* Hero text simulation (0.6s - 2.0s) */}
             <div className="flex flex-col items-center gap-4 mt-8">

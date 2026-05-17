@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import React, { memo, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import { portfolioData, Language } from "../data";
 import { Logo } from "./Logo";
@@ -59,7 +59,7 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
         <motion.button
           onClick={() => setLang(lang === "en" ? "fa" : "en")}
           whileTap={{ scale: 0.95 }}
-          className="text-[11px] font-medium text-white/40 border border-white/[0.12] rounded-full px-3 py-1 hover:bg-white/[0.06] hover:text-white/70 transition-colors"
+          className="text-[12px] font-medium text-white/40 border border-white/[0.12] rounded-full px-3 py-1 hover:bg-white/[0.06] hover:text-white/70 transition-colors"
         >
           {lang === "en" ? "FA" : "EN"}
         </motion.button>

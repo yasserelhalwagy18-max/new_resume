@@ -13,16 +13,9 @@
   --color-border-soft: rgba(255, 255, 255, 0.08);
   --color-accent-ivory: #D6C7A8;
   --color-accent-olive: #5E6654;
-  --color-accent-amber: #C9945F;
+  --color-accent-amber: #B07D52;
   --color-shadow-deep: rgba(0, 0, 0, 0.45);
 }
-
-/* CONTRAST COMPLIANCE:
-   #F3F1EB: 17.64:1 - any size
-   #D6C7A8: 11.95:1 - any size
-   #C9945F: 7.2:1 - 18px+ or bold 14px+
-   #8B8B8B: 5.85:1 - 18px+ only, never for small labels
-*/
 
 /* Global Reset & Base */
 *, *::before, *::after {
@@ -93,25 +86,21 @@ h1, h2, h3, h4, h5, h6 {
 
 [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
   font-family: "Vazirmatn", sans-serif;
-  font-weight: 700;
-}
-
-[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3 {
-  text-wrap: balance;
+  font-weight: 600;
 }
 
 [dir="rtl"] p {
   line-height: 2.2;
   max-width: 640px;
-  text-wrap: balance;
 }
 
+/* LTR for English */
 [dir="ltr"] {
   text-align: left;
 }
 
 [dir="ltr"] h1, [dir="ltr"] h2, [dir="ltr"] h3 {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter Tight", "Inter", sans-serif;
 }
 
 /* Persian Typography Specifics */
@@ -140,24 +129,6 @@ h1, h2, h3, h4, h5, h6 {
 .text-section-title {
   font-size: clamp(2rem, 4vw, 3.5rem);
   line-height: 1.35;
-}
-
-.text-subhead {
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  line-height: 1.4;
-}
-
-[dir="rtl"] .text-subhead {
-  line-height: 1.6;
-}
-
-.text-lead {
-  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
-  line-height: 1.8;
-}
-
-[dir="rtl"] .text-lead {
-  line-height: 2.0;
 }
 
 .text-body-lg {
@@ -272,7 +243,7 @@ a:hover {
 }
 
 .accent-amber {
-  color: #C9945F;
+  color: #B07D52;
 }
 
 /* Animation Easing - Slow Confidence */
@@ -317,21 +288,6 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-primary:hover::before {
-  transform: translateX(100%);
 }
 
 .btn-primary:hover {
@@ -375,8 +331,8 @@ a:hover {
   }
 }
 
-/* Mezzo sections - intentional stillness */
-.section-mezzo {
+/* Quiet sections - intentional stillness */
+.section-quiet {
   padding-top: clamp(160px, 18vw, 180px);
   padding-bottom: clamp(120px, 18vw, 180px);
 }
@@ -387,8 +343,8 @@ a:hover {
   padding-bottom: clamp(80px, 10vw, 120px);
 }
 
-/* Forte sections - extra breathing room */
-.section-forte {
+/* Visual silence - extra breathing room */
+.section-silent {
   padding-top: clamp(200px, 15vw, 320px);
   padding-bottom: clamp(160px, 15vw, 320px);
 }

@@ -92,8 +92,6 @@ const t3 = (x: number, y: number, z: number, i: number, j: number, k: number) =>
   return t * t * dot(grad3[p[i + p[j + p[k]]] % 12], x, y, z);
 };
 
-import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
-
 export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
   centerX,
   centerY,
@@ -104,10 +102,9 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestRef = useRef<number>(0);
   const hasInitialized = useRef(false);
-  const prefersReduced = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (prefersReduced) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -167,20 +164,11 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
       };
     };
 
-    let lastFrameTime = 0;
     const animate = (time: number) => {
-      const isMobile = window.innerWidth < 768;
-      const frameInterval = isMobile ? 33 : 16; // 30fps mobile, 60fps desktop
-
-      if (time - lastFrameTime < frameInterval) {
-        requestRef.current = requestAnimationFrame(animate);
-        return;
-      }
-      lastFrameTime = time;
-
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Use logical center if not provided, otherwise use provided (and handle RTL if relative)
+      // Actually, let's make it relative if it's < 1
       const relX = centerX !== undefined ? (centerX > 1 ? centerX / canvas.width : centerX) : 0.5;
       const relY = centerY !== undefined ? (centerY > 1 ? centerY / canvas.height : centerY) : 0.5;
 
@@ -215,12 +203,12 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
         // Lens Interaction
         const dx = p.x - effectiveCenterX;
         const dy = p.y - effectiveCenterY;
-        const distSq = dx * dx + dy * dy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
         let displayOpacity = p.opacity;
         let displaySize = p.size;
 
-        if (distSq < 40000) { // 200^2
+        if (dist < 200) {
           displayOpacity *= 1.4; // +40%
           displaySize *= 1.2;    // +20%
         }
@@ -241,9 +229,8 @@ export const CinematicParticles: React.FC<CinematicParticlesProps> = memo(({
           const p2 = particles[j];
           const d2x = p.x - p2.x;
           const d2y = p.y - p2.y;
-          const distSq = d2x * d2x + d2y * d2y;
-          if (distSq < 3600) {
-            const dist2 = Math.sqrt(distSq);
+          const dist2 = Math.sqrt(d2x * d2x + d2y * d2y);
+          if (dist2 < 60) {
             ctx.beginPath();
             ctx.strokeStyle = `rgba(214, 199, 168, ${0.03 * (1 - dist2 / 60)})`;
             ctx.lineWidth = 0.5;

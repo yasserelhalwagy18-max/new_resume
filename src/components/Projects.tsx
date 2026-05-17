@@ -1,21 +1,18 @@
-import React, { memo, useRef } from "react";
+import React, { memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { portfolioData, Language } from "../data";
-import { ArrowUpRight, ArrowUpLeft, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { WordReveal } from "./WordReveal";
 import { useScrollVelocity } from "../hooks/useScrollVelocity";
-import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 export const Projects = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].projects;
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const isFa = lang === "fa";
-  const prefersReduced = usePrefersReducedMotion();
-  const scrollSkew = useScrollVelocity(prefersReduced ? 0 : 2);
+  const scrollSkew = useScrollVelocity(2);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -57,37 +54,12 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
       if (e.key === "Escape") {
         setSelectedProject(null);
       }
-
-      if (e.key === "Tab" && modalRef.current) {
-        const focusableElements = modalRef.current.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        const firstElement = focusableElements[0] as HTMLElement;
-        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-
-        if (e.shiftKey) {
-          if (document.activeElement === firstElement) {
-            lastElement.focus();
-            e.preventDefault();
-          }
-        } else {
-          if (document.activeElement === lastElement) {
-            firstElement.focus();
-            e.preventDefault();
-          }
-        }
-      }
     };
 
     if (selectedProject !== null) {
       document.body.style.overflow = "hidden";
       document.body.classList.add("modal-open");
       window.addEventListener("keydown", handleKeyDown);
-      // Focus the first element in the modal
-      setTimeout(() => {
-        const firstButton = modalRef.current?.querySelector('button');
-        firstButton?.focus();
-      }, 100);
     } else {
       document.body.style.overflow = "";
       document.body.classList.remove("modal-open");
@@ -103,7 +75,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
   return (
     <section
       id="projects"
-      className="px-6 max-w-7xl mx-auto section-mezzo relative"
+      className="px-6 max-w-7xl mx-auto section-quiet relative"
     >
       <div
         className="hidden md:block absolute -top-8 -left-12 rtl:-left-auto rtl:-right-12 text-[clamp(10rem,20vw,18rem)] font-light text-white/[0.03] leading-none select-none pointer-events-none z-0 overflow-hidden whitespace-nowrap"
@@ -120,15 +92,10 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
       >
         {/* Section Header - Editorial Style */}
         <div className="mb-28 max-w-3xl">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <WordReveal
+            text={t.title}
             className={`text-[clamp(2.2rem, 5vw, 3.5rem)] font-light text-[#F3F1EB] mb-6 ${isFa ? 'tracking-normal' : 'tracking-tight'}`}
-          >
-            {t.title}
-          </motion.h2>
+          />
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -143,7 +110,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
         </div>
 
         {/* Projects Grid - More Breathing Room */}
-        <div style={{ skewY: scrollSkew }} className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-20">
           {t.items.map((item, index) => {
             const isLast = index === t.items.length - 1;
             return (
@@ -152,6 +119,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
+                style={{ skewY: scrollSkew }}
                 className={`group relative overflow-hidden flex flex-col p-6 md:p-10 lg:p-12 rounded-3xl card-bg border border-white/[0.08] transition-all duration-500 cursor-pointer focus:outline-none focus:ring-1 focus:ring-amber-500/30`}
                 onClick={() => {
                   setSelectedProject(item.id);
@@ -178,7 +146,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                 />
 
                 <div className="flex flex-col-reverse md:flex-row md:justify-between items-start mb-12 gap-4 md:gap-0">
-                  <h3 className="text-subhead font-light pr-0 md:pr-8 rtl:pr-0 rtl:md:pl-8 text-[#F3F1EB]">
+                  <h3 className="text-[clamp(1.4rem, 3vw, 1.8rem)] font-light pr-0 md:pr-8 rtl:pr-0 rtl:md:pl-8 text-[#F3F1EB]">
                     {item.name}
                   </h3>
                   <div className="flex w-full md:w-auto justify-end gap-2 shrink-0 z-10 relative">
@@ -190,14 +158,14 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                         onClick={(e) => e.stopPropagation()}
                         className="p-3 bg-white/5 rounded-full hover:bg-white/10 transition-colors"
                       >
-                        {isFa ? <ArrowUpLeft size={18} /> : <ArrowUpRight size={18} />}
+                        <ArrowUpRight size={18} />
                       </a>
                     )}
                   </div>
                 </div>
 
                 <div className="flex flex-col flex-grow">
-                  <p className="text-xs uppercase tracking-widest text-amber-500 mb-3">
+                  <p className="text-xs uppercase tracking-widest text-amber-500/60 mb-3">
                     {item.role}
                   </p>
 
@@ -217,9 +185,6 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                           key={i}
                           src={img}
                           alt=""
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
                           className="h-full w-20 object-cover rounded-lg flex-shrink-0 grayscale group-hover/thumbs:grayscale-0 transition-all duration-500"
                         />
                       ))}
@@ -242,17 +207,10 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                     <div className="flex items-center">
                       <div className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500/5 border border-amber-500/10 text-xs uppercase tracking-widest text-amber-500/80 font-medium group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all duration-400">
                         <span>{item.readMore}</span>
-                        {isFa ? (
-                          <ArrowUpLeft
-                            size={14}
-                            className="transition-transform group-hover:-translate-x-[0.5px] group-hover:-translate-y-[0.5px]"
-                          />
-                        ) : (
-                          <ArrowUpRight
-                            size={14}
-                            className="transition-transform group-hover:translate-x-[0.5px] group-hover:-translate-y-[0.5px]"
-                          />
-                        )}
+                        <ArrowUpRight
+                          size={14}
+                          className="transition-transform group-hover:translate-x-[0.5px] group-hover:-translate-y-[0.5px] rtl:group-hover:-translate-x-[0.5px]"
+                        />
                       </div>
                     </div>
                   </div>
@@ -282,9 +240,6 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                 const item = t.items.find((i) => i.id === selectedProject)!;
                 return (
                   <motion.div
-                    ref={modalRef}
-                    role="dialog"
-                    aria-modal="true"
                     initial={isMobile ? { y: "100%" } : { opacity: 0, scale: 0.98, y: 20 }}
                     animate={isMobile ? { y: 0 } : { opacity: 1, scale: 1, y: 0 }}
                     exit={isMobile ? { y: "100%" } : { opacity: 0, scale: 0.98, y: 20 }}
@@ -310,9 +265,6 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                             key={currentImageIndex}
                             src={item.images[currentImageIndex]}
                             alt={`${item.name} screenshot ${currentImageIndex + 1}`}
-                            onError={(e) => {
-                              e.currentTarget.src = '/fallback-image.jpg';
-                            }}
                             custom={direction}
                             variants={slideVariants}
                             initial="enter"
@@ -351,7 +303,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                                 e.stopPropagation();
                                 paginate(-1, item.images!.length);
                               }}
-                              className="absolute start-4 top-1/2 -translate-y-1/2 p-2 bg-black/30 hover:bg-black/60 rounded-full text-white/70 hover:text-white backdrop-blur-sm transition-all opacity-0 group-hover/carousel:opacity-100 focus:opacity-100 -translate-x-4 group-hover/carousel:translate-x-0 z-20"
+                              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/30 hover:bg-black/60 rounded-full text-white/70 hover:text-white backdrop-blur-sm transition-all opacity-0 group-hover/carousel:opacity-100 focus:opacity-100 -translate-x-4 group-hover/carousel:translate-x-0 z-20"
                               aria-label="Previous image"
                             >
                               <ChevronLeft size={24} />
@@ -361,7 +313,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                                 e.stopPropagation();
                                 paginate(1, item.images!.length);
                               }}
-                              className="absolute end-4 top-1/2 -translate-y-1/2 p-2 bg-black/30 hover:bg-black/60 rounded-full text-white/70 hover:text-white backdrop-blur-sm transition-all opacity-0 group-hover/carousel:opacity-100 focus:opacity-100 translate-x-4 group-hover/carousel:translate-x-0 z-20"
+                              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/30 hover:bg-black/60 rounded-full text-white/70 hover:text-white backdrop-blur-sm transition-all opacity-0 group-hover/carousel:opacity-100 focus:opacity-100 translate-x-4 group-hover/carousel:translate-x-0 z-20"
                               aria-label="Next image"
                             >
                               <ChevronRight size={24} />
@@ -388,9 +340,9 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                     )}
 
                     <div
-                      className={`flex-1 flex flex-col w-full ${item.images && item.images.length > 0 ? "md:w-1/2" : ""} p-6 md:p-12 overflow-visible md:overflow-y-auto bg-gradient-to-b from-transparent to-black/20 ps-12 lg:ps-0 lg:pe-12`}
+                      className={`flex-1 flex flex-col w-full ${item.images && item.images.length > 0 ? "md:w-1/2" : ""} p-6 md:p-12 overflow-visible md:overflow-y-auto bg-gradient-to-b from-transparent to-black/20`}
                     >
-                      <div className="mb-6 md:mb-8 ps-12 lg:ps-0 lg:pe-12">
+                      <div className="mb-6 md:mb-8 pr-12 lg:pr-0 lg:pl-12 rtl:pr-0 rtl:pl-12 rtl:lg:pl-0 rtl:lg:pr-12">
                         <h3 className="text-4xl md:text-5xl font-light mb-2">
                           {item.name}
                         </h3>
@@ -411,24 +363,24 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                         className="grid grid-cols-1 gap-6 mb-8"
                       >
                         <div className="grid grid-cols-1 gap-4 mb-6">
-                          <div className="border-l-2 border-[#8B3A3A]/30 bg-[#8B3A3A]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#C98B8B] mb-2">
+                          <div className="border-l-2 border-red-500/30 bg-red-500/[0.03] rounded-2xl p-6 text-left rtl:text-right">
+                            <span className="block text-xs uppercase tracking-widest text-red-400 mb-2">
                               {lang === "en" ? "Problem" : "مسئله"}
                             </span>
                             <p className="text-white/90 text-xs md:text-sm leading-relaxed">
                               {item.problem}
                             </p>
                           </div>
-                          <div className="border-l-2 border-[#D6C7A8]/30 bg-[#D6C7A8]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#D6C7A8] mb-2">
+                          <div className="border-l-2 border-amber-500/30 bg-amber-500/[0.03] rounded-2xl p-6 text-left rtl:text-right">
+                            <span className="block text-xs uppercase tracking-widest text-amber-400 mb-2">
                               {lang === "en" ? "Solution" : "راهکار"}
                             </span>
                             <p className="text-white/90 text-xs md:text-sm leading-relaxed">
                               {item.solution}
                             </p>
                           </div>
-                          <div className="border-l-2 border-[#5E6654]/30 bg-[#5E6654]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#8B9A7D] mb-2">
+                          <div className="border-l-2 border-emerald-500/30 bg-emerald-500/[0.03] rounded-2xl p-6 text-left rtl:text-right">
+                            <span className="block text-xs uppercase tracking-widest text-emerald-400 mb-2">
                               {lang === "en" ? "Result" : "نتیجه"}
                             </span>
                             <p className="text-white/90 text-xs md:text-sm leading-relaxed">

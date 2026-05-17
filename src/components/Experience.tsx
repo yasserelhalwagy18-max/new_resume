@@ -47,7 +47,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
   return (
     <section
       id="experience"
-      className="px-6 max-w-5xl mx-auto border-t border-white/[0.08] section-mezzo relative"
+      className="px-6 max-w-5xl mx-auto border-t border-white/[0.08] section-quiet relative"
     >
       <div
         className="hidden md:block absolute -top-8 -left-12 rtl:-left-auto rtl:-right-12 text-[clamp(10rem,20vw,18rem)] font-light text-white/[0.03] leading-none select-none pointer-events-none z-0 overflow-hidden whitespace-nowrap"
@@ -63,15 +63,10 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
         className="relative z-10"
       >
         <div className="mb-24">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <WordReveal
+            text={t.title}
             className={`text-4xl md:text-5xl font-light ${isFa ? 'tracking-normal' : 'tracking-tight'}`}
-          >
-            {t.title}
-          </motion.h2>
+          />
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -106,17 +101,8 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
 
                 {/* Content card */}
                 <div
-                  className="flex-1 bg-white/[0.03] border border-white/[0.08] p-6 rounded-2xl hover:bg-white/[0.05] transition-colors cursor-pointer text-left rtl:text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/50"
+                  className="flex-1 bg-white/[0.03] border border-white/[0.08] p-6 rounded-2xl hover:bg-white/[0.05] transition-colors cursor-pointer text-left rtl:text-right"
                   onClick={() => toggleExpand(item.id)}
-                  role="button"
-                  tabIndex={0}
-                  aria-expanded={isExpanded}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      toggleExpand(item.id);
-                    }
-                  }}
                 >
                   <div className="flex justify-between items-start mb-3">
                     <span className="text-[12px] uppercase tracking-widest text-amber-500 font-medium">
@@ -124,12 +110,12 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                     </span>
                     <motion.div
                       animate={{ rotate: isExpanded ? 180 : 0 }}
-                      className="text-white/60"
+                      className="text-white/30"
                     >
                       <ChevronDown size={16} aria-hidden="true" />
                     </motion.div>
                   </div>
-                  <h3 className="text-subhead font-light mb-1 text-white">
+                  <h3 className="text-xl font-light mb-1 text-white">
                     {item.role}
                   </h3>
                   <span className="text-sm font-medium text-white/60 block mb-4">
@@ -156,37 +142,6 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
             );
           })}
         </div>
-
-        {/* Process Section */}
-        {portfolioData[lang].process && (
-          <div className="border-t border-white/[0.08] pt-32 mb-32">
-            <h3 className="text-xl md:text-2xl font-light tracking-tight pb-12 text-white text-center">
-              {portfolioData[lang].process.title}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {portfolioData[lang].process.steps.map((step, index) => (
-                <motion.div
-                  key={step.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  className="bg-white/[0.02] border border-white/[0.08] p-8 rounded-2xl text-center hover:bg-white/[0.04] hover:border-white/[0.12] transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-full border border-amber-500/30 flex items-center justify-center mx-auto mb-6 bg-amber-500/5 text-amber-500 font-serif italic text-lg">
-                    {isFa ? step.id.toLocaleString("fa-IR") : `0${step.id}`}
-                  </div>
-                  <h4 className="text-[#F3F1EB] font-medium text-lg mb-3 tracking-wide">
-                    {step.title}
-                  </h4>
-                  <p className="text-white/60 text-sm leading-relaxed">
-                    {step.desc}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Combined Expertise & Focus Areas Section */}
         <div className="border-t border-white/[0.08] pt-32">
@@ -225,7 +180,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                   {expertiseToFocusMap[i]?.map((focusIdx) => (
                     <span
                       key={focusIdx}
-                      className="text-[11px] uppercase tracking-widest text-white/60 border border-white/[0.12] px-2 py-1 rounded"
+                      className="text-[11px] uppercase tracking-widest text-white/30 border border-white/[0.12] px-2 py-1 rounded"
                     >
                       {aboutT.coreFocus[focusIdx]}
                     </span>

@@ -1,14 +1,12 @@
 import { useState, useEffect, memo, useMemo } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "motion/react";
-import { ArrowDownRight, ArrowDownLeft } from "lucide-react";
+import { ArrowDownRight } from "lucide-react";
 import { portfolioData, Language } from "../data";
 import { CinematicParticles } from "./CinematicParticles";
-import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 export const Hero = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].hero;
   const isFa = lang === "fa";
-  const prefersReduced = usePrefersReducedMotion();
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -18,14 +16,14 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
   const springY = useSpring(mouseY, springConfig);
 
   // Parallax shifts
-  const layer2X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 4}%`);
-  const layer2Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 4}%`);
-  const layer3X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 3}%`);
-  const layer3Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 3}%`);
-  const layer1X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 1.6}%`);
-  const layer1Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 1.6}%`);
-  const layer4X = useTransform(springX, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 1}%`);
-  const layer4Y = useTransform(springY, (v) => prefersReduced ? "0%" : `${(v - 0.5) * 1}%`);
+  const layer2X = useTransform(springX, [0, 1], ["-2%", "2%"]);
+  const layer2Y = useTransform(springY, [0, 1], ["-2%", "2%"]);
+  const layer3X = useTransform(springX, [0, 1], ["-1.5%", "1.5%"]);
+  const layer3Y = useTransform(springY, [0, 1], ["-1.5%", "1.5%"]);
+  const layer1X = useTransform(springX, [0, 1], ["-0.8%", "0.8%"]);
+  const layer1Y = useTransform(springY, [0, 1], ["-0.8%", "0.8%"]);
+  const layer4X = useTransform(springX, [0, 1], ["-0.5%", "0.5%"]);
+  const layer4Y = useTransform(springY, [0, 1], ["-0.5%", "0.5%"]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -42,7 +40,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
   const remainingFirstLine = firstLineWords.slice(2).join(" ");
 
   return (
-    <section className="min-h-screen flex items-center pt-[72px] px-6 relative overflow-hidden section-forte bg-[#08090A]" style={{ minHeight: '100dvh' }}>
+    <section className="min-h-screen flex items-center pt-[72px] px-6 relative overflow-hidden section-silent bg-[#08090A]" style={{ minHeight: '100dvh' }}>
       {/* Layer 4: Dust Field (Canvas) */}
       <motion.div
         style={{ x: layer4X, y: layer4Y }}
@@ -67,14 +65,14 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
         transition={{ duration: 1, delay: 1.8 }}
         className="absolute inset-0 z-[2] pointer-events-none hidden lg:block"
       >
-        <div className="absolute start-[20%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]">
+        <div className="absolute start-[20%] top-1/2 -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]">
 
           {/* Layer 1: God Rays */}
           <motion.div
             style={{ x: layer1X, y: layer1Y }}
-            animate={prefersReduced ? {} : { rotate: 360 }}
+            animate={{ rotate: 360 }}
             transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 hidden md:flex items-center justify-center opacity-[0.08] mix-blend-screen will-change-transform"
+            className="absolute inset-0 flex items-center justify-center opacity-[0.08] mix-blend-screen will-change-transform"
           >
             <div
               className="w-full h-full rounded-full"
@@ -89,7 +87,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
           {/* Layer 2: Primary Glass Lens */}
           <motion.div
             style={{ x: layer2X, y: layer2Y }}
-            animate={prefersReduced ? {} : { rotate: 360 }}
+            animate={{ rotate: 360 }}
             transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
             className="absolute inset-0 flex items-center justify-center will-change-transform"
           >
@@ -98,7 +96,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
               <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/[0.03] to-transparent pointer-events-none" />
 
               {/* Chromatic Aberration Pseudo-element */}
-              <div className="absolute -inset-[1px] hidden md:block rounded-full mix-blend-screen opacity-50">
+              <div className="absolute -inset-[1px] rounded-full mix-blend-screen opacity-50">
                 <div className="absolute inset-0 rounded-full border-l-2 border-red-500/20 -translate-x-[2px]" />
                 <div className="absolute inset-0 rounded-full border-r-2 border-cyan-500/20 translate-x-[2px]" />
               </div>
@@ -108,7 +106,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
           {/* Layer 3: Secondary Lens */}
           <motion.div
             style={{ x: layer3X, y: layer3Y }}
-            animate={prefersReduced ? {} : { rotate: -360 }}
+            animate={{ rotate: -360 }}
             transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
             className="absolute inset-0 flex items-center justify-center will-change-transform"
           >
@@ -137,7 +135,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
           </motion.span>
 
           <h1
-            className={`${isFa ? "text-[clamp(2.8rem, 7vw, 5rem)]" : "text-hero-display"} text-[#F3F1EB] text-4xl pb-6 ${isFa ? "leading-[1.45]" : "leading-[1.1]"}`}
+            className={`${isFa ? "text-[clamp(2.6rem, 6vw, 4rem)]" : "text-hero-display"} text-[#F3F1EB] text-4xl pb-6 ${isFa ? "leading-[1.45]" : "leading-[1.1]"}`}
             dir={isFa ? "rtl" : "ltr"}
           >
             <span className="sr-only">{t.title}</span>
@@ -185,13 +183,9 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
           >
             <a href="#projects" className="btn-primary group">
               {t.ctaPrimary}
-              {isFa ? (
-                <ArrowDownLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 group-hover:translate-y-px" />
-              ) : (
-                <ArrowDownRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:translate-y-px" />
-              )}
+              <ArrowDownRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:translate-y-px rtl:group-hover:-translate-x-1" />
             </a>
-            <a href="#contact" className="btn-ghost">
+            <a href="/resume.pdf" download className="btn-ghost">
               {t.ctaSecondary}
             </a>
           </motion.div>

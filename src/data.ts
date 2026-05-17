@@ -17,17 +17,6 @@ export interface ProjectItem {
   images: string[];
 }
 
-export interface VisualItem {
-  id: number;
-  title: string;
-  tools: string;
-  concept: string;
-  impact: string;
-  images: string[];
-  detailsBtn: string;
-  closeBtn: string;
-}
-
 export const portfolioData = {
   en: {
     nav: {
@@ -40,7 +29,7 @@ export const portfolioData = {
     },
     hero: {
       role: "Brand Identity Designer · Full-Stack Developer · AI Creative Systems",
-      title: "Most websites are forgettable.\nMine aren't.",
+      title: "Most websites are forgettable.\nI build the ones that linger.",
       description:
         "Digital experiences shot like cinema — where every transition earns trust and every detail converts attention into action.",
       ctaPrimary: "View Projects",
@@ -72,7 +61,7 @@ export const portfolioData = {
     about: {
       title: "Approach",
       paragraphs: [
-        "I'm obsessed with the moment a user forgets they're looking at a screen. That happens when photography, motion, and code stop fighting each other and start telling one story together.",
+        "I'm obsessed with the moment a user forgets they're looking at a screen. That happens when photography, motion, and code stop fighting each other and start telling one lie together.",
         "I treat digital experiences like film reels. Rhythm. Atmosphere. Tension. Emotional clarity. These matter more than visual complexity. A slow fade can be more powerful than a thousand animations.",
         "AI isn't a tool I use. It's a voice I argue with. The best ideas come from that friction — when the machine suggests something absurd and I have to prove why the human way matters.",
         "Performance is aesthetics. Restraint is confidence. And precision — the kind you feel before you understand it — is the only thing that separates being seen from being remembered.",
@@ -305,14 +294,6 @@ export const portfolioData = {
         },
       ],
     },
-    process: {
-      title: "How I Work",
-      steps: [
-        { id: 1, title: 'Discovery & Strategy', desc: 'Understanding your exact needs and drawing a clear roadmap.' },
-        { id: 2, title: 'Design & Decoupage', desc: 'Creating visual identity and user interface with the highest standards.' },
-        { id: 3, title: 'Development & Execution', desc: 'Flawless coding, final testing, and project delivery.' }
-      ]
-    },
     testimonials: {
       title: "Client & Collaborator Testimonials",
       stats: [
@@ -373,7 +354,7 @@ export const portfolioData = {
     },
     hero: {
       role: "طراح هویت برند · توسعه‌دهنده فول‌استک · سیستم‌های خلاقانه AI",
-      title: "اغلب وب‌سایت‌ها فراموش‌شدنی‌اند.\nمن فراموش‌نشدنی می‌سازم.",
+      title: "اغلب وب‌سایت‌ها فراموش‌شدنی‌اند.\nمن آن‌هایی را می‌سازم که در ذهن می‌مانند.",
       description:
         "تجربه‌های دیجیتالی با دکوپاژ سینمایی — جایی که هر ترنزیشن اعتماد می‌سازد و هر جزئیات، توجه را به عمل تبدیل می‌کند.",
       ctaPrimary: "مشاهده پروژه‌ها",
@@ -619,14 +600,6 @@ export const portfolioData = {
           closeBtn: "بستن",
         },
       ],
-    },
-    process: {
-      title: 'مسیر انجام کار',
-      steps: [
-        { id: 1, title: 'کشف و استراتژی', desc: 'فهمیدن دقیق نیاز شما و ترسیم نقشه راه.' },
-        { id: 2, title: 'طراحی و دکوپاژ', desc: 'خلق هویت بصری و رابط کاربری با بالاترین استاندارد.' },
-        { id: 3, title: 'توسعه و اجرا', desc: 'کدنویسی بی‌نقص، تست‌های نهایی و تحویل پروژه.' }
-      ]
     },
     testimonials: {
       title: "نظرات همکاران و کارفرمایان",

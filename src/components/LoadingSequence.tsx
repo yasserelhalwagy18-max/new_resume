@@ -10,23 +10,12 @@ export const LoadingSequence = ({ onComplete }: LoadingSequenceProps) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const minDisplayTime = 800; // Show loader at least 800ms (avoids flash)
-    const maxWaitTime = 2500;   // Cap at 2.5s (prevents hanging)
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+      setTimeout(onComplete, 500); // Allow exit animation to finish
+    }, 2500);
 
-    const startTime = Date.now();
-
-    Promise.race([
-      document.fonts.ready,
-      new Promise(resolve => setTimeout(resolve, maxWaitTime))
-    ]).then(() => {
-      const elapsed = Date.now() - startTime;
-      const remaining = Math.max(0, minDisplayTime - elapsed);
-
-      setTimeout(() => {
-        setIsVisible(false);
-        setTimeout(onComplete, 500);
-      }, remaining);
-    });
+    return () => clearTimeout(timer);
   }, [onComplete]);
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {

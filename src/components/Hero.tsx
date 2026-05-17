@@ -11,7 +11,7 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
 
   return (
     <section
-      className="min-h-screen flex items-end pb-16 md:pb-24 pt-[80px] px-6 relative overflow-hidden bg-[#0A0A0A]"
+      className="min-h-screen flex items-end pb-16 padding-bottom: calc(env(safe-area-inset-bottom) + 4rem) md:pb-24 pt-[80px] px-6 relative overflow-hidden bg-[#0A0A0A]"
       style={{ minHeight: "100dvh" }}
     >
       {/* Playful Geometric Accent — Saul Bass Energy */}

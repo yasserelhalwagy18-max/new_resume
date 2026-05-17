@@ -1,15 +1,13 @@
 import React, { memo, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
-import { portfolioData } from "../data";
+import { portfolioData, Language } from "../data";
 import { ArrowUpRight, ArrowUpLeft, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { WordReveal } from "./WordReveal";
 import { useScrollVelocity } from "../hooks/useScrollVelocity";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
-import { useDirection } from "./providers/DirectionProvider";
 
-export const Projects = memo(() => {
-  const { locale: lang } = useDirection();
+export const Projects = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].projects;
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);

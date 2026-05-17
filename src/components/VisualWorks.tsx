@@ -1,12 +1,10 @@
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { portfolioData, VisualItem } from "../data";
+import { portfolioData, Language, VisualItem } from "../data";
 import { ChevronDown, Wrench, Lightbulb, Target } from "lucide-react";
 import { WordReveal } from "./WordReveal";
-import { useDirection } from "./providers/DirectionProvider";
 
-export const VisualWorks = memo(() => {
-  const { locale: lang } = useDirection();
+export const VisualWorks = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].visual;
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const isFa = lang === "fa";

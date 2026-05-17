@@ -47,7 +47,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
         </div>
 
         {/* Asymmetric Grid — Visual First */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {t.items.map((item, index) => {
             const isLarge = index === 0; // First project is hero size
             return (
@@ -77,50 +77,31 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
                 </div>
 
-                {/* Content Overlay — Minimal */}
-                <div className="absolute inset-0 p-6 md:p-10 flex flex-col justify-between" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.6)' }}>
-                  <div className="flex justify-between items-start">
-                    <span className="text-[11px] uppercase tracking-widest text-white/50 font-medium">
-                      {item.year}
-                    </span>
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-2 rounded-full bg-white/10 backdrop-blur-sm text-white/70 hover:text-[#D4A017] hover:bg-white/20 transition-all"
-                        aria-label="Visit site"
-                      >
-                        <ExternalLink size={16} />
-                      </a>
-                    )}
-                  </div>
-
-                  <div>
-                    <h3 className={`text-2xl md:text-3xl font-bold text-white mb-2 ${isFa ? "" : "tracking-tight"}`} style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}>
-                      {item.name}
-                    </h3>
-                    <p className="text-sm text-white/70 mb-4 max-w-md line-clamp-2 leading-relaxed">
-                      {item.description}
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <span className="text-[11px] text-white/40 uppercase tracking-widest">
-                        {item.stack.length} {isFa ? "تکنولوژی" : "technologies"}
-                      </span>
-                      <span className="w-8 h-[1px] bg-white/20" />
-                    </div>
-                  </div>
+                {/* Year Stamp */}
+                <div className="absolute top-4 start-4 z-20">
+                  <span className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm text-[10px] uppercase tracking-widest text-[#D4A017] font-medium border border-white/5">
+                    {item.year}
+                  </span>
                 </div>
 
                 {/* Hover Reveal — Arrow */}
-                <div className="absolute top-6 end-6 md:top-10 md:end-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-12 h-12 rounded-full bg-[#D4A017] flex items-center justify-center text-black">
-                    <ArrowUpRight size={20} />
+                <div className="absolute top-4 end-4 z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <div className="w-10 h-10 rounded-full bg-[#D4A017] flex items-center justify-center text-black">
+                    <ArrowUpRight size={18} />
                   </div>
+                </div>
+
+                {/* Content Overlay — Visible on Hover */}
+                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.6)' }}>
+                  <h3 className={`text-2xl md:text-3xl font-bold text-white mb-2 ${isFa ? "" : "tracking-tight"}`} style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}>
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-white/80 mb-4 max-w-md line-clamp-2 leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
               </motion.div>
             );
@@ -140,62 +121,81 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
               className="absolute inset-0 bg-black/90 backdrop-blur-sm"
             />
 
-            {t.items.find((i) => i.id === selectedProject) && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-[#111] border border-white/[0.08] rounded-3xl shadow-2xl flex flex-col md:flex-row"
-              >
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 rtl:left-4 rtl:right-auto z-20 p-2 bg-black/40 backdrop-blur-md rounded-full text-white/70 hover:text-white border border-white/[0.1] transition-colors"
+            {(() => {
+              const selected = t.items.find((i) => i.id === selectedProject);
+              if (!selected) return null;
+
+              return (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-[#111] border border-white/[0.08] rounded-3xl shadow-2xl flex flex-col"
                 >
-                  <X size={20} />
-                </button>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="absolute top-4 right-4 rtl:left-4 rtl:right-auto z-20 p-2 bg-black/60 backdrop-blur-md rounded-full text-white/70 hover:text-white border border-white/[0.1] transition-colors"
+                  >
+                    <X size={20} />
+                  </button>
 
-                {/* Image Side — 60% */}
-                <div className="w-full md:w-3/5 aspect-video md:aspect-auto md:min-h-[500px] relative bg-black">
-                  <img
-                    src={t.items.find((i) => i.id === selectedProject)!.images[0]}
-                    alt={t.items.find((i) => i.id === selectedProject)!.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Text Side — 40%, minimal */}
-                <div className="w-full md:w-2/5 p-8 md:p-10 flex flex-col justify-center">
-                  <span className="text-[11px] uppercase tracking-widest text-[#D4A017] mb-4 block">
-                    {t.items.find((i) => i.id === selectedProject)!.year}
-                  </span>
-                  <h3 className={`text-3xl font-bold text-white mb-4 ${isFa ? "" : "tracking-tight"}`}>
-                    {t.items.find((i) => i.id === selectedProject)!.name}
-                  </h3>
-                  <p className="text-sm text-white/60 mb-6 leading-relaxed">
-                    {t.items.find((i) => i.id === selectedProject)!.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {t.items.find((i) => i.id === selectedProject)!.stack.map((tech) => (
-                      <span key={tech} className="tag tag-gold text-xs">
-                        {tech}
-                      </span>
-                    ))}
+                  {/* Full-bleed Image Gallery */}
+                  <div className="w-full relative bg-black aspect-video md:aspect-[21/9]">
+                    <div className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {selected.images.map((img, idx) => (
+                        <div key={idx} className="w-full h-full flex-shrink-0 snap-start relative">
+                          <img
+                            src={img}
+                            alt={`${selected.name} - ${idx + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    {/* Gallery indicators */}
+                    {selected.images.length > 1 && (
+                      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10 pointer-events-none">
+                        {selected.images.map((_, idx) => (
+                          <div key={idx} className="w-1.5 h-1.5 rounded-full bg-white/50" />
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  {t.items.find((i) => i.id === selectedProject)!.link && (
-                    <a
-                      href={t.items.find((i) => i.id === selectedProject)!.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary w-fit text-sm"
-                    >
-                      {isFa ? "مشاهده وب‌سایت" : "View Live Site"}
-                      <ExternalLink size={14} />
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-            )}
+
+                  {/* Text Content Below */}
+                  <div className="w-full p-8 md:p-10 flex flex-col">
+                    <span className="text-[11px] uppercase tracking-widest text-[#D4A017] mb-2 block">
+                      {selected.year}
+                    </span>
+                    <h3 className={`text-3xl font-bold text-white mb-4 ${isFa ? "" : "tracking-tight"}`}>
+                      {selected.name}
+                    </h3>
+                    <p className="text-sm text-white/80 mb-6 leading-relaxed max-w-3xl">
+                      {selected.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {selected.stack.map((tech) => (
+                        <span key={tech} className="tag tag-gold text-xs">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    {selected.link && (
+                      <a
+                        href={selected.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary w-fit text-sm"
+                      >
+                        {isFa ? "مشاهده وب‌سایت" : "View Live Site"}
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })()}
           </div>
         )}
       </AnimatePresence>

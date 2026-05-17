@@ -36,9 +36,9 @@ export default function App() {
 
       <main>
         <Hero lang={lang} />
+        <About lang={lang} />
         <Projects lang={lang} />
         <VisualWorks lang={lang} />
-        <About lang={lang} />
         <Experience lang={lang} />
         <Testimonials lang={lang} />
         <Contact lang={lang} />

@@ -14,29 +14,61 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
       className="min-h-screen flex items-end pb-16 padding-bottom: calc(env(safe-area-inset-bottom) + 4rem) md:pb-24 pt-[80px] px-6 relative overflow-hidden bg-[#0A0A0A]"
       style={{ minHeight: "100dvh" }}
     >
-      {/* Playful Geometric Accent — Saul Bass Energy */}
+      {/* Playful Geometric Accent — Cinematic Saul Bass Energy */}
       <div className="absolute top-[12%] end-[8%] md:end-[12%] w-[100px] h-[100px] md:w-[160px] md:h-[160px] opacity-80 pointer-events-none z-[1]">
         <motion.div
-          initial={{ rotate: 15, scale: 0.8, opacity: 0 }}
-          animate={{ rotate: 0, scale: 1, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ rotate: 15, scale: 0.8, opacity: 0, y: 0 }}
+          animate={{ rotate: [0, 5, -2, 0], scale: 1, opacity: 1, y: [0, -15, 10, 0] }}
+          transition={{
+            duration: 8,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+            opacity: { duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] },
+            scale: { duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] },
+          }}
           className="w-full h-full bg-[#D4A017]"
-          style={{ clipPath: "polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%)" }}
+          style={{
+            clipPath: "polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%)",
+            filter: "drop-shadow(0 20px 30px rgba(0,0,0,0.5))"
+          }}
         />
       </div>
 
       {/* Secondary Geometric — Teal Circle Fragment */}
       <div className="absolute bottom-[25%] start-[8%] md:start-[12%] w-[60px] h-[60px] md:w-[100px] md:h-[100px] pointer-events-none z-[1]">
         <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.6 }}
-          transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ scale: 0, opacity: 0, y: 0, rotate: 0 }}
+          animate={{ scale: 1, opacity: 0.6, y: [0, 20, -10, 0], rotate: [0, 10, -5, 0] }}
+          transition={{
+            duration: 10,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+            opacity: { duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
+            scale: { duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
+          }}
           className="w-full h-full rounded-full border-[3px] border-[#2A9D8F]"
+          style={{ filter: "drop-shadow(0 20px 30px rgba(0,0,0,0.5))" }}
         />
       </div>
 
       {/* Rose Diagonal Stripe */}
-      <div className="absolute top-[45%] start-[5%] md:start-[8%] w-[2px] h-[100px] md:h-[160px] bg-[#C1666B] opacity-30 rotate-45 pointer-events-none z-[1]" />
+      <div className="absolute top-[45%] start-[5%] md:start-[8%] w-[2px] h-[100px] md:h-[160px] pointer-events-none z-[1]">
+        <motion.div
+          initial={{ opacity: 0, y: 0, rotate: 45 }}
+          animate={{ opacity: 0.3, y: [0, -20, 15, 0], rotate: [45, 48, 42, 45] }}
+          transition={{
+            duration: 12,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+            opacity: { duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] },
+          }}
+          className="w-full h-full bg-[#C1666B]"
+          style={{ filter: "drop-shadow(0 20px 30px rgba(0,0,0,0.5))" }}
+        />
+      </div>
 
       {/* Main Content — Bottom-Anchored for Drama */}
       <div className="relative z-10 w-full max-w-6xl mx-auto">

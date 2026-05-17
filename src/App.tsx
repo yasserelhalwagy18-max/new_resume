@@ -1,30 +1,31 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useState, useEffect, lazy, Suspense } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Language, portfolioData } from "./data";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { Projects } from "./components/Projects";
-import { VisualWorks } from "./components/VisualWorks";
-import { About } from "./components/About";
-import { Experience } from "./components/Experience";
-import { Testimonials } from "./components/Testimonials";
-import { Contact } from "./components/Contact";
 import { ArrowUp } from "lucide-react";
+
+// Lazy loaded components for improved initial load performance
+const About = lazy(() => import('./components/About').then(m => ({ default: m.About })));
+const Projects = lazy(() => import('./components/Projects').then(m => ({ default: m.Projects })));
+const VisualWorks = lazy(() => import('./components/VisualWorks').then(m => ({ default: m.VisualWorks })));
+const Experience = lazy(() => import('./components/Experience').then(m => ({ default: m.Experience })));
+const Testimonials = lazy(() => import('./components/Testimonials').then(m => ({ default: m.Testimonials })));
+const Contact = lazy(() => import('./components/Contact').then(m => ({ default: m.Contact })));
 
 export default function App() {
   const [lang, setLang] = useState<Language>("fa");
-  const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
     document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
     document.documentElement.lang = lang;
   }, [lang]);
 
-  useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 800);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // GPU-accelerated scroll values for "Back to top" button
+  const { scrollY } = useScroll();
+  const topOpacity = useTransform(scrollY, [700, 800], [0, 1]);
+  const topScale = useTransform(scrollY, [700, 800], [0.8, 1]);
+  const pointerEvents = useTransform(scrollY, [700, 800], ["none", "auto"]);
 
   return (
     <div
@@ -36,12 +37,14 @@ export default function App() {
 
       <main>
         <Hero lang={lang} />
-        <About lang={lang} />
-        <Projects lang={lang} />
-        <VisualWorks lang={lang} />
-        <Experience lang={lang} />
-        <Testimonials lang={lang} />
-        <Contact lang={lang} />
+        <Suspense fallback={<div className="h-screen bg-[#0A0A0A]" />}>
+          <About lang={lang} />
+          <Projects lang={lang} />
+          <VisualWorks lang={lang} />
+          <Experience lang={lang} />
+          <Testimonials lang={lang} />
+          <Contact lang={lang} />
+        </Suspense>
       </main>
 
       {/* Footer — Architectural & Quiet */}
@@ -65,20 +68,14 @@ export default function App() {
       </footer>
 
       {/* Back to top */}
-      <AnimatePresence>
-        {showTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-8 end-8 z-50 w-12 h-12 rounded-full border border-white/[0.12] bg-black/40 backdrop-blur-md flex items-center justify-center hover:border-[#D4A017]/50 hover:bg-[#D4A017]/10 transition-all group"
-            aria-label="Back to top"
-          >
-            <ArrowUp size={18} className="text-white/40 group-hover:text-[#D4A017] transition-colors" />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      <motion.button
+        style={{ opacity: topOpacity, scale: topScale, pointerEvents: pointerEvents as any }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-8 end-8 z-50 w-12 h-12 rounded-full border border-white/[0.12] bg-black/40 backdrop-blur-md flex items-center justify-center hover:border-[#D4A017]/50 hover:bg-[#D4A017]/10 transition-all group"
+        aria-label="Back to top"
+      >
+        <ArrowUp size={18} className="text-white/40 group-hover:text-[#D4A017] transition-colors" />
+      </motion.button>
     </div>
   );
 }

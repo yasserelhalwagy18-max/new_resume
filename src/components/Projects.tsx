@@ -57,7 +57,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative overflow-hidden rounded-2xl md:rounded-3xl cursor-pointer card-bg ${isLarge ? "md:col-span-2 md:aspect-[21/9]" : "aspect-[4/3]"}`}
+                className={`group relative overflow-hidden rounded-2xl md:rounded-3xl cursor-pointer card-bg focus-visible:ring-2 focus-visible:ring-[#D4A017] focus-visible:outline-none ${isLarge ? "md:col-span-2 md:aspect-[21/9]" : "aspect-[4/3]"}`}
                 onClick={() => setSelectedProject(item.id)}
                 role="button"
                 tabIndex={0}

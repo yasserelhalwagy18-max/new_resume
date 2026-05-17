@@ -46,7 +46,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
                 <img
                   src={item.images[0]}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 grayscale"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 grayscale group-hover:[filter:grayscale(0%)_sepia(0.2)_saturate(1.2)]"
                   loading="lazy"
                   decoding="async"
                 />
@@ -58,7 +58,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
                 <span className="text-xs uppercase tracking-widest text-[#D4A017] font-medium block mb-1">
                   {isFa ? "مشاهده" : "View"}
                 </span>
-                <h3 className={`text-lg font-bold text-white ${isFa ? "" : "tracking-tight"}`}>
+                <h3 className={`text-lg text-white ${isFa ? "font-black" : "font-bold tracking-tight"}`}>
                   {item.title}
                 </h3>
               </div>

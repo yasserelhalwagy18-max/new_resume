@@ -1,20 +1,19 @@
 import { memo } from "react";
 import { motion } from "motion/react";
 import { portfolioData, Language } from "../data";
-import { WordReveal } from "./WordReveal";
 
 export const About = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].about;
-  const capT = portfolioData[lang].capabilities;
   const isFa = lang === "fa";
 
   return (
     <section
       id="about"
-      className="px-6 max-w-5xl mx-auto border-t border-white/[0.08] section-quiet relative mt-[-4rem] z-30"
+      className="px-6 max-w-6xl mx-auto section-padding relative"
     >
+      {/* Watermark */}
       <div
-        className="hidden md:block absolute -top-8 -left-12 rtl:-left-auto rtl:-right-12 text-[clamp(10rem,20vw,18rem)] font-light text-white/[0.03] leading-none select-none pointer-events-none z-0 overflow-hidden whitespace-nowrap"
+        className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-0`}
         aria-hidden="true"
       >
         {isFa ? "۰۱" : "01"}
@@ -23,89 +22,78 @@ export const About = memo(({ lang }: { lang: Language }) => {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 1.2 }}
-        className="max-w-3xl relative z-10"
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 1 }}
+        className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
       >
-        <WordReveal
-          text={t.title}
-          className={`text-5xl md:text-6xl font-light mb-24 text-[#F3F1EB] ${isFa ? 'tracking-normal' : 'tracking-tight'}`}
-        />
-
-        <div className={`space-y-20 text-[1.1rem] ${isFa ? 'leading-[2.2]' : 'leading-[1.8]'} text-white/80 font-light`}>
-          {t.paragraphs?.map((p, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{
-                duration: 1,
-                delay: i * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              {p}
-            </motion.p>
-          ))}
+        {/* Left Column — Title */}
+        <div className="lg:col-span-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className={`text-section-title font-bold text-[#F4F1EA] mb-4 ${isFa ? "" : "tracking-tighter"}`}
+          >
+            {t.title}
+          </motion.h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-12 h-[2px] bg-[#D4A017] origin-left rtl:origin-right"
+          />
         </div>
 
-        {/* Signature Line */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="mt-24 pt-8 border-t border-white/[0.08] text-xs tracking-widest text-white/60"
-        >
-          {t.location}
-        </motion.div>
+        {/* Right Column — Content */}
+        <div className="lg:col-span-8">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className={`text-lg md:text-xl text-white/80 font-light leading-relaxed ${isFa ? "leading-[2] mb-12" : "mb-12 max-w-2xl"}`}
+          >
+            {t.paragraph}
+          </motion.p>
 
-        {/* Capability Blocks - Merged from CapabilitySnapshot */}
-        <div className="mt-24 pt-16 border-t border-white/[0.08]">
-          <span className="text-xs uppercase tracking-widest text-amber-500/60 mb-12 block">
-            {isFa ? "چگونه کار می‌کنم" : "How I Work"}
-          </span>
+          {/* Capabilities — Tag Cloud (Visual, not textual) */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <span className="text-[11px] uppercase tracking-widest text-white/40 block mb-4">
+              {isFa ? "توانایی‌ها" : "Capabilities"}
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {t.capabilities.map((cap, i) => (
+                <motion.span
+                  key={cap}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.3 + i * 0.05 }}
+                  className="tag tag-gold"
+                >
+                  {cap}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
 
-          {/* Mobile: Horizontal Scroll, Desktop: 2x2 Grid */}
-          <div className="relative">
-          <div className="flex md:grid md:grid-cols-2 gap-6 lg:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory no-scrollbar pb-8 md:pb-0">
-            {capT.blocks.map((block, index) => (
-              <motion.div
-                key={block.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: index * 0.1
-                }}
-                className="min-w-[85vw] md:min-w-0 snap-center group p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:bg-white/[0.03] hover:border-white/[0.12] transition-all duration-500"
-              >
-                <div className="mb-6 text-amber-500/40">
-                  {index === 0 && <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/></svg>}
-                  {index === 1 && <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>}
-                  {index === 2 && <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>}
-                  {index === 3 && <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>}
-                </div>
-                <h3 className="text-sm font-medium text-[#F3F1EB] mb-3 tracking-wide">
-                  {block.title}
-                </h3>
-                <p className="text-xs text-white/60 leading-relaxed">
-                  {block.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Scroll hint - only on mobile */}
-          <div className="md:hidden absolute right-0 top-0 bottom-8 w-16 bg-gradient-to-l from-[#08090A] to-transparent pointer-events-none rtl:right-auto rtl:left-0 rtl:bg-gradient-to-r" />
-
-          <p className="md:hidden text-center text-[11px] text-white/30 uppercase tracking-widest mt-4 animate-pulse">
-            {isFa ? "← برای دیدن بیشتر بکشید" : "Swipe to see more →"}
-          </p>
-          </div>
+          {/* Location */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-12 pt-6 border-t border-white/[0.06] text-xs text-white/40 font-light tracking-widest"
+          >
+            {t.location}
+          </motion.p>
         </div>
       </motion.div>
     </section>

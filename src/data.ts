@@ -7,647 +7,349 @@ export interface ProjectItem {
   link?: string;
   role: string;
   stack: string[];
-  problem: string;
-  solution: string;
-  result: string;
-  impact: string;
-  details: string;
-  readMore: string;
-  readLess: string;
+  description: string;
+  images: string[];
+}
+
+export interface VisualItem {
+  id: number;
+  title: string;
   images: string[];
 }
 
 export const portfolioData = {
   en: {
     nav: {
-      about: "Approach",
-      experience: "Experience",
-      projects: "Projects",
-      visual: "Visual Works",
-      testimonials: "Testimonials",
+      work: "Work",
+      about: "Studio",
       contact: "Contact",
     },
     hero: {
-      role: "Brand Identity Designer · Full-Stack Developer · AI Creative Systems",
-      title: "Most websites are forgettable.\nI build the ones that linger.",
-      description:
-        "Digital experiences shot like cinema — where every transition earns trust and every detail converts attention into action.",
-      ctaPrimary: "View Projects",
+      role: "Brand Identity · Full-Stack · AI Systems",
+      title: "Design that\nrefuses to forget.",
+      description: "Digital experiences built like cinema — where every frame earns attention.",
+      ctaPrimary: "View Selected Work",
       ctaSecondary: "Start a Project",
     },
-    capabilities: {
-      blocks: [
-        {
-          title: "Brand Identity",
-          description:
-            "Visual systems and brand strategy with editorial sensibility",
-        },
-        {
-          title: "Product Design",
-          description: "Cinematic digital experiences with emotional depth",
-        },
-        {
-          title: "Development",
-          description:
-            "Frontend craft focused on motion, rhythm, and atmosphere",
-        },
-        {
-          title: "AI Workflow",
-          description:
-            "Creative augmentation through AI-assisted ideation and systems",
-        },
-      ],
-    },
     about: {
-      title: "Approach",
-      paragraphs: [
-        "I'm obsessed with the moment a user forgets they're looking at a screen. That happens when photography, motion, and code stop fighting each other and start telling one lie together.",
-        "I treat digital experiences like film reels. Rhythm. Atmosphere. Tension. Emotional clarity. These matter more than visual complexity. A slow fade can be more powerful than a thousand animations.",
-        "AI isn't a tool I use. It's a voice I argue with. The best ideas come from that friction — when the machine suggests something absurd and I have to prove why the human way matters.",
-        "Performance is aesthetics. Restraint is confidence. And precision — the kind you feel before you understand it — is the only thing that separates being seen from being remembered.",
-      ],
-      location:
-        "Based in Iran • Available for selective international projects",
-      coreFocus: [
-        "Front-End Development",
-        "Back-End Development",
-        "UI/UX Design",
-        "Brand Identity",
-        "Graphic Design",
-        "Visual Storytelling",
-        "Cinematic & Artistic Photography",
-        "AI-Assisted Creative Workflow",
-      ],
+      title: "Studio",
+      paragraph: "I chase the moment a user forgets the screen exists. That happens when photography, motion, and code stop competing and start conspiring. Restraint is confidence. Precision is the only thing that separates being seen from being remembered.",
+      capabilities: ["Brand Identity", "Product Design", "Front-End Craft", "AI Creative Systems", "Cinematic Photography", "Visual Narrative"],
+      location: "Based in Iran · Available worldwide",
     },
     experience: {
-      title: "Experience",
-      summary:
-        "4+ years in Web & Product Development. 10+ years in Visual Direction & Brand Identity.",
+      title: "Path",
+      summary: "4+ years shipping web products. 10+ years shaping visual identities.",
       items: [
         {
           id: 1,
           role: "Senior Designer & Web Developer",
           company: "AFS (Tehran)",
-          date: "Nov 2024 - Present",
-          description:
-            "Led a multidisciplinary workflow covering brand identity, graphic assets, complete UI/UX, and end-to-end website implementation, while also using AI tools for design enhancement, content production, product development, video creation, and teaser editing.",
+          date: "2024 — Present",
+          description: "End-to-end brand identity, UI/UX, and full-stack web implementation.",
         },
         {
           id: 2,
-          role: "Senior Designer & Web Developer",
-          company: "Makhtoot (Qom)",
-          date: "Feb 2024 - Apr 2024",
-          description:
-            "Built the brand identity from concept to detailed execution, produced the required graphic assets, and then designed the UI/UX and fully developed the website with a brand-led approach.",
+          role: "AI Systems Architect",
+          company: "AFS (Tehran)",
+          date: "2024",
+          description: "Built local GPU automation pipeline that transforms book chapters into cinematic AI-generated images and motion videos.",
         },
         {
           id: 3,
+          role: "Full-Stack Developer & Product Designer",
+          company: "Sangin (Independent)",
+          date: "2023 — 2024",
+          description: "Designed and built complete ERP-grade CRM system for iron manufacturing from zero to production.",
+        },
+        {
+          id: 4,
+          role: "Senior Designer & Web Developer",
+          company: "Makhtoot (Qom)",
+          date: "2024",
+          description: "Zero-to-launch brand system and responsive web platform in 8 weeks.",
+        },
+        {
+          id: 5,
           role: "Frontend Developer & UI/UX Designer",
           company: "Rafed (Qom)",
-          date: "Jan 2022 - Mar 2024",
-          description:
-            "Designed UI/UX and developed frontend interfaces for the company and its internal systems, with a focus on usability, structured interfaces, and reusable product components.",
+          date: "2022 — 2024",
+          description: "Component library and internal system redesign across 5+ platforms.",
         },
       ],
     },
     projects: {
-      title: "Selected Projects",
+      title: "Selected Work",
       items: [
         {
           id: 1,
-          name: "AFSSOLAR & Custom Headless CMS",
+          name: "AFSSOLAR",
           year: "2024",
           link: "https://afssolar.ir",
-          role: "Full-Stack Engineer, Senior Designer & Architect",
-          stack: [
-            "React 19",
-            "Express",
-            "Drizzle ORM",
-            "MariaDB",
-            "Next.js",
-            "Brand Identity",
-          ],
-          problem:
-            "The client needed a highly secure, performant, and custom-tailored content management system that existing off-the-shelf solutions couldn't provide without significant overhead or security compromises.",
-          solution:
-            "Architected a custom headless CMS from the ground up with a block-based editor and granular security controls, paired with a high-performance frontend.",
-          result:
-            "Achieved near-perfect Lighthouse scores, 100% automated deployment, and an enterprise-grade security posture with real-time SEO capabilities.",
-          impact:
-            "Cut their content chaos in half and made them look like the Tesla of solar energy in Iran.",
-          details:
-            "This overarching project required a full brand identity creation from scratch and translating it into a performant web presence. Concurrently, I designed and built a custom headless CMS featuring a block-based architecture, nested pages, content slots, auto-saving drafts, and a Tiptap rich-text editor integrated with a powerful media library. Emphasized security through granular RBAC, JWT revocation, HttpOnly secure cookies, CSRF protection, file upload magic-number validation, and comprehensive audit logs. Architected the backend using Drizzle ORM on MariaDB, enabling seamless SSG hydration and maximum performance. Established fully automated deployments to cPanel via GitHub Actions.",
-          readMore: "Read More",
-          readLess: "Show Less",
+          role: "Full-Stack · Brand · CMS Architecture",
+          stack: ["React 19", "Next.js", "Express", "Drizzle", "MariaDB"],
+          description: "Custom headless CMS and corporate web presence for Iran's leading solar energy supplier. Near-perfect Lighthouse scores. Enterprise-grade security.",
           images: [
-            "/images/photo-1498050108023-c5249f4df085.webp",
-            "/images/photo-1555421689-491a97ff2040.webp",
-            "/images/photo-1461749280684-dccba630e2f6.webp",
-            "/images/photo-1555066931-4365d14bab8c.webp",
-            "/images/photo-1633356122544-f134324a6cee.webp",
+            "/images/AFS_1.webp",
+            "/images/AFS_2.webp",
+            "/images/AFS_3.webp",
           ],
         },
         {
           id: 2,
-          name: "Rafed Internal Systems",
-          year: "2022 - 2024",
-          role: "Frontend Developer & UI/UX Designer",
-          stack: ["React", "UI/UX", "Component Thinking", "Internal Systems"],
-          problem:
-            "Fragmented internal tools with inconsistent UX led to decreased productivity and higher training costs for new employees.",
-          solution:
-            "Developed a standardized component library and redesigned core internal systems with a focus on usability and data visualization.",
-          result:
-            "Reduced task completion time by 30% and unified the visual language across 5+ internal platforms.",
-          impact:
-            "Turned their internal tools from a daily headache into something their team actually wanted to use.",
-          details:
-            "Designed and developed numerous front-end interfaces for internal organizational tools. The focus was heavily on component reusability, maintaining a clean UI/UX standard across different systems, and improving overall operational efficiency.",
-          readMore: "Read More",
-          readLess: "Show Less",
+          name: "Rafed Systems",
+          year: "2022 — 2024",
+          role: "Frontend · UI/UX · Design Systems",
+          stack: ["React", "Component Library", "Data Visualization"],
+          description: "Unified internal tools and component architecture. Reduced task completion time by 30%.",
           images: [
-            "/images/photo-1551288049-bebda4e38f71.webp",
-            "/images/photo-1547658719-da2b51169166.webp",
+            "/images/Rafed_1.webp",
+            "/images/Rafed_2.webp",
           ],
         },
         {
           id: 3,
           name: "Makhtoot",
           year: "2024",
-          role: "Senior Designer & Web Developer",
-          stack: [
-            "Brand Identity",
-            "Graphic Design",
-            "UI/UX",
-            "Web Development",
-          ],
-          problem:
-            "A new brand required a complete visual identity and digital presence from zero to launch in a very tight timeframe.",
-          solution:
-            "Executed a rapid design-to-development workflow, creating a modular brand system and a responsive web platform simultaneously.",
-          result:
-            "Successfully launched the brand identity and website within 2 months, establishing a strong market presence from day one.",
-          impact:
-            "Launched a complete brand-to-website pipeline in 8 weeks, turning a concept into a market-ready identity that secured early customer traction.",
-          details:
-            "Starting with just a core concept, I crafted a complete visual identity and graphical assets. This brand foundation was then seamlessly integrated into the UI/UX design and full front-end development of their main website.",
-          readMore: "Read More",
-          readLess: "Show Less",
+          role: "Brand · UI/UX · Web",
+          stack: ["Brand Identity", "Figma", "React"],
+          description: "Complete brand-to-website pipeline launched in 8 weeks. Concept to market-ready identity.",
           images: [
-            "/images/photo-1626785774573-4b799315345d.webp",
-            "/images/photo-1561070791-2526d30994b5.webp",
+            "/images/Makhtoot_1.webp",
+            "/images/Makhtoot_2.webp",
           ],
         },
-      ],
-    },
-    skills: {
-      title: "Expertise",
-      categories: [
         {
-          name: "Creative Development",
-          items:
-            "React, Next.js, TypeScript, Motion Design, Cinematic Interfaces",
-          level: 90,
+          id: 4,
+          name: "AI Book Visualizer",
+          year: "2024",
+          role: "AI Systems · Automation · Local GPU Pipeline",
+          stack: ["Python", "Stable Diffusion", "ComfyUI", "LLM", "Local GPU"],
+          description: "End-to-end AI automation pipeline that reads book chapters, generates cinematic prompts via LLM, creates images through Stable Diffusion, and renders motion videos — all running locally on GPU without cloud dependencies.",
+          images: [
+            "/images/AIBook_1.webp",
+            "/images/AIBook_2.webp",
+          ],
         },
         {
-          name: "Product & Experience",
-          items:
-            "UI/UX Design, Visual Systems, Interaction Design, Digital Storytelling",
-          level: 85,
-        },
-        {
-          name: "Brand & Visual",
-          items:
-            "Brand Identity, Art Direction, Graphic Design, Visual Narrative",
-          level: 95,
-        },
-        {
-          name: "AI Creative Systems",
-          items:
-            "AI-Assisted Ideation, Prompt Engineering, Creative Automation, Visual Experimentation",
-          level: 88,
+          id: 5,
+          name: "Sangin CRM",
+          year: "2023 — 2024",
+          link: "#",
+          role: "Full-Stack · ERP Architecture · Product Design",
+          stack: ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
+          description: "Complete ERP-grade CRM system for an iron manufacturing company. Inventory management, supply chain tracking, customer relations, financial reporting, and real-time analytics dashboard — designed from zero to production.",
+          images: [
+            "/images/Sangin_1.webp",
+            "/images/Sangin_2.webp",
+            "/images/Sangin_3.webp",
+          ],
         },
       ],
     },
     visual: {
-      title: "Visual Works",
+      title: "Visual Archive",
       items: [
-        {
-          id: 1,
-          title: "Brand Identity / Graphic Design",
-          tools: "Illustrator, Photoshop, Midjourney",
-          concept:
-            "Creating a cohesive visual language from logos to marketing assets across physical and digital mediums.",
-          impact:
-            "Established strong, recognizable brand presences that accurately reflect company values.",
-          images: [
-            "/images/photo-1626785774573-4b799315345d.webp",
-            "/images/photo-1626785774625-ddcddc3445e9.webp",
-          ],
-          detailsBtn: "View Details",
-          closeBtn: "Close",
-        },
-        {
-          id: 2,
-          title: "Cinematic Photography",
-          tools: "Lightroom, Professional Camera Gear",
-          concept:
-            "Capturing atmospheric and narrative-driven imagery to tell a visual story.",
-          impact:
-            "Enhanced visual storytelling for campaigns and personal art projects.",
-          images: [
-            "/images/photo-1492691527719-9d1e07e534b4.webp",
-            "/images/photo-1542038784456-1ea8e935640e.webp",
-          ],
-          detailsBtn: "View Details",
-          closeBtn: "Close",
-        },
-        {
-          id: 3,
-          title: "Visual Narrative / Art Direction",
-          tools: "Figma, AI Tools, Video Editing",
-          concept:
-            "Guiding the creative vision for digital products and campaigns.",
-          impact:
-            "Delivered unified aesthetic experiences across all user touchpoints.",
-          images: [
-            "/images/photo-1561070791-2526d30994b5.webp",
-            "/images/photo-1558655146-d09347e92766.webp",
-          ],
-          detailsBtn: "View Details",
-          closeBtn: "Close",
-        },
-        {
-          id: 4,
-          title: "Interface Design / Digital Product",
-          tools: "Figma, React, UI/UX Principles",
-          concept:
-            "Designing intuitive and accessible user interfaces with a focus on component architecture.",
-          impact:
-            "Improved user satisfaction and streamlined organizational workflows.",
-          images: [
-            "/images/photo-1507238691740-187a5b1d37b8.webp",
-            "/images/photo-1555421689-491a97ff2040.webp",
-          ],
-          detailsBtn: "View Details",
-          closeBtn: "Close",
-        },
+        { id: 1, title: "Brand Identity", images: ["/images/Visual_Brand_1.webp", "/images/Visual_Brand_2.webp"] },
+        { id: 2, title: "Cinematic Photography", images: ["/images/Visual_Photo_1.webp", "/images/Visual_Photo_2.webp"] },
+        { id: 3, title: "Art Direction", images: ["/images/Visual_Art_1.webp", "/images/Visual_Art_2.webp"] },
+        { id: 4, title: "Interface Design", images: ["/images/Visual_UI_1.webp", "/images/Visual_UI_2.webp"] },
       ],
     },
     testimonials: {
-      title: "Client & Collaborator Testimonials",
-      stats: [
-        { label: "Years Experience", value: "4+" },
-        { label: "Projects Delivered", value: "20+" },
-        { label: "Main Services", value: "Web & Brand" },
-      ],
+      title: "Voices",
       items: [
         {
           id: 1,
-          name: "Head of Digital",
-          company: "AFS (Tehran)",
-          role: "Client",
-          text: "Sadegh combines deep technical frontend knowledge with an eagle eye for design. He elevated our entire digital presence and branded output.",
-          result: "30% increase in user engagement.",
+          name: "Head of Digital, AFS",
+          text: "Sadegh combines deep technical knowledge with an eagle eye for design. He elevated our entire digital presence.",
         },
         {
           id: 2,
-          name: "Product Lead",
-          company: "Rafed (Qom)",
-          role: "Collaborator",
-          text: "His ability to craft cohesive, reusable components while maintaining high-quality UX is remarkable. A true asset to any product team.",
-          result: "Halved development time for new features.",
+          name: "Product Lead, Rafed",
+          text: "His ability to craft cohesive components while maintaining high-quality UX is remarkable. A true asset.",
         },
       ],
     },
-    humanMoment: {
-      quote:
-        "I once spent three hours adjusting the easing on a button hover. Nobody will notice. Everybody will feel it.",
-      attribution: "",
-    },
     contact: {
-      title: "Let's work together",
-      message:
-        "Tell me what you're building. I'll reply within 24 hours with a clear timeline and next steps.",
+      title: "Let's build something",
+      message: "Tell me what you're making. I'll reply within 24 hours.",
       email: "m110s11061@gmail.com",
       phone: "+98 936 991 3228",
-      linkedin: "linkedin.com/in/mohammad-sadegh-shahid",
-      github: "github.com/mohammadsadeghshahid",
       linkedinUrl: "https://linkedin.com/in/mohammad-sadegh-shahid",
       githubUrl: "https://github.com/mohammadsadeghshahid",
       whatsappUrl: "https://wa.me/989369913228",
     },
     footer: {
-      tagline:
-        "Every project on this site was built with the belief that restraint is more powerful than noise. If you share that belief, we should talk.",
+      tagline: "Restraint is more powerful than noise.",
       copyright: "© {year} Sadegh Shahid",
     },
   },
   fa: {
     nav: {
-      about: "رویکرد",
-      experience: "تجربیات",
-      projects: "پروژه‌ها",
-      visual: "آثار بصری",
-      testimonials: "نظرات",
+      work: "آثار",
+      about: "استودیو",
       contact: "تماس",
     },
     hero: {
-      role: "طراح هویت برند · توسعه‌دهنده فول‌استک · سیستم‌های خلاقانه AI",
-      title: "اغلب وب‌سایت‌ها فراموش‌شدنی‌اند.\nمن آن‌هایی را می‌سازم که در ذهن می‌مانند.",
-      description:
-        "تجربه‌های دیجیتالی با دکوپاژ سینمایی — جایی که هر ترنزیشن اعتماد می‌سازد و هر جزئیات، توجه را به عمل تبدیل می‌کند.",
-      ctaPrimary: "مشاهده پروژه‌ها",
-      ctaSecondary: "شروع یک پروژه",
-    },
-    capabilities: {
-      blocks: [
-        {
-          title: "هویت برند",
-          description: "سیستم‌های بصری و استراتژی برند با حساسیت ادیتوریال",
-        },
-        {
-          title: "طراحی محصول",
-          description: "تجربه‌های دیجیتال سینمایی با عمق احساسی",
-        },
-        {
-          title: "توسعه",
-          description: "صنعت‌گری فرانت‌اند با تمرکز بر موشن، ریتم و اتمسفر",
-        },
-        {
-          title: "سیستم‌های خلاقانه مبتنی بر هوش مصنوعی",
-          description:
-            "تقویت خلاقیت از طریق ایده‌پردازی و سیستم‌های مبتنی بر هوش مصنوعی",
-        },
-      ],
+      role: "هویت برند · فول‌استک · سیستم‌های AI",
+      title: "طراحی که\nفراموش نمی‌شود.",
+      description: "تجربه‌های دیجیتال با دکوپاژ سینمایی — جایی که هر فریم، توجه را می‌خرد.",
+      ctaPrimary: "مشاهده آثار",
+      ctaSecondary: "شروع پروژه",
     },
     about: {
-      title: "رویکرد",
-      paragraphs: [
-        "من شیفته لحظه‌ای هستم که کاربر فراموش می‌کند به یک صفحه نمایش خیره شده است. این زمانی اتفاق می‌افتد که عکاسی، موشن و کد دست از جنگیدن با هم برمی‌دارند و با هم یک رویای مشترک را روایت می‌کنند.",
-        "من با تجربه‌های دیجیتال مانند پلان‌های سینمایی برخورد می‌کنم. ریتم، اتمسفر، تعلیق و وضوح احساسی؛ این‌ها بیش از پیچیدگی‌های بصری اهمیت دارند. گاهی یک فیدِ آرام، قدرتمندتر از هزاران انیمیشن است.",
-        "هوش مصنوعی برای من صرفاً یک ابزار نیست؛ صدایی است که با آن بحث می‌کنم. بهترین ایده‌ها از دل همین اصطکاک بیرون می‌آیند — وقتی ماشین پیشنهادی پوچ می‌دهد و من باید ثابت کنم چرا نگاه انسانی هنوز مهم است.",
-        "عملکرد، عین زیبایی است. خویشتن‌داری، نشانه اعتمادبه‌نفس. و دقت — از آن نوعی که قبل از درک کردن، حسش می‌کنید — تنها چیزی است که مرز بین دیده شدن و به یاد ماندن را تعیین می‌کند.",
-      ],
-      location: "مستقر در قم • آماده برای پروژه‌های منتخب دورکاری و هیبرید",
-      coreFocus: [
-        "توسعه سمت کاربر (Front-End)",
-        "توسعه سمت سرور (Back-End)",
-        "طراحی UI/UX",
-        "هویت برند",
-        "طراحی گرافیک",
-        "روایت بصری",
-        "عکاسی هنری و سینمایی",
-        "جریان‌کار خلاقانه مبتنی بر هوش مصنوعی",
-      ],
+      title: "استودیو",
+      paragraph: "من به لحظه‌ای معتادم که کاربر فراموش می‌کند به یک صفحه خیره است. وقتی عکاسی، موشن و کد دست از جنگ برمی‌دارند و با هم روایت می‌کنند. خویشتن‌داری، اعتمادبه‌نفس است. دقت، تنها مرز بین دیده شدن و به یاد ماندن.",
+      capabilities: ["هویت برند", "طراحی محصول", "صنعت‌گری فرانت‌اند", "سیستم‌های خلاقانه AI", "عکاسی سینمایی", "روایت بصری"],
+      location: "قم، ایران · آماده برای پروژه‌های دورکاری",
     },
     experience: {
-      title: "تجربیات",
-      summary: "۴+ سال توسعه وب و محصول. ۱۰+ سال جهت‌گیری بصری و هویت برند.",
+      title: "مسیر",
+      summary: "۴+ سال توسعه وب و محصول. ۱۰+ سال شکل‌دهی هویت بصری.",
       items: [
         {
           id: 1,
           role: "طراح ارشد و توسعه‌دهنده وب",
           company: "AFS (تهران)",
-          date: "آبان ۱۴۰۳ - اکنون",
-          description:
-            "هویت برند، گرافیک، طراحی و توسعه کامل وب‌سایت. استفاده از هوش مصنوعی برای بهبود طراحی، محتوا و تولید ویدیو.",
+          date: "۱۴۰۳ — اکنون",
+          description: "هویت برند، UI/UX و پیاده‌سازی فول‌استک وب‌سایت.",
         },
         {
           id: 2,
-          role: "طراح ارشد و توسعه‌دهنده وب",
-          company: "مخطوط (قم)",
-          date: "بهمن ۱۴۰۲ - اردیبهشت ۱۴۰۳",
-          description:
-            "هویت برند از ایده تا اجرا. تولید گرافیک، طراحی UI/UX و توسعه وب‌سایت با رویکرد برندمحور.",
+          role: "معمار سیستم‌های AI",
+          company: "AFS (تهران)",
+          date: "۱۴۰۳",
+          description: "ساخت پایپ‌لاین اتوماسیون GPU محلی که فصل‌های کتاب را به تصاویر و ویدیوهای سینمایی AI تبدیل می‌کند.",
         },
         {
           id: 3,
-          role: "توسعه‌دهنده سمت کاربر (Front-End) و طراح UI/UX",
+          role: "توسعه‌دهنده فول‌استک و طراح محصول",
+          company: "سنگین (مستقل)",
+          date: "۱۴۰۲ — ۱۴۰۳",
+          description: "طراحی و پیاده‌سازی سیستم CRM در سطح ERP برای تولیدی آهن. از صفر تا پروداکشن.",
+        },
+        {
+          id: 4,
+          role: "طراح ارشد و توسعه‌دهنده وب",
+          company: "مخطوط (قم)",
+          date: "۱۴۰۳",
+          description: "سیستم برند و پلتفرم وب، از صفر تا راه‌اندازی در ۸ هفته.",
+        },
+        {
+          id: 5,
+          role: "توسعه‌دهنده فرانت‌اند و طراح UI/UX",
           company: "رافد (قم)",
-          date: "دی ۱۴۰۰ - اسفند ۱۴۰۲",
-          description:
-            "طراحی UI/UX و توسعه سمت کاربر برای سیستم‌های درون‌سازمانی. تمرکز بر تجربه کاربری و کامپوننت‌های قابل استفاده مجدد.",
+          date: "۱۴۰۰ — ۱۴۰۲",
+          description: "کتابخانه کامپوننت و بازطراحی سیستم‌های درون‌سازمانی.",
         },
       ],
     },
     projects: {
-      title: "پروژه‌های منتخب",
+      title: "آثار منتخب",
       items: [
         {
           id: 1,
-          name: "وب‌سایت AFSSOLAR و سیستم مدیریت محتوای اختصاصی",
+          name: "AFSSOLAR",
           year: "۱۴۰۳",
           link: "https://afssolar.ir",
-          role: "توسعه‌دهنده فول‌استک و طراح ارشد",
-          stack: [
-            "React 19",
-            "Express",
-            "Drizzle ORM",
-            "MariaDB",
-            "Next.js",
-            "هویت برند",
-          ],
-          problem:
-            "مشتری به یک سیستم مدیریت محتوای کاملاً سفارشی، با امنیت بالا و کارایی فوق‌العاده نیاز داشت که راه‌حل‌های آماده موجود نمی‌توانستند بدون پیچیدگی‌های زیاد یا ضعف‌های امنیتی آن را برآورده کنند.",
-          solution:
-            "معماری یک CMS Headless اختصاصی از پایه با ویرایشگر بلوک‌محور و کنترل‌های امنیتی دقیق، همراه با یک فرانت‌اند با کارایی بالا.",
-          result:
-            "دستیابی به امتیازهای عالی در Lighthouse، استقرار ۱۰۰٪ خودکار و وضعیت امنیتی در سطح سازمانی با قابلیت‌های سئو بلادرنگ.",
-          impact:
-            "هرج و مرج محتوایی آن‌ها را به نصف رساندم و تصویری همچون تسلای انرژی خورشیدی در ایران برایشان ساختم.",
-          details:
-            "این پروژه نیازمند خلق هویت برند از پایه بود که به طراحی یک حضور دیجیتال کارآمد منجر شد. هم‌زمان، معماری یک سیستم مدیریت محتوا با قابلیت‌های پیشرفته شامل ساختار بلاک‌بیس، مدیریت صفحات تودرتو، اسلات‌های محتوا، ذخیره خودکار پیش‌نویس‌ها و پیاده‌سازی ادیتور Tiptap همراه با مدیریت یکپارچه مدیا انجام شد. امنیت سیستم به‌شدت مورد توجه قرار گرفت و به‌وسیله RBAC، کوکی‌های دور از دسترس مرورگر، جلوگیری از حملات پیشرفته، اعتبارسنجی فایل‌های آپلودی مبتنی‌بر ساختار باینری، و لاگ‌های کامل کاربری تضمین شد. بک‌اند با استفاده از Drizzle و MariaDB بازطراحی شد که بستر پیاده‌سازی SSG و بهبود راندمان را فراهم آورد. سیستم CI/CD اتوماتیک نیز با گیت‌هاب اکشنز پیاده‌سازی شد.",
-          readMore: "بیشتر بخوانید",
-          readLess: "بستن",
+          role: "فول‌استک · برند · معماری CMS",
+          stack: ["React 19", "Next.js", "Express", "Drizzle", "MariaDB"],
+          description: "CMS Headless اختصاصی و حضور دیجیتال شرکتی برای بزرگ‌ترین تأمین‌کننده انرژی خورشیدی ایران. امتیاز عالی Lighthouse. امنیت سازمانی.",
           images: [
-            "/images/photo-1498050108023-c5249f4df085.webp",
-            "/images/photo-1555421689-491a97ff2040.webp",
-            "/images/photo-1461749280684-dccba630e2f6.webp",
-            "/images/photo-1555066931-4365d14bab8c.webp",
-            "/images/photo-1633356122544-f134324a6cee.webp",
+            "/images/AFS_1.webp",
+            "/images/AFS_2.webp",
+            "/images/AFS_3.webp",
           ],
         },
         {
           id: 2,
-          name: "سیستم‌های داخلی رافد",
-          year: "۱۴۰۰ - ۱۴۰۲",
-          role: "توسعه‌دهنده سمت کاربر (Front-End) و طراح UI/UX",
-          stack: ["React", "UI/UX", "مبتنی بر کامپوننت", "سیستم‌های داخلی"],
-          problem:
-            "ابزارهای داخلی پراکنده با تجربه کاربری نامنظم که منجر به کاهش بهره‌وری و هزینه‌های آموزشی بالا برای کارمندان جدید می‌شد.",
-          solution:
-            "توسعه یک کتابخانه کامپوننت استاندارد و بازطراحی سیستم‌های داخلی اصلی با تمرکز بر قابلیت استفاده و بصری‌سازی داده‌ها.",
-          result:
-            "کاهش ۳۰ درصدی زمان انجام وظایف و یکپارچه‌سازی زبان بصری در بیش از ۵ پلتفرم داخلی.",
-          impact:
-            "ابزارهای داخلی‌شان را از یک سردرد روزمره به چیزی تبدیل کردم که تیم واقعاً دوست داشت از آن استفاده کند.",
-          details:
-            "طراحی و توسعه چندین رابط کاربری برای ابزارهای سازمانی با تمرکز شدید بر قابلیت استفاده مجدد کامپوننت‌ها حفظ استانداردهای UI/UX و بهبود راندمان کلی سیستم.",
-          readMore: "بیشتر بخوانید",
-          readLess: "بستن",
+          name: "سیستم‌های رافد",
+          year: "۱۴۰۰ — ۱۴۰۲",
+          role: "فرانت‌اند · UI/UX · سیستم طراحی",
+          stack: ["React", "کامپوننت", "بصری‌سازی داده"],
+          description: "یکپارچه‌سازی ابزارهای درون‌سازمانی و معماری کامپوننت. کاهش ۳۰٪ زمان انجام وظایف.",
           images: [
-            "/images/photo-1551288049-bebda4e38f71.webp",
-            "/images/photo-1547658719-da2b51169166.webp",
+            "/images/Rafed_1.webp",
+            "/images/Rafed_2.webp",
           ],
         },
         {
           id: 3,
           name: "مخطوط",
           year: "۱۴۰۳",
-          role: "طراح ارشد و توسعه‌دهنده وب",
-          stack: ["هویت برند", "طراحی گرافیک", "UI/UX", "توسعه وب"],
-          problem:
-            "یک برند جدید به هویت بصری کامل و حضور دیجیتال از صفر تا راه‌اندازی در یک بازه زمانی بسیار فشرده نیاز داشت.",
-          solution:
-            "اجرای سریع فرآیند طراحی تا توسعه، خلق یک سیستم برند مدولار و یک پلتفرم وب واکنش‌گرا به طور همزمان.",
-          result:
-            "راه‌اندازی موفق هویت برند و وب‌سایت در مدت ۲ ماه و ایجاد حضور قوی در بازار از روز اول.",
-          impact:
-            "راه‌اندازی یک خط کامل از برند تا وب‌سایت در ۸ هفته، تبدیل یک ایده به هویتی آماده برای بازار که جذب مشتری اولیه را تضمین کرد.",
-          details:
-            "شروع کار از یک ایده اولیه برای طراحی هویت بصری جامع و گرافیکی بود. سپس این پایه بصری برای طراحی کامل UI/UX و فرانت‌اند وبسایت اصلی پیاده‌سازی و یکپارچه شد.",
-          readMore: "بیشتر بخوانید",
-          readLess: "بستن",
+          role: "برند · UI/UX · وب",
+          stack: ["هویت برند", "Figma", "React"],
+          description: "خط کامل برند تا وب‌سایت در ۸ هفته. از ایده تا هویت آماده بازار.",
           images: [
-            "/images/photo-1626785774573-4b799315345d.webp",
-            "/images/photo-1561070791-2526d30994b5.webp",
+            "/images/Makhtoot_1.webp",
+            "/images/Makhtoot_2.webp",
           ],
         },
-      ],
-    },
-    skills: {
-      title: "تخصص‌ها",
-      categories: [
         {
-          name: "توسعه خلاق",
-          items: "React, Next.js, TypeScript, طراحی موشن، رابط‌های سینمایی",
-          level: 90,
+          id: 4,
+          name: "ویژوالایزر کتاب AI",
+          year: "۱۴۰۳",
+          role: "سیستم‌های AI · اتوماسیون · پایپ‌لاین GPU محلی",
+          stack: ["Python", "Stable Diffusion", "ComfyUI", "LLM", "GPU محلی"],
+          description: "پایپ‌لاین اتوماسیون end-to-end که فصل‌های کتاب را می‌خواند، پرامپت‌های سینمایی تولید می‌کند، تصویر می‌سازد و ویدیو رندر می‌دهد — همه روی GPU محلی بدون وابستگی به ابر.",
+          images: [
+            "/images/AIBook_1.webp",
+            "/images/AIBook_2.webp",
+          ],
         },
         {
-          name: "محصول و تجربه",
-          items: "طراحی UI/UX، سیستم‌های بصری، طراحی تعامل، روایت دیجیتال",
-          level: 85,
-        },
-        {
-          name: "برند و بصری",
-          items: "هویت برند، مدیریت هنری، طراحی گرافیک، روایت بصری",
-          level: 95,
-        },
-        {
-          name: "سیستم‌های خلاقانه مبتنی بر هوش مصنوعی",
-          items:
-            "ایده‌پردازی با کمک هوش مصنوعی، مهندسی پرامپت، اتوماسیون خلاق، آزمایش‌های بصری",
-          level: 88,
+          id: 5,
+          name: "سنگین CRM",
+          year: "۱۴۰۲ — ۱۴۰۳",
+          link: "#",
+          role: "فول‌استک · معماری ERP · طراحی محصول",
+          stack: ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
+          description: "سیستم CRM در سطح ERP برای یک شرکت تولیدی آهن. مدیریت موجودی، ردیابی زنجیره تأمین، روابط مشتری، گزارش‌دهی مالی و داشبورد تحلیل بلادرنگ — از صفر تا پروداکشن.",
+          images: [
+            "/images/Sangin_1.webp",
+            "/images/Sangin_2.webp",
+            "/images/Sangin_3.webp",
+          ],
         },
       ],
     },
     visual: {
-      title: "آثار بصری",
+      title: "آرشیو بصری",
       items: [
-        {
-          id: 1,
-          title: "هویت برند / طراحی گرافیک",
-          tools: "Illustrator, Photoshop, Midjourney",
-          concept:
-            "ایجاد یک زبان بصری منسجم از لوگوها تا دارایی‌های بازاریابی.",
-          impact: "تثبیت حضور قوی و قابل تشخیص برند از طریق کانال‌های مختلف.",
-          images: [
-            "/images/photo-1626785774573-4b799315345d.webp",
-            "/images/photo-1626785774625-ddcddc3445e9.webp",
-          ],
-          detailsBtn: "مشاهده جزئیات",
-          closeBtn: "بستن",
-        },
-        {
-          id: 2,
-          title: "عکاسی سینمایی",
-          tools: "لایت‌روم، تجهیزات حرفه‌ای عکاسی",
-          concept: "ثبت تصاویر جوی و داستان‌محور برای روایت یک داستان بصری.",
-          impact: "ارتقاء روایت بصری برای کمپین‌ها و پروژه‌های هنری شخصی.",
-          images: [
-            "/images/photo-1492691527719-9d1e07e534b4.webp",
-            "/images/photo-1542038784456-1ea8e935640e.webp",
-          ],
-          detailsBtn: "مشاهده جزئیات",
-          closeBtn: "بستن",
-        },
-        {
-          id: 3,
-          title: "روایت بصری / جهت‌گیری هنری",
-          tools: "Figma, AI Tools, ویرایش ویدیو",
-          concept: "هدایت چشم‌انداز خلاقانه برای محصولات دیجیتال و کمپین‌ها.",
-          impact: "ارائه تجربیات بصری یکپارچه در تمام نقاط تماس کاربر.",
-          images: [
-            "/images/photo-1561070791-2526d30994b5.webp",
-            "/images/photo-1558655146-d09347e92766.webp",
-          ],
-          detailsBtn: "مشاهده جزئیات",
-          closeBtn: "بستن",
-        },
-        {
-          id: 4,
-          title: "طراحی رابط کاربری / محصول دیجیتال",
-          tools: "Figma, React, اصول UI/UX",
-          concept:
-            "طراحی رابط‌های کاربری بصری و در دسترس با تمرکز بر معماری کامپوننت.",
-          impact: "بهبود رضایت کاربر و ساده‌سازی جریان‌های کاری سازمانی.",
-          images: [
-            "/images/photo-1507238691740-187a5b1d37b8.webp",
-            "/images/photo-1555421689-491a97ff2040.webp",
-          ],
-          detailsBtn: "مشاهده جزئیات",
-          closeBtn: "بستن",
-        },
+        { id: 1, title: "هویت برند", images: ["/images/Visual_Brand_1.webp", "/images/Visual_Brand_2.webp"] },
+        { id: 2, title: "عکاسی سینمایی", images: ["/images/Visual_Photo_1.webp", "/images/Visual_Photo_2.webp"] },
+        { id: 3, title: "جهت‌گیری هنری", images: ["/images/Visual_Art_1.webp", "/images/Visual_Art_2.webp"] },
+        { id: 4, title: "طراحی رابط", images: ["/images/Visual_UI_1.webp", "/images/Visual_UI_2.webp"] },
       ],
     },
     testimonials: {
-      title: "نظرات همکاران و کارفرمایان",
-      stats: [
-        { label: "سال تجربه", value: "+۴" },
-        { label: "پروژه موفق", value: "+۲۰" },
-        { label: "خدمات اصلی", value: "وب و برند" },
-      ],
+      title: "نقل‌قول‌ها",
       items: [
         {
           id: 1,
-          name: "مدیر دیجیتال",
-          company: "AFS (تهران)",
-          role: "کارفرما",
-          text: "صادق دانش عمیق فنی فرانت‌اند را با دیدگاهی دقیق در طراحی ترکیب می‌کند. او تمام حضور دیجیتال و خروجی برند ما را ارتقا داد.",
-          result: "۳۰٪ افزایش در تعامل کاربران.",
+          name: "مدیر دیجیتال، AFS",
+          text: "صادق دانش فنی عمیق را با دید طراحی دقیق تلفیق می‌کند. او تمام حضور دیجیتال ما را ارتقا داد.",
         },
         {
           id: 2,
-          name: "سرپرست محصول",
-          company: "رافد (قم)",
-          role: "همکار",
-          text: "توانایی او در ساخت کامپوننت‌های منسجم و قابل استفاده مجدد و در عین حال حفظ تجربه کاربری با کیفیت بالا، قابل توجه است. یک مهره ارزشمند برای هر تیم محصول.",
-          result: "کاهش ۵۰٪ زمان توسعه ویژگی‌های جدید.",
+          name: "سرپرست محصول، رافد",
+          text: "توانایی او در ساخت کامپوننت‌های منسجم و حفظ UX با کیفیت، قابل توجه است.",
         },
       ],
     },
-    humanMoment: {
-      quote:
-        "یک بار سه ساعت را صرف تنظیم نرمیِ حرکتِ هاور یک دکمه کردم. هیچکس متوجه نخواهد شد. همه آن را حس خواهند کرد.",
-      attribution: "",
-    },
     contact: {
-      title: "همکاری",
-      message:
-        "بگو چه می‌سازی. ظرف ۲۴ ساعت پاسخ می‌دهم با یک زمان‌بندی روشن و گام‌های بعدی.",
+      title: "بسازیم",
+      message: "بگویید چه می‌سازید. ظرف ۲۴ ساعت پاسخ می‌دهم.",
       email: "m110s11061@gmail.com",
-      phone: "+98 936 991 3228",
-      linkedin: "linkedin.com/in/mohammad-sadegh-shahid",
-      github: "github.com/mohammadsadeghshahid",
+      phone: "+۹۸ ۹۳۶ ۹۹۱ ۳۲۲۸",
       linkedinUrl: "https://linkedin.com/in/mohammad-sadegh-shahid",
       githubUrl: "https://github.com/mohammadsadeghshahid",
       whatsappUrl: "https://wa.me/989369913228",
     },
     footer: {
-      tagline:
-        "هر پروژه‌ای در این سایت با این باور ساخته شده که خویشتن‌داری قدرتمندتر از هیاهو است. اگر شما هم به این باور دارید، باید با هم صحبت کنیم.",
-      copyright: "© {year} sadegh shahid",
+      tagline: "خویشتن‌داری قدرتمندتر از هیاهو است.",
+      copyright: "© {year} صادق شاهد",
     },
   },
 };

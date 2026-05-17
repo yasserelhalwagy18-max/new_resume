@@ -1,366 +1,180 @@
-import React, { useState, useEffect, memo } from "react";
+import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { portfolioData, Language } from "../data";
-import { WordReveal } from "./WordReveal";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  Phone,
-  Send,
-  CheckCircle2,
-} from "lucide-react";
+import { Send, CheckCircle2, Mail, Phone, Linkedin, Github } from "lucide-react";
 
 export const Contact = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].contact;
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [status, setStatus] = useState<
-    "idle" | "submitting" | "success" | "error"
-  >("idle");
-
-  const validate = () => {
-    const newErrors: { [key: string]: string } = {};
-    if (!formData.name.trim())
-      newErrors.name = lang === "en" ? "Name is required" : "نام الزامی است";
-
-    if (!formData.email.trim()) {
-      newErrors.email =
-        lang === "en" ? "Email is required" : "ایمیل الزامی است";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email =
-        lang === "en" ? "Invalid email format" : "فرمت ایمیل نامعتبر است";
-    }
-
-    if (formData.phone.trim() && !/^\+?[0-9\s-]{7,15}$/.test(formData.phone)) {
-      newErrors.phone =
-        lang === "en"
-          ? "Invalid phone number format"
-          : "فرمت شماره تماس نامعتبر است";
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message =
-        lang === "en" ? "Message is required" : "پیام الزامی است";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const isFa = lang === "fa";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
-
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
     setStatus("submitting");
-
-    // Simulating an API call
     setTimeout(() => {
       setStatus("success");
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    }, 1500);
+      setFormData({ name: "", email: "", message: "" });
+    }, 1200);
   };
 
-  const isEn = lang === "en";
-
   return (
-    <section id="contact" className="py-24 px-6 max-w-5xl mx-auto relative">
-      <motion.div
-        animate={{
-          scale: 1,
-          opacity: 1,
-          rotate: 0,
-        }}
-        transition={{ duration: 0.5 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none"
-      />
+    <section id="contact" className="px-6 max-w-6xl mx-auto section-padding-lg relative">
+      {/* Watermark */}
+      <div
+        className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}
+        aria-hidden="true"
+      >
+        {isFa ? "۰۶" : "06"}
+      </div>
 
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 flex flex-col items-center glass-surface rounded-3xl p-8 lg:p-16"
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 1 }}
+        className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24"
       >
-        <div className="w-full mb-12 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[12px] uppercase tracking-widest mb-6"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-            {isEn
-              ? "Available for freelance / remote"
-              : "آماده برای پروژه‌های منتخب"}
-          </motion.div>
-          <WordReveal
-            text={t.title}
-            className={`text-4xl md:text-5xl font-light mb-4 ${isEn ? 'tracking-tighter' : 'tracking-normal'}`}
-          />
-          <p className="text-white/70 text-lg max-w-xl mx-auto">{t.message}</p>
-        </div>
+        {/* Left — Text & Links */}
+        <div>
+          <h2 className={`text-section-title font-bold text-[#F4F1EA] mb-6 ${isFa ? "" : "tracking-tighter"}`}>
+            {t.title}
+          </h2>
+          <p className="text-lg text-white/60 font-light mb-12 max-w-md">
+            {t.message}
+          </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
-          <div className="flex flex-col h-full justify-between gap-8 order-2 lg:order-1">
-            <div className="flex flex-col gap-6">
-              <a
-                href={`mailto:${t.email}`}
-                aria-label="Send an email"
-                className="flex items-center justify-between  gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500 hover:bg-amber-500/5 transition-all duration-300 focus:outline-none w-full"
-              >
-                <div className="p-3 bg-black/30 rounded-full text-amber-500">
-                  <Mail size={20} aria-hidden="true" />
-                </div>
-                <div className="flex flex-col items-start rtl:items-end">
-                  <span className="text-sm text-white/60">
-                    {isEn ? "Email" : "ایمیل"}
-                  </span>
-                  <span
-                    className="text-sm tracking-widest text-white/90 font-light"
-                    dir="ltr"
-                  >
-                    {t.email}
-                  </span>
-                </div>
-              </a>
+          <div className="flex flex-col gap-4">
+            <a
+              href={`mailto:${t.email}`}
+              className="group flex items-center gap-4 p-4 rounded-2xl border border-white/[0.06] hover:border-[#D4A017]/30 hover:bg-[#D4A017]/5 transition-all"
+            >
+              <div className="w-10 h-10 rounded-full bg-[#D4A017]/10 flex items-center justify-center text-[#D4A017]">
+                <Mail size={18} />
+              </div>
+              <div>
+                <span className="text-xs text-white/40 block mb-0.5">
+                  {isFa ? "ایمیل" : "Email"}
+                </span>
+                <span className="text-sm text-white/80 font-mono" dir="ltr">
+                  {t.email}
+                </span>
+              </div>
+            </a>
 
-              <a
-                href={t.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Contact on WhatsApp"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 justify-between  hover:border-amber-500 hover:bg-amber-500/5 transition-all duration-300 focus:outline-none w-full"
-              >
-                <div className="p-3 bg-black/30 rounded-full  text-amber-500">
-                  <Phone size={20} aria-hidden="true" />
-                </div>
-                <div className="flex flex-col items-start rtl:items-end">
-                  <span className="text-sm text-white/60">
-                    {isEn ? "WhatsApp" : "واتساپ"}
-                  </span>
-                  <span
-                    className="text-sm tracking-widest text-white/90 font-light"
-                    dir="ltr"
-                  >
-                    {t.phone}
-                  </span>
-                </div>
-              </a>
-            </div>
+            <a
+              href={t.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 p-4 rounded-2xl border border-white/[0.06] hover:border-[#2A9D8F]/30 hover:bg-[#2A9D8F]/5 transition-all"
+            >
+              <div className="w-10 h-10 rounded-full bg-[#2A9D8F]/10 flex items-center justify-center text-[#2A9D8F]">
+                <Phone size={18} />
+              </div>
+              <div>
+                <span className="text-xs text-white/40 block mb-0.5">
+                  {isFa ? "واتساپ" : "WhatsApp"}
+                </span>
+                <span className="text-sm text-white/80 font-mono" dir="ltr">
+                  {t.phone}
+                </span>
+              </div>
+            </a>
 
-            <div className="flex justify-center lg:justify-start gap-4">
+            <div className="flex gap-3 mt-4">
               <a
                 href={t.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
-                className="p-4 bg-white/5 border border-white/10 text-white/60 hover:text-amber-500 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all duration-300 focus:outline-none rounded-2xl"
+                className="w-11 h-11 rounded-full border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-[#D4A017] hover:border-[#D4A017]/30 transition-all"
+                aria-label="LinkedIn"
               >
-                <Linkedin size={22} aria-hidden="true" />
+                <Linkedin size={18} />
               </a>
               <a
                 href={t.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub Profile"
-                className="p-4 bg-white/5 border border-white/10 text-white/60 hover:text-amber-500 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all duration-300 focus:outline-none rounded-2xl"
+                className="w-11 h-11 rounded-full border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-[#D4A017] hover:border-[#D4A017]/30 transition-all"
+                aria-label="GitHub"
               >
-                <Github size={22} aria-hidden="true" />
+                <Github size={18} />
               </a>
             </div>
           </div>
-
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-4 w-full order-1 lg:order-2"
-          >
-            <AnimatePresence>
-              {status === "success" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -20, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: "auto" }}
-                  exit={{ opacity: 0, y: -20, height: 0 }}
-                  className="bg-amber-500/10 border border-amber-500/30 text-amber-500 p-4 rounded-xl flex items-center gap-3 mb-2"
-                >
-                  <CheckCircle2 size={24} />
-                  <span className="font-semibold">
-                    {isEn
-                      ? "Thank you! Your message has been sent successfully."
-                      : "با تشکر! پیام شما با موفقیت ارسال شد."}
-                  </span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <div className="flex flex-col gap-1 text-left rtl:text-right">
-              <label htmlFor="name" className="sr-only">
-                {isEn ? "Your Name" : "نام شما"}
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder={isEn ? "Your Name" : "نام شما"}
-                value={formData.name}
-                onChange={(e) => {
-                  setFormData({ ...formData, name: e.target.value });
-                  if (errors.name) setErrors({ ...errors, name: "" });
-                }}
-                className={`w-full bg-black/30 border ${errors.name ? "border-red-500 focus:ring-red-500/50" : "border-white/[0.15] focus:border-amber-500/50 focus:ring-amber-500/50"} rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-1 transition-all`}
-              />
-              <AnimatePresence>
-                {errors.name && (
-                  <motion.span
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="text-red-500 text-xs px-2"
-                  >
-                    {errors.name}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <div className="flex flex-col gap-1 text-left rtl:text-right">
-              <label htmlFor="email" className="sr-only">
-                {isEn ? "Email Address" : "آدرس ایمیل"}
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder={isEn ? "Email Address" : "آدرس ایمیل"}
-                value={formData.email}
-                onChange={(e) => {
-                  setFormData({ ...formData, email: e.target.value });
-                  if (errors.email) setErrors({ ...errors, email: "" });
-                }}
-                className={`w-full bg-black/30 border ${errors.email ? "border-red-500 focus:ring-red-500/50" : "border-white/[0.15] focus:border-amber-500/50 focus:ring-amber-500/50"} rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-1 transition-all ${!isEn && "text-right"}`}
-              />
-              <AnimatePresence>
-                {errors.email && (
-                  <motion.span
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="text-red-500 text-xs px-2"
-                  >
-                    {errors.email}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <div className="flex flex-col gap-1 text-left rtl:text-right">
-              <label htmlFor="phone" className="sr-only">
-                {isEn ? "Phone Number (Optional)" : "شماره تماس (اختیاری)"}
-              </label>
-              <input
-                id="phone"
-                type="tel"
-                placeholder={
-                  isEn ? "Phone Number (Optional)" : "شماره تماس (اختیاری)"
-                }
-                value={formData.phone}
-                onChange={(e) => {
-                  setFormData({ ...formData, phone: e.target.value });
-                  if (errors.phone) setErrors({ ...errors, phone: "" });
-                }}
-                className={`w-full bg-black/30 border ${errors.phone ? "border-red-500 focus:ring-red-500/50" : "border-white/[0.15] focus:border-amber-500/50 focus:ring-amber-500/50"} rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-1 transition-all ${!isEn && "text-right"}`}
-              />
-              <AnimatePresence>
-                {errors.phone && (
-                  <motion.span
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="text-red-500 text-xs px-2"
-                  >
-                    {errors.phone}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <div className="flex flex-col gap-1 text-left rtl:text-right mb-2">
-              <label htmlFor="message" className="sr-only">
-                {isEn ? "Your Message" : "پیام شما"}
-              </label>
-              <textarea
-                id="message"
-                placeholder={isEn ? "Your Message" : "پیام شما"}
-                rows={4}
-                value={formData.message}
-                onChange={(e) => {
-                  setFormData({ ...formData, message: e.target.value });
-                  if (errors.message) setErrors({ ...errors, message: "" });
-                }}
-                className={`w-full bg-black/30 border ${errors.message ? "border-red-500 focus:ring-red-500/50" : "border-white/[0.15] focus:border-amber-500/50 focus:ring-amber-500/50"} rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-1 transition-all resize-none`}
-              />
-              <AnimatePresence>
-                {errors.message && (
-                  <motion.span
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="text-red-500 text-xs px-2"
-                  >
-                    {errors.message}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <button
-              type="submit"
-              disabled={status === "submitting" || status === "success"}
-              className="group relative flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-[#D6C7A8] text-[#0A0A0A] font-medium hover:bg-[#E5D5B8] hover:accent-glow transition-all disabled:opacity-80 disabled:cursor-not-allowed overflow-hidden mt-2"
-            >
-              <AnimatePresence mode="wait">
-                {status === "submitting" ? (
-                  <motion.div
-                    key="submitting"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="flex items-center gap-2"
-                  >
-                    <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                    <span>{isEn ? "Sending..." : "در حال ارسال..."}</span>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="idle"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="flex items-center gap-2"
-                  >
-                    <span>
-                      {status === "success"
-                        ? isEn
-                          ? "Sent"
-                          : "ارسال شد"
-                        : isEn
-                          ? "Send Message"
-                          : "ارسال پیام"}
-                    </span>
-                    <Send
-                      size={16}
-                      className="group-hover:translate-x-1 group-hover:-translate-y-1 rtl:group-hover:-translate-x-1 transition-transform"
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
-          </form>
         </div>
+
+        {/* Right — Form (3 fields only) */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <AnimatePresence>
+            {status === "success" && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="bg-[#D4A017]/10 border border-[#D4A017]/20 text-[#D4A017] p-4 rounded-xl flex items-center gap-3"
+              >
+                <CheckCircle2 size={20} />
+                <span className="text-sm font-medium">
+                  {isFa ? "پیام شما ارسال شد." : "Message sent successfully."}
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div>
+            <input
+              type="text"
+              placeholder={isFa ? "نام" : "Name"}
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#D4A017]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors text-sm"
+              required
+            />
+          </div>
+
+          <div>
+            <input
+              type="email"
+              placeholder={isFa ? "ایمیل" : "Email"}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className={`w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#D4A017]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors text-sm ${!isFa ? "" : "text-right"}`}
+              dir="ltr"
+              required
+            />
+          </div>
+
+          <div>
+            <textarea
+              placeholder={isFa ? "پیام" : "Message"}
+              rows={4}
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#D4A017]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors resize-none text-sm"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={status === "submitting" || status === "success"}
+            className="btn-primary w-full md:w-auto self-start"
+          >
+            {status === "submitting" ? (
+              <span className="flex items-center gap-2">
+                <span className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+                {isFa ? "در حال ارسال..." : "Sending..."}
+              </span>
+            ) : (
+              <span className="flex items-center gap-2">
+                {isFa ? "ارسال پیام" : "Send Message"}
+                <Send size={16} />
+              </span>
+            )}
+          </button>
+        </form>
       </motion.div>
     </section>
   );

@@ -1,17 +1,20 @@
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
 
 interface LogoProps {
-  isDrawing?: boolean;
   className?: string;
 }
 
-export const Logo = ({ isDrawing = false, className = "w-8 h-8" }: LogoProps) => {
+export const Logo = ({ className = "w-8 h-8" }: LogoProps) => {
   return (
-    <motion.div
-      className="relative flex items-center justify-center cursor-pointer select-none"
-      whileHover={isDrawing ? undefined : "hover"}
-      initial="initial"
-      animate="animate"
+    <motion.a
+      href="#"
+      onClick={(e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+      className="relative flex items-center justify-center cursor-pointer select-none group"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       <svg
         width="32"
@@ -20,63 +23,30 @@ export const Logo = ({ isDrawing = false, className = "w-8 h-8" }: LogoProps) =>
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={className}
-        aria-label="Sadegh Shahid Logo"
+        aria-label="Sadegh Shahid"
       >
-        {/* Letter S (Shahid) - Secondary, background */}
+        {/* Geometric S — Saul Bass inspired, not literal */}
         <motion.path
-          d="M26 13C26 10.7909 24.2091 9 22 9H18C15.7909 9 14 10.7909 14 13V17C14 19.2091 15.7909 21 18 21H22C24.2091 21 26 22.7909 26 25V29C26 31.2091 24.2091 33 22 33H18C15.7909 33 14 31.2091 14 29"
-          stroke="#F3F1EB"
-          strokeOpacity={isDrawing ? 1 : 0.6}
-          strokeWidth={isDrawing ? "2" : "3"}
+          d="M8 12C8 8 12 6 16 6C22 6 24 10 24 14C24 20 16 20 16 26C16 30 20 32 24 32C28 32 30 30 32 28"
+          stroke="#D4A017"
+          strokeWidth="3"
           strokeLinecap="round"
           fill="none"
-          variants={{
-            initial: isDrawing ? { pathLength: 0, opacity: 0, x: 1, y: 1 } : { x: 1, y: 1 },
-            animate: isDrawing ? {
-              pathLength: 1,
-              opacity: 1,
-              fill: "rgba(214,199,168,0.02)",
-              transition: {
-                pathLength: { duration: 0.8, ease: "easeInOut" },
-                opacity: { duration: 0.8 },
-                fill: { delay: 0.8, duration: 0.4 }
-              }
-            } : {
-              pathLength: 1,
-              opacity: 1
-            },
-            hover: { x: 3, y: 2 }
-          }}
-          transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
         />
-
-        {/* Letter S (Sadegh) - Primary, foreground */}
-        <motion.path
-          d="M24 11C24 8.79086 22.2091 7 20 7H16C13.7909 7 12 8.79086 12 11V15C12 17.2091 13.7909 19 16 19H20C22.2091 19 24 20.7909 24 23V27C24 29.2091 22.2091 31 20 31H16C13.7909 31 12 29.2091 12 27"
-          stroke="#D6C7A8"
-          strokeWidth={isDrawing ? "2" : "3"}
-          strokeLinecap="round"
-          fill="none"
-          variants={{
-            initial: isDrawing ? { pathLength: 0, opacity: 0, x: -1, y: -1 } : { x: -1, y: -1 },
-            animate: isDrawing ? {
-              pathLength: 1,
-              opacity: 1,
-              fill: "rgba(214,199,168,0.05)",
-              transition: {
-                pathLength: { duration: 0.8, ease: "easeInOut" },
-                opacity: { duration: 0.8 },
-                fill: { delay: 0.8, duration: 0.4 }
-              }
-            } : {
-              pathLength: 1,
-              opacity: 1
-            },
-            hover: { x: -3, y: -2 }
-          }}
-          transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+        {/* Dot accent */}
+        <motion.circle
+          cx="8"
+          cy="28"
+          r="3"
+          fill="#2A9D8F"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.4, delay: 1 }}
         />
       </svg>
-    </motion.div>
+    </motion.a>
   );
 };

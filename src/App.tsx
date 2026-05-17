@@ -1,4 +1,4 @@
-import { useScroll, useSpring, motion } from "motion/react";
+import { useScroll, useSpring, motion, MotionConfig } from "motion/react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -9,6 +9,8 @@ import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { DirectionProvider, useDirection } from "./components/providers/DirectionProvider";
+import { NoiseOverlay } from "./components/atmosphere/NoiseOverlay";
+import { VignetteOverlay } from "./components/atmosphere/VignetteOverlay";
 
 function AppContent() {
   const { locale, direction } = useDirection();
@@ -26,6 +28,9 @@ function AppContent() {
       dir={direction}
       lang={locale}
     >
+      <VignetteOverlay />
+      <NoiseOverlay />
+
       <a
         href="#about"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70] focus:px-4 focus:py-2 focus:bg-[#D6C7A8] focus:text-[#0A0A0A] focus:rounded-lg"
@@ -64,7 +69,9 @@ function AppContent() {
 export default function App() {
   return (
     <DirectionProvider>
-      <AppContent />
+      <MotionConfig reducedMotion="user">
+        <AppContent />
+      </MotionConfig>
     </DirectionProvider>
   );
 }

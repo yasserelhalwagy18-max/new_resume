@@ -73,7 +73,7 @@ export const Testimonials = memo(() => {
                 <div className="text-section-title font-light text-amber-500 mb-2">
                   {stat.value}
                 </div>
-                <div className="text-xs uppercase tracking-widest text-white/60">
+                <div className="text-sm uppercase tracking-widest text-white/60">
                   {stat.label}
                 </div>
               </motion.div>
@@ -103,7 +103,7 @@ export const Testimonials = memo(() => {
               </p>
 
               <div className="bg-amber-500/5 border border-amber-500/10 rounded-2xl p-4 mb-8">
-                <span className="block text-[12px] uppercase tracking-[0.2em] text-amber-500 mb-1">
+                <span className="block text-sm uppercase tracking-[0.2em] text-amber-500 mb-1">
                   {lang === "en" ? "Result" : "نتیجه"}
                 </span>
                 <p className="text-white/80 text-sm font-medium">
@@ -120,7 +120,7 @@ export const Testimonials = memo(() => {
                 </div>
                 <div>
                   <h3 className="text-white font-medium">{item.name}</h3>
-                  <p className="text-white/50 text-xs uppercase tracking-widest">
+                  <p className="text-white/50 text-sm uppercase tracking-widest">
                     {item.role} &middot; {item.company}
                   </p>
                 </div>

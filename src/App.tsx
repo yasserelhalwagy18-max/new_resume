@@ -9,6 +9,8 @@ import { About } from "./components/About";
 import { Experience } from "./components/Experience";
 import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
+import { TransitionMoment } from "./components/TransitionMoment";
+import { HumanMoment } from "./components/HumanMoment";
 import { ArrowUp } from "lucide-react";
 
 export default function App() {
@@ -36,16 +38,18 @@ export default function App() {
 
       <main>
         <Hero lang={lang} />
-        <About lang={lang} />
+        <TransitionMoment lang={lang} />
         <Projects lang={lang} />
         <VisualWorks lang={lang} />
+        <About lang={lang} />
         <Experience lang={lang} />
         <Testimonials lang={lang} />
+        <HumanMoment lang={lang} />
         <Contact lang={lang} />
       </main>
 
       {/* Footer — Architectural & Quiet */}
-      <footer className="relative w-full py-20 px-6 border-t border-white/[0.06] mt-24 overflow-hidden bg-[#0A0A0A]">
+      <footer className="relative w-full py-20 px-6 border-t border-white/[0.06] overflow-hidden bg-[#0A0A0A]">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8 relative z-10">
           <p className={`text-sm font-light text-white/50 max-w-sm leading-relaxed ${lang === 'fa' ? 'leading-[2]' : ''}`}>
             {portfolioData[lang].footer.tagline}

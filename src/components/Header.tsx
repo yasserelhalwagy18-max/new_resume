@@ -53,7 +53,7 @@ export const Header = memo(() => {
       </motion.div>
       
       {/* Navigation - Center */}
-      <nav aria-label="Main Navigation" className="hidden md:flex gap-4 lg:gap-8 text-sm lg:text-sm text-white/60">
+      <nav aria-label="Main Navigation" className="hidden md:flex gap-4 lg:gap-8 text-xs lg:text-sm text-white/60">
         <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-white transition-colors relative group">
           {t.about}
           <span className="absolute bottom-[-4px] start-1/2 w-0 h-[1px] bg-[#D6C7A8] transition-all duration-300 group-hover:w-full group-hover:start-0"></span>
@@ -108,7 +108,7 @@ export const Header = memo(() => {
         onClick={() => setLang()}
         aria-label={`Switch language to ${lang === 'en' ? 'Persian' : 'English'}`}
         whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-2 text-sm text-white/50 border border-white/[0.15] rounded-full px-3 py-1.5 hover:bg-white/[0.08] transition-colors focus:outline-none focus:ring-1 focus:ring-[#D6C7A8]/50 overflow-hidden relative"
+        className="flex items-center gap-2 text-xs text-white/50 border border-white/[0.15] rounded-full px-3 py-1.5 hover:bg-white/[0.08] transition-colors focus:outline-none focus:ring-1 focus:ring-[#D6C7A8]/50 overflow-hidden relative"
       >
         <AnimatePresence mode="wait">
           <motion.span

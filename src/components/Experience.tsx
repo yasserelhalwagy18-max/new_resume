@@ -121,7 +121,7 @@ export const Experience = memo(() => {
                   }}
                 >
                   <div className="flex justify-between items-start mb-3">
-                    <span className="text-sm uppercase tracking-widest text-amber-500 font-medium">
+                    <span className="text-[12px] uppercase tracking-widest text-amber-500 font-medium">
                       {item.date}
                     </span>
                     <motion.div

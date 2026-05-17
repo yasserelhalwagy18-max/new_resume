@@ -36,7 +36,7 @@ export const About = memo(() => {
 
         {/* Capability Blocks - Moved to Top */}
         <div className="mb-32">
-          <span className="text-xs uppercase tracking-widest text-amber-500 mb-12 block">
+          <span className="text-sm uppercase tracking-widest text-amber-500 mb-12 block">
             {isFa ? "چگونه کار می‌کنم" : "How I Work"}
           </span>
 
@@ -64,7 +64,7 @@ export const About = memo(() => {
                   <h3 className="text-sm font-medium text-[#F3F1EB] mb-3 tracking-wide">
                     {block.title}
                   </h3>
-                  <p className="text-xs text-white/60 leading-relaxed">
+                  <p className="text-sm text-white/60 leading-relaxed">
                     {block.description}
                   </p>
                 </motion.div>
@@ -103,7 +103,7 @@ export const About = memo(() => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mt-24 pt-8 border-t border-white/[0.08] text-xs tracking-widest text-white/60"
+          className="mt-24 pt-8 border-t border-white/[0.08] text-sm tracking-widest text-white/60"
         >
           {t.location}
         </motion.div>

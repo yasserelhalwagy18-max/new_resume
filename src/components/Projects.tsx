@@ -199,7 +199,7 @@ export const Projects = memo(() => {
                 </div>
 
                 <div className="flex flex-col flex-grow">
-                  <p className="text-xs uppercase tracking-widest text-amber-500 mb-3">
+                  <p className="text-sm uppercase tracking-widest text-amber-500 mb-3">
                     {item.role}
                   </p>
 
@@ -234,7 +234,7 @@ export const Projects = memo(() => {
                         <span
                           key={tech}
                           dir="ltr"
-                          className="px-3 py-1 text-[12px] border border-white/[0.10] rounded-full text-white/70"
+                          className="px-3 py-1 text-sm border border-white/[0.10] rounded-full text-white/70"
                         >
                           {tech}
                         </span>
@@ -242,7 +242,7 @@ export const Projects = memo(() => {
                     </div>
 
                     <div className="flex items-center">
-                      <div className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500/5 border border-amber-500/10 text-xs uppercase tracking-widest text-amber-500/80 font-medium group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all duration-400">
+                      <div className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500/5 border border-amber-500/10 text-sm uppercase tracking-widest text-amber-500/80 font-medium group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all duration-400">
                         <span>{item.readMore}</span>
                         {isFa ? (
                           <ArrowUpLeft
@@ -414,33 +414,33 @@ export const Projects = memo(() => {
                       >
                         <div className="grid grid-cols-1 gap-4 mb-6">
                           <div className="border-l-2 border-[#8B3A3A]/30 bg-[#8B3A3A]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#C98B8B] mb-2">
+                            <span className="block text-sm uppercase tracking-widest text-[#C98B8B] mb-2">
                               {lang === "en" ? "Problem" : "مسئله"}
                             </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
+                            <p className="text-white/90 text-sm md:text-sm leading-relaxed">
                               {item.problem}
                             </p>
                           </div>
                           <div className="border-l-2 border-[#D6C7A8]/30 bg-[#D6C7A8]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#D6C7A8] mb-2">
+                            <span className="block text-sm uppercase tracking-widest text-[#D6C7A8] mb-2">
                               {lang === "en" ? "Solution" : "راهکار"}
                             </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
+                            <p className="text-white/90 text-sm md:text-sm leading-relaxed">
                               {item.solution}
                             </p>
                           </div>
                           <div className="border-l-2 border-[#5E6654]/30 bg-[#5E6654]/[0.03] rounded-2xl p-6 text-left rtl:text-right">
-                            <span className="block text-xs uppercase tracking-widest text-[#8B9A7D] mb-2">
+                            <span className="block text-sm uppercase tracking-widest text-[#8B9A7D] mb-2">
                               {lang === "en" ? "Result" : "نتیجه"}
                             </span>
-                            <p className="text-white/90 text-xs md:text-sm leading-relaxed">
+                            <p className="text-white/90 text-sm md:text-sm leading-relaxed">
                               {item.result}
                             </p>
                           </div>
                         </div>
 
                         <div className="bg-black/20 border border-white/10 rounded-2xl p-6 md:p-8 text-left rtl:text-right mb-8">
-                          <span className="block text-xs uppercase tracking-widest text-amber-500 mb-3">
+                          <span className="block text-sm uppercase tracking-widest text-amber-500 mb-3">
                             {lang === "en" ? "Deep Dive" : "جزئیات بیشتر"}
                           </span>
                           <p className="text-white/70 text-sm md:text-base leading-relaxed md:leading-loose whitespace-pre-wrap">
@@ -455,7 +455,7 @@ export const Projects = memo(() => {
                         transition={{ duration: 0 }}
                         className="pt-6 border-t border-white/10 text-left rtl:text-right"
                       >
-                        <span className="block text-xs uppercase tracking-widest text-white/50 mb-4">
+                        <span className="block text-sm uppercase tracking-widest text-white/50 mb-4">
                           {lang === "en" ? "Technologies" : "فناوری‌ها"}
                         </span>
                         <div className="flex flex-wrap gap-2 rtl:justify-start">
@@ -463,7 +463,7 @@ export const Projects = memo(() => {
                             <span
                               key={tech}
                               dir="ltr"
-                              className="px-4 py-2 text-xs md:text-sm border border-white/20 hover:border-white/40 transition-colors rounded-xl text-white/80 bg-white/5"
+                              className="px-4 py-2 text-sm md:text-sm border border-white/20 hover:border-white/40 transition-colors rounded-xl text-white/80 bg-white/5"
                             >
                               {tech}
                             </span>

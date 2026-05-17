@@ -11,26 +11,44 @@ export const Hero = memo(({ lang }: { lang: Language }) => {
 
   return (
     <section
-      className="min-h-screen flex items-end pb-16 padding-bottom: calc(env(safe-area-inset-bottom) + 4rem) md:pb-24 pt-[80px] px-6 relative overflow-hidden bg-[#0A0A0A]"
-      style={{ minHeight: "100dvh" }}
+      className="min-h-screen flex items-end pb-16 md:pb-24 pt-[80px] px-6 relative overflow-hidden bg-[#0A0A0A]"
+      style={{ minHeight: "100dvh", paddingBottom: "calc(env(safe-area-inset-bottom) + 4rem)" }}
     >
-      {/* Playful Geometric Accent — Saul Bass Energy */}
+      {/* Playful Geometric Accent — Breathing Saul Bass Energy */}
       <div className="absolute top-[12%] end-[8%] md:end-[12%] w-[100px] h-[100px] md:w-[160px] md:h-[160px] opacity-80 pointer-events-none z-[1]">
         <motion.div
           initial={{ rotate: 15, scale: 0.8, opacity: 0 }}
-          animate={{ rotate: 0, scale: 1, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          animate={{
+            rotate: [0, 2, -2, 0],
+            scale: [1, 1.02, 0.98, 1],
+            opacity: 1,
+          }}
+          transition={{
+            rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+            opacity: { duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] },
+          }}
           className="w-full h-full bg-[#D4A017]"
           style={{ clipPath: "polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%)" }}
         />
       </div>
 
-      {/* Secondary Geometric — Teal Circle Fragment */}
+      {/* Secondary Geometric — Orbital Drift */}
       <div className="absolute bottom-[25%] start-[8%] md:start-[12%] w-[60px] h-[60px] md:w-[100px] md:h-[100px] pointer-events-none z-[1]">
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.6 }}
-          transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          animate={{
+            scale: 1,
+            opacity: 0.6,
+            x: [0, 10, -10, 0],
+            y: [0, -10, 10, 0],
+          }}
+          transition={{
+            scale: { duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
+            opacity: { duration: 1, delay: 0.8 },
+            x: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+          }}
           className="w-full h-full rounded-full border-[3px] border-[#2A9D8F]"
         />
       </div>

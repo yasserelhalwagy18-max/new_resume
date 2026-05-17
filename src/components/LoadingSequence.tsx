@@ -12,8 +12,8 @@ export const LoadingSequence = ({ onComplete }: LoadingSequenceProps) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-      setTimeout(onComplete, 500); // Allow exit animation to finish
-    }, 2500);
+      setTimeout(onComplete, 200); // Allow exit animation to finish
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -54,7 +54,7 @@ export const LoadingSequence = ({ onComplete }: LoadingSequenceProps) => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="h-4 w-64 bg-white/5 rounded-full overflow-hidden relative"
               >
                  <motion.div
@@ -67,13 +67,13 @@ export const LoadingSequence = ({ onComplete }: LoadingSequenceProps) => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: .7, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="h-4 w-48 bg-white/5 rounded-full overflow-hidden relative"
               >
                 <motion.div
                     initial={{ x: "-100%" }}
                     animate={{ x: "100%" }}
-                    transition={{ delay: 1.2, duration: 0.8, ease: "easeInOut" }}
+                    transition={{ delay: .7, duration: 0.8, ease: "easeInOut" }}
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-[#D6C7A8]/20 to-transparent"
                  />
               </motion.div>

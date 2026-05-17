@@ -17,6 +17,11 @@ export interface VisualItem {
   images: string[];
 }
 
+export interface ServiceItem {
+  title: string;
+  desc: string;
+}
+
 export const portfolioData = {
   en: {
     nav: {
@@ -29,13 +34,24 @@ export const portfolioData = {
       title: "Design that\nrefuses to forget.",
       description: "Digital experiences built like cinema — where every frame earns attention.",
       ctaPrimary: "View Selected Work",
-      ctaSecondary: "Start a Project",
+      ctaSecondary: "Begin a Project",
     },
     about: {
       title: "Studio",
-      paragraph: "I chase the moment a user forgets the screen exists. That happens when photography, motion, and code stop competing and start conspiring. Restraint is confidence. Precision is the only thing that separates being seen from being remembered.",
+      paragraph: "I chase the moment a user forgets the screen exists. That happens when photography, motion, and code stop competing and start conspiring. Restraint is confidence. Precision separates being seen from being remembered.",
       capabilities: ["Brand Identity", "Product Design", "Front-End Craft", "AI Creative Systems", "Cinematic Photography", "Visual Narrative"],
       location: "Based in Iran · Available worldwide",
+    },
+    humanMoment: {
+      quote: "I don't build interfaces. I build the moment you forget you're looking at a screen.",
+    },
+    services: {
+      title: "Services",
+      items: [
+        { title: "Brand Identity Systems", desc: "From strategy to visual system — logos, typography, color architecture, and brand guidelines that scale across every touchpoint." },
+        { title: "Full-Stack Product Build", desc: "React/Next.js frontends, Node.js backends, database design, and deployment. Zero to production with obsessive precision." },
+        { title: "AI Creative Automation", desc: "Local GPU pipelines, LLM integrations, and generative workflows that turn static content into cinematic motion." },
+      ],
     },
     experience: {
       title: "Path",
@@ -162,12 +178,22 @@ export const portfolioData = {
         {
           id: 1,
           name: "Head of Digital, AFS",
-          text: "Sadegh combines deep technical knowledge with an eagle eye for design. He elevated our entire digital presence.",
+          text: "Sadegh shipped AFSSOLAR's custom CMS in 6 weeks with Lighthouse scores near 95. Our previous agency quoted 4 months. He elevated our entire digital presence.",
         },
         {
           id: 2,
           name: "Product Lead, Rafed",
-          text: "His ability to craft cohesive components while maintaining high-quality UX is remarkable. A true asset.",
+          text: "The component library didn't just reduce task time by 30%. It made our internal tools feel premium. The team actually enjoys using them now.",
+        },
+        {
+          id: 3,
+          name: "Founder, Makhtoot",
+          text: "From zero to market-ready brand and website in 8 weeks. Sadegh understood our audience faster than we did, and the result speaks for itself.",
+        },
+        {
+          id: 4,
+          name: "Operations Director, Sangin",
+          text: "The CRM exposed supply chain bottlenecks we didn't know we had. It's not just software — it's a lens into our own business.",
         },
       ],
     },
@@ -200,9 +226,20 @@ export const portfolioData = {
     },
     about: {
       title: "استودیو",
-      paragraph: "من به لحظه‌ای معتادم که کاربر فراموش می‌کند به یک صفحه خیره است. وقتی عکاسی، موشن و کد دست از جنگ برمی‌دارند و با هم روایت می‌کنند. خویشتن‌داری، اعتمادبه‌نفس است. دقت، تنها مرز بین دیده شدن و به یاد ماندن.",
-      capabilities: ["هویت برند", "طراحی محصول", "صنعت‌گری فرانت‌اند", "سیستم‌های خلاقانه AI", "عکاسی سینمایی", "روایت بصری"],
+      paragraph: "من به لحظه‌ای معتادم که کاربر فراموش می‌کند به یک صفحه خیره است. وقتی عکاسی، موشن و کد دست از جنگ برمی‌دارند و با هم روایت می‌کنند. خویشتن‌داری، اعتمادبه‌نفس است. دقت، مرز بین دیده شدن و به یاد ماندن.",
+      capabilities: ["هویت برند", "طراحی محصول", "توسعه فرانت‌اند", "سیستم‌های خلاقانه AI", "عکاسی سینمایی", "روایت بصری"],
       location: "قم، ایران · آماده برای پروژه‌های دورکاری",
+    },
+    humanMoment: {
+      quote: "من رابط نمی‌سازم. لحظه‌ای می‌سازم که فراموش کنی به یک صفحه خیره‌ای.",
+    },
+    services: {
+      title: "خدمات",
+      items: [
+        { title: "سیستم‌های هویت بصری", desc: "از استراتژی تا سیستم بصری — لوگو، تایپوگرافی، معماری رنگ و راهنمای برند که در هر نقطه تماس مقیاس‌پذیر باشد." },
+        { title: "توسعه فول‌استک محصول", desc: "فرانت‌اند React/Next.js، بک‌اند Node.js، طراحی دیتابیس و دیپلوی. از صفر تا پروداکشن با دقت وسواسی." },
+        { title: "اتوماسیون خلاقانه AI", desc: "پایپ‌لاین GPU محلی، یکپارچه‌سازی LLM و گردش کارهای جنریتیو که محتوای استاتیک را به سینما تبدیل می‌کند." },
+      ],
     },
     experience: {
       title: "مسیر",
@@ -329,17 +366,27 @@ export const portfolioData = {
         {
           id: 1,
           name: "مدیر دیجیتال، AFS",
-          text: "صادق دانش فنی عمیق را با دید طراحی دقیق تلفیق می‌کند. او تمام حضور دیجیتال ما را ارتقا داد.",
+          text: "صادق CMS اختصاصی AFSSOLAR را در ۶ هفته با امتیاز Lighthouse نزدیک به ۹۵ تحویل داد. آژانس قبلی ۴ ماه تخمین زده بود. او تمام حضور دیجیتال ما را ارتقا داد.",
         },
         {
           id: 2,
           name: "سرپرست محصول، رافد",
-          text: "توانایی او در ساخت کامپوننت‌های منسجم و حفظ UX با کیفیت، قابل توجه است.",
+          text: "کتابخانه کامپوننت نه تنها زمان وظایف را ۳۰٪ کاهش داد، بلکه ابزارهای درون‌سازمانی‌مان را لوکس کرد. تیم حالا واقعاً از کار با آن لذت می‌برد.",
+        },
+        {
+          id: 3,
+          name: "مؤسس، مخطوط",
+          text: "از صفر تا برند و وب‌سایت آماده بازار در ۸ هفته. صادق مخاطب ما را سریع‌تر از خودمان درک کرد و نتیجه خودش حرف می‌زند.",
+        },
+        {
+          id: 4,
+          name: "مدیر عملیات، سنگین",
+          text: "سیستم CRM گلوگاه‌های زنجیره تأمین را نشان داد که ما از وجودشان خبر نداشتیم. این فقط نرم‌افزار نیست — یک ذره‌بین به کسب‌وکار خودمان است.",
         },
       ],
     },
     contact: {
-      title: "بسازیم",
+      title: "بیایید بسازیم",
       message: "بگویید چه می‌سازید. ظرف ۲۴ ساعت پاسخ می‌دهم.",
       email: "m110s11061@gmail.com",
       phone: "+۹۸ ۹۳۶ ۹۹۱ ۳۲۲۸",

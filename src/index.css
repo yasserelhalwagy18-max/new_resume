@@ -93,7 +93,6 @@ h1, h2, h3, h4, h5, h6 {
 
 [dir="rtl"] p {
   line-height: 2.0;
-  max-width: 52ch;
 }
 
 /* LTR for English */
@@ -123,15 +122,34 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: normal !important;
 }
 
+/* Scoped Persian prose — ONLY apply max-width to reading blocks */
+.prose-persian p {
+  max-width: 52ch;
+}
+
 /* Font Sizes — Dramatic Editorial Scale */
 .text-hero-display {
   font-size: clamp(3.2rem, 10vw, 8rem);
   line-height: 1.05;
 }
 
+/* Persian hero safety: ascenders/descenders need room */
+[dir="rtl"] .text-hero-display {
+  line-height: 1.25;
+  font-weight: 800;
+  word-spacing: -0.02em;
+}
+
 .text-section-title {
   font-size: clamp(2.2rem, 5vw, 4.5rem);
   line-height: 1.1;
+}
+
+/* English section titles — Editorial soul via Playfair Display */
+[dir="ltr"] .text-section-title {
+  font-family: "Playfair Display", ui-serif, serif;
+  font-weight: 400;
+  letter-spacing: -0.03em;
 }
 
 .text-body-lg {
@@ -146,6 +164,9 @@ h1, h2, h3, h4, h5, h6 {
   .text-hero-display {
     font-size: clamp(2.4rem, 12vw, 4rem);
     line-height: 1.15;
+  }
+  [dir="rtl"] .text-hero-display {
+    line-height: 1.25;
   }
 }
 

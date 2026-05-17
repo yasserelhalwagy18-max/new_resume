@@ -25,9 +25,13 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
     }
   };
 
+  const isFa = lang === "fa";
+
   const navItems = [
     { label: t.work, href: "#projects" },
+    { label: isFa ? "بایگانی بصری" : "Archive", href: "#visual-works" },
     { label: t.about, href: "#about" },
+    { label: isFa ? "مسیر" : "Path", href: "#experience" },
     { label: t.contact, href: "#contact" },
   ];
 
@@ -39,7 +43,7 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
     >
       <Logo />
 
-      {/* Desktop Nav — 3 Items Only */}
+      {/* Desktop Nav — 5 Items */}
       <nav className="hidden md:flex items-center gap-8 text-[13px] text-white/50">
         {navItems.map((item) => (
           <a

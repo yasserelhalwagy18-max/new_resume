@@ -1,4 +1,4 @@
-import { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { portfolioData, Language } from "../data";
 import { ArrowUpRight, X, ExternalLink } from "lucide-react";
@@ -7,6 +7,11 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].projects;
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const isFa = lang === "fa";
+
+  const selectedItem = useMemo(
+    () => t.items.find((i) => i.id === selectedProject),
+    [t.items, selectedProject]
+  );
 
   useEffect(() => {
     if (selectedProject !== null) {
@@ -49,7 +54,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
         {/* Asymmetric Grid — Visual First */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {t.items.map((item, index) => {
-            const isLarge = index === 0; // First project is hero size
+            const isLarge = index === 0;
             return (
               <motion.div
                 key={item.id}
@@ -130,7 +135,7 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
 
       {/* Lightbox Modal — Image First, Text Second */}
       <AnimatePresence>
-        {selectedProject !== null && (
+        {selectedProject !== null && selectedItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
             <motion.div
               initial={{ opacity: 0 }}
@@ -140,62 +145,60 @@ export const Projects = memo(({ lang }: { lang: Language }) => {
               className="absolute inset-0 bg-black/90 backdrop-blur-sm"
             />
 
-            {t.items.find((i) => i.id === selectedProject) && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-[#111] border border-white/[0.08] rounded-3xl shadow-2xl flex flex-col md:flex-row"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-[#111] border border-white/[0.08] rounded-3xl shadow-2xl flex flex-col md:flex-row"
+            >
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 rtl:left-4 rtl:right-auto z-20 p-2 bg-black/40 backdrop-blur-md rounded-full text-white/70 hover:text-white border border-white/[0.1] transition-colors"
               >
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 rtl:left-4 rtl:right-auto z-20 p-2 bg-black/40 backdrop-blur-md rounded-full text-white/70 hover:text-white border border-white/[0.1] transition-colors"
-                >
-                  <X size={20} />
-                </button>
+                <X size={20} />
+              </button>
 
-                {/* Image Side — 60% */}
-                <div className="w-full md:w-3/5 aspect-video md:aspect-auto md:min-h-[500px] relative bg-black">
-                  <img
-                    src={t.items.find((i) => i.id === selectedProject)!.images[0]}
-                    alt={t.items.find((i) => i.id === selectedProject)!.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              {/* Image Side — 60% */}
+              <div className="w-full md:w-3/5 aspect-video md:aspect-auto md:min-h-[500px] relative bg-black">
+                <img
+                  src={selectedItem.images[0]}
+                  alt={selectedItem.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-                {/* Text Side — 40%, minimal */}
-                <div className="w-full md:w-2/5 p-8 md:p-10 flex flex-col justify-center">
-                  <span className="text-[11px] uppercase tracking-widest text-[#D4A017] mb-4 block">
-                    {t.items.find((i) => i.id === selectedProject)!.year}
-                  </span>
-                  <h3 className={`text-3xl font-bold text-white mb-4 ${isFa ? "" : "tracking-tight"}`}>
-                    {t.items.find((i) => i.id === selectedProject)!.name}
-                  </h3>
-                  <p className="text-sm text-white/60 mb-6 leading-relaxed">
-                    {t.items.find((i) => i.id === selectedProject)!.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {t.items.find((i) => i.id === selectedProject)!.stack.map((tech) => (
-                      <span key={tech} className="tag tag-gold text-xs">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  {t.items.find((i) => i.id === selectedProject)!.link && (
-                    <a
-                      href={t.items.find((i) => i.id === selectedProject)!.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary w-fit text-sm"
-                    >
-                      {isFa ? "مشاهده وب‌سایت" : "View Live Site"}
-                      <ExternalLink size={14} />
-                    </a>
-                  )}
+              {/* Text Side — 40%, minimal */}
+              <div className="w-full md:w-2/5 p-8 md:p-10 flex flex-col justify-center">
+                <span className="text-[11px] uppercase tracking-widest text-[#D4A017] mb-4 block">
+                  {selectedItem.year}
+                </span>
+                <h3 className={`text-3xl font-bold text-white mb-4 ${isFa ? "" : "tracking-tight"}`}>
+                  {selectedItem.name}
+                </h3>
+                <p className="text-sm text-white/60 mb-6 leading-relaxed">
+                  {selectedItem.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {selectedItem.stack.map((tech) => (
+                    <span key={tech} className="tag tag-gold text-xs">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-              </motion.div>
-            )}
+                {selectedItem.link && (
+                  <a
+                    href={selectedItem.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary w-fit text-sm"
+                  >
+                    {isFa ? "مشاهده وب‌سایت" : "View Live Site"}
+                    <ExternalLink size={14} />
+                  </a>
+                )}
+              </div>
+            </motion.div>
           </div>
         )}
       </AnimatePresence>

@@ -1,22 +1,29 @@
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { portfolioData, Language } from "../data";
-import { Send, CheckCircle2, Mail, Phone, Linkedin, Github } from "lucide-react";
+import { Send, CheckCircle2, Mail, Linkedin, Github, MessageCircle, Copy, ExternalLink } from "lucide-react";
 
 export const Contact = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].contact;
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [copied, setCopied] = useState(false);
   const isFa = lang === "fa";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
-    setStatus("submitting");
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-    }, 1200);
+    const subject = encodeURIComponent(`Project Inquiry from ${formData.name}`);
+    const body = encodeURIComponent(`Name: ${formData.name}
+Email: ${formData.email}
+
+${formData.message}`);
+    window.location.href = `mailto:${t.email}?subject=${subject}&body=${body}`;
+  };
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText(t.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -46,14 +53,36 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
           </p>
 
           <div className="flex flex-col gap-4">
+            {/* WhatsApp — PRIMARY for Persian business culture */}
             <a
-              href={`mailto:${t.email}`}
-              className="group flex items-center gap-4 p-4 rounded-2xl border border-white/[0.06] hover:border-[#D4A017]/30 hover:bg-[#D4A017]/5 transition-all"
+              href={t.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 p-4 rounded-2xl border border-[#2A9D8F]/30 bg-[#2A9D8F]/5 hover:bg-[#2A9D8F]/10 transition-all"
+            >
+              <div className="w-10 h-10 rounded-full bg-[#2A9D8F]/15 flex items-center justify-center text-[#2A9D8F]">
+                <MessageCircle size={18} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <span className="text-xs text-[#2A9D8F] block mb-0.5 font-medium">
+                  {isFa ? "واتساپ (سریع‌ترین)" : "WhatsApp (Fastest)"}
+                </span>
+                <span className="text-sm text-white/80 font-mono" dir="ltr">
+                  {t.phone}
+                </span>
+              </div>
+              <ExternalLink size={14} className="text-white/20 group-hover:text-[#2A9D8F] shrink-0" />
+            </a>
+
+            {/* Email — Copy-to-clipboard + mailto */}
+            <button
+              onClick={copyEmail}
+              className="group flex items-center gap-4 p-4 rounded-2xl border border-white/[0.06] hover:border-[#D4A017]/30 hover:bg-[#D4A017]/5 transition-all text-left w-full"
             >
               <div className="w-10 h-10 rounded-full bg-[#D4A017]/10 flex items-center justify-center text-[#D4A017]">
                 <Mail size={18} />
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <span className="text-xs text-white/40 block mb-0.5">
                   {isFa ? "ایمیل" : "Email"}
                 </span>
@@ -61,26 +90,28 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
                   {t.email}
                 </span>
               </div>
-            </a>
-
-            <a
-              href={t.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-4 rounded-2xl border border-white/[0.06] hover:border-[#2A9D8F]/30 hover:bg-[#2A9D8F]/5 transition-all"
-            >
-              <div className="w-10 h-10 rounded-full bg-[#2A9D8F]/10 flex items-center justify-center text-[#2A9D8F]">
-                <Phone size={18} />
-              </div>
-              <div>
-                <span className="text-xs text-white/40 block mb-0.5">
-                  {isFa ? "واتساپ" : "WhatsApp"}
-                </span>
-                <span className="text-sm text-white/80 font-mono" dir="ltr">
-                  {t.phone}
-                </span>
-              </div>
-            </a>
+              <AnimatePresence mode="wait">
+                {copied ? (
+                  <motion.div
+                    key="check"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                  >
+                    <CheckCircle2 size={14} className="text-[#D4A017] shrink-0" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="copy"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                  >
+                    <Copy size={14} className="text-white/20 group-hover:text-white/50 shrink-0" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
 
             <div className="flex gap-3 mt-4">
               <a
@@ -105,24 +136,8 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
           </div>
         </div>
 
-        {/* Right — Form (3 fields only) */}
+        {/* Right — Form (functional mailto) */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <AnimatePresence>
-            {status === "success" && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="bg-[#D4A017]/10 border border-[#D4A017]/20 text-[#D4A017] p-4 rounded-xl flex items-center gap-3"
-              >
-                <CheckCircle2 size={20} />
-                <span className="text-sm font-medium">
-                  {isFa ? "پیام شما ارسال شد." : "Message sent successfully."}
-                </span>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
           <div>
             <input
               type="text"
@@ -159,21 +174,19 @@ export const Contact = memo(({ lang }: { lang: Language }) => {
 
           <button
             type="submit"
-            disabled={status === "submitting" || status === "success"}
             className="btn-primary w-full md:w-auto self-start"
           >
-            {status === "submitting" ? (
-              <span className="flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                {isFa ? "در حال ارسال..." : "Sending..."}
-              </span>
-            ) : (
-              <span className="flex items-center gap-2">
-                {isFa ? "ارسال پیام" : "Send Message"}
-                <Send size={16} />
-              </span>
-            )}
+            <span className="flex items-center gap-2">
+              {isFa ? "باز کردن ایمیل کلاینت" : "Open Email Client"}
+              <Send size={16} />
+            </span>
           </button>
+
+          <p className="text-xs text-white/30 mt-1">
+            {isFa
+              ? "فرم کلاینت ایمیل شما را باز می‌کند. داده‌ای روی سرور ذخیره نمی‌شود."
+              : "This opens your default email client. No data is stored on this server."}
+          </p>
         </form>
       </motion.div>
     </section>

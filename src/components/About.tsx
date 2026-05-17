@@ -26,7 +26,7 @@ export const About = memo(({ lang }: { lang: Language }) => {
         transition={{ duration: 1 }}
         className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
       >
-        {/* Left Column — Title */}
+        {/* Left Column — Title + Portrait Mark */}
         <div className="lg:col-span-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -44,6 +44,17 @@ export const About = memo(({ lang }: { lang: Language }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-12 h-[2px] bg-[#D4A017] origin-left rtl:origin-right"
           />
+
+          {/* Geometric Portrait Mark — Saul Bass Soul */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-10 w-24 h-24 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/20 flex items-center justify-center overflow-hidden"
+          >
+            <span className="text-3xl font-bold text-[#D4A017]" style={{ fontFamily: '"Playfair Display", ui-serif, serif' }}>S</span>
+          </motion.div>
         </div>
 
         {/* Right Column — Content */}
@@ -53,12 +64,12 @@ export const About = memo(({ lang }: { lang: Language }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className={`text-lg md:text-xl text-white/80 font-light leading-relaxed ${isFa ? "leading-[2] mb-12" : "mb-12 max-w-2xl"}`}
+            className={`text-lg md:text-xl text-white/80 font-light leading-relaxed ${isFa ? "leading-[2] mb-12 prose-persian" : "mb-12 max-w-2xl"}`}
           >
             {t.paragraph}
           </motion.p>
 
-          {/* Capabilities — Tag Cloud (Visual, not textual) */}
+          {/* Capabilities — Tag Cloud */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

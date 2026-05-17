@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import React, { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { portfolioData, Language } from "../data";
 import { Send, CheckCircle2, Mail, Phone, Linkedin, Github } from "lucide-react";

@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import React, { memo, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import { portfolioData, Language } from "../data";
 import { Logo } from "./Logo";

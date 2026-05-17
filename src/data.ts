@@ -31,6 +31,10 @@ export const portfolioData = {
       ctaPrimary: "View Selected Work",
       ctaSecondary: "Start a Project",
     },
+
+    humanMoment: {
+      quote: "Design is not just what it looks like and feels like. Design is how it works.",
+    },
     about: {
       title: "Studio",
       paragraph: "I chase the moment a user forgets the screen exists. That happens when photography, motion, and code stop competing and start conspiring. Restraint is confidence. Precision is the only thing that separates being seen from being remembered.",
@@ -197,6 +201,10 @@ export const portfolioData = {
       description: "تجربه‌های دیجیتال با دکوپاژ سینمایی — جایی که هر فریم، توجه را می‌خرد.",
       ctaPrimary: "مشاهده آثار",
       ctaSecondary: "شروع پروژه",
+    },
+
+    humanMoment: {
+      quote: "طراحی فقط ظاهر و احساس نیست. طراحی نحوه کارکرد است.",
     },
     about: {
       title: "استودیو",

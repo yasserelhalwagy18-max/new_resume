@@ -27,7 +27,7 @@ ${formData.message}`);
   };
 
   return (
-    <section id="contact" className="px-6 max-w-6xl mx-auto section-padding-lg relative">
+    <section id="contact" className="px-6 max-w-6xl mx-auto section-padding-lg pb-0 relative">
       {/* Watermark */}
       <div
         className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}

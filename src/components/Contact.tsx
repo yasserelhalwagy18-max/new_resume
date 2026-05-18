@@ -174,7 +174,7 @@ ${formData.message}`);
 
           <button
             type="submit"
-            className="btn-primary w-full md:w-auto self-start"
+            className="btn-primary w-full md:w-auto justify-center"
           >
             <span className="flex items-center gap-2">
               {isFa ? "باز کردن ایمیل کلاینت" : "Open Email Client"}

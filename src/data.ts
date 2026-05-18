@@ -460,7 +460,6 @@ export const portfolioData = {
           id: 5,
           name: "سنگین CRM",
           year: "۱۴۰۲ — ۱۴۰۳",
-          link: "#",
           role: "فول‌استک · معماری ERP · طراحی محصول",
           stack: ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
           description:

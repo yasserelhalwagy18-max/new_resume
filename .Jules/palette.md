@@ -1,3 +1,0 @@
-## 2024-05-18 - Keyboard Accessibility for Expandable Elements
-**Learning:** Found that custom interactive elements (like expandable timeline cards in `Experience.tsx`) relying only on `onClick` lack keyboard accessibility out-of-the-box. Without `tabIndex` and keyboard event listeners, these are invisible to keyboard users.
-**Action:** Always add `role="button"`, `tabIndex={0}`, `aria-expanded`, and keyboard support (`e.key === 'Enter' || e.key === ' '`) to any `div` or `span` that functions as a button. For visual feedback, prefer `focus-visible:` over `focus:` to ensure the ring only shows for keyboard users.

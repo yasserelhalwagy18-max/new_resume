@@ -63,7 +63,7 @@ export default function App() {
               <Contact lang={lang} />
             </main>
 
-            <footer className="relative z-10 w-full py-24 px-6 border-t border-white/[0.04] mt-32 overflow-hidden bg-[#050505]">
+            <footer className="relative z-10 w-full pb-20 px-6 border-t border-white/[0.04] mt-0 overflow-hidden bg-[#050505]">
               <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8 relative z-10">
                 <p className={`text-sm font-light text-white/50 max-w-sm leading-relaxed ${lang === "fa" ? "leading-[1.75]" : ""}`}>
                   {portfolioData[lang].footer.tagline}

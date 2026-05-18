@@ -68,7 +68,7 @@ export const ImmersiveHero = memo(({ lang }: { lang: Language }) => {
         </h1>
 
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 1.6 }}
-          className={`text-white/55 max-w-lg mb-12 md:mb-16 font-light ${isFa ? "text-base leading-[1.75]" : "text-body-lg"}`}>
+          className={`text-white/55 max-w-lg mb-12 md:mb-16 mt-2 font-light ${isFa ? "text-base leading-[1.75]" : "text-body-lg"}`}>
           {t.description}
         </motion.p>
 

@@ -1,17 +1,35 @@
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { portfolioData, Language } from "../data";
-import { Send, CheckCircle2, Mail, Linkedin, Github, MessageCircle, Copy, ExternalLink } from "lucide-react";
+import {
+  Send,
+  CheckCircle2,
+  Mail,
+  Linkedin,
+  Github,
+  MessageCircle,
+  Copy,
+  ExternalLink,
+} from "lucide-react";
 
 export const Contact = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].contact;
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [copied, setCopied] = useState(false);
   const isFa = lang === "fa";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    )
+      return;
     const subject = encodeURIComponent(`Project Inquiry from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}
 Email: ${formData.email}
@@ -27,7 +45,10 @@ ${formData.message}`);
   };
 
   return (
-    <section id="contact" className="px-6 max-w-6xl mx-auto section-padding-lg relative">
+    <section
+      id="contact"
+      className="px-6 max-w-6xl mx-auto section-padding-lg relative"
+    >
       {/* Watermark */}
       <div
         className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}
@@ -45,7 +66,9 @@ ${formData.message}`);
       >
         {/* Left — Text & Links */}
         <div>
-          <h2 className={`text-section-title font-bold text-[#F4F1EA] mb-6 ${isFa ? "" : "tracking-tighter"}`}>
+          <h2
+            className={`text-section-title font-bold text-[#F4F1EA] mb-6 ${isFa ? "" : "tracking-tighter"}`}
+          >
             {t.title}
           </h2>
           <p className="text-lg text-white/60 font-light mb-12 max-w-md leading-relaxed">
@@ -71,7 +94,10 @@ ${formData.message}`);
                   {t.phone}
                 </span>
               </div>
-              <ExternalLink size={14} className="text-white/25 group-hover:text-[#2A9D8F] shrink-0 transition-colors" />
+              <ExternalLink
+                size={14}
+                className="text-white/25 group-hover:text-[#2A9D8F] shrink-0 transition-colors"
+              />
             </a>
 
             {/* Email — Copy-to-clipboard + mailto */}
@@ -98,7 +124,10 @@ ${formData.message}`);
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                   >
-                    <CheckCircle2 size={14} className="text-[#C9A84C] shrink-0" />
+                    <CheckCircle2
+                      size={14}
+                      className="text-[#C9A84C] shrink-0"
+                    />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -107,7 +136,10 @@ ${formData.message}`);
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                   >
-                    <Copy size={14} className="text-white/25 group-hover:text-white/50 shrink-0 transition-colors" />
+                    <Copy
+                      size={14}
+                      className="text-white/25 group-hover:text-white/50 shrink-0 transition-colors"
+                    />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -143,7 +175,9 @@ ${formData.message}`);
               type="text"
               placeholder={isFa ? "نام" : "Name"}
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#C9A84C]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors text-sm"
               required
             />
@@ -154,7 +188,9 @@ ${formData.message}`);
               type="email"
               placeholder={isFa ? "ایمیل" : "Email"}
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               className={`w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#C9A84C]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors text-sm ${!isFa ? "" : "text-right"}`}
               dir="ltr"
               required
@@ -166,7 +202,9 @@ ${formData.message}`);
               placeholder={isFa ? "پیام" : "Message"}
               rows={4}
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
               className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#C9A84C]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors resize-none text-sm"
               required
             />
@@ -174,7 +212,7 @@ ${formData.message}`);
 
           <button
             type="submit"
-            className="btn-primary w-full md:w-auto self-start"
+            className="btn-primary w-full md:w-auto self-start justify-center m-auto"
           >
             <span className="flex items-center gap-2">
               {isFa ? "باز کردن ایمیل کلاینت" : "Open Email Client"}
@@ -182,7 +220,7 @@ ${formData.message}`);
             </span>
           </button>
 
-          <p className="text-xs text-white/35 mt-1">
+          <p className="text-xs text-white/35 mt-1 mx-auto">
             {isFa
               ? "فرم کلاینت ایمیل شما را باز می‌کند. داده‌ای روی سرور ذخیره نمی‌شود."
               : "This opens your default email client. No data is stored on this server."}

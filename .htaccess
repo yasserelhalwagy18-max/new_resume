@@ -1,7 +1,7 @@
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/pfcfghud/noxt_app"
+PassengerAppRoot "/home/pfcfghud/next_app"
 PassengerBaseURI "/"
-PassengerNodejs "/home/pfcfghud/nodevenv/noxt_app/22/bin/node"
+PassengerNodejs "/home/pfcfghud/nodevenv/next_app/22/bin/node"
 PassengerAppType node
 PassengerStartupFile server.js
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END

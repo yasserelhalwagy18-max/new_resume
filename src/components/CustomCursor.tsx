@@ -58,13 +58,24 @@ export const CustomCursor = () => {
         translateY: "-50%",
       }}
       animate={{
-        width: isHovering ? 40 : 12,
-        height: isHovering ? 40 : 12,
+        width: isHovering ? 44 : 14,
+        height: isHovering ? 44 : 14,
         backgroundColor: isHovering ? "transparent" : "white",
-        border: isHovering ? "1px solid white" : "0px solid white",
+        border: isHovering ? "1.5px solid white" : "0px solid white",
       }}
       transition={{ type: "spring", stiffness: 250, damping: 20, mass: 0.5 }}
       className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full mix-blend-difference"
-    />
+    >
+      {/* Outer ring for visibility */}
+      <motion.div
+        className="absolute inset-0 rounded-full"
+        animate={{
+          border: isHovering ? "1px solid rgba(255,255,255,0.25)" : "none",
+          scale: isHovering ? 1.15 : 1,
+        }}
+        transition={{ duration: 0.3 }}
+        style={{ margin: isHovering ? "-4px" : "0" }}
+      />
+    </motion.div>
   );
 };

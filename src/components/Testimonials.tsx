@@ -9,12 +9,8 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
 
   return (
     <section className="px-6 max-w-5xl mx-auto section-padding relative">
-      {/* Watermark */}
-      <div
-        className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}
-        aria-hidden="true"
-      >
-        {isFa ? "۰۵" : "05"}
+      <div className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`} aria-hidden="true">
+        {isFa ? "۰۷" : "07"}
       </div>
 
       <motion.div
@@ -38,27 +34,18 @@ export const Testimonials = memo(({ lang }: { lang: Language }) => {
               transition={{ duration: 0.8, delay: index * 0.15 }}
               className="relative"
             >
-              {/* Large Quote Mark */}
-              <Quote
-                className="text-[#D4A017]/20 mb-6"
-                size={48}
-                strokeWidth={1}
-              />
+              <Quote className="text-[#C9A84C]/20 mb-6" size={48} strokeWidth={1} />
 
-              <blockquote
-                className={`text-2xl md:text-4xl font-light text-white/90 leading-snug mb-8 ${isFa ? "leading-[1.6]" : "leading-[1.3] tracking-tight"}`}
-              >
+              <blockquote className={`text-2xl md:text-4xl font-light text-white/85 leading-snug mb-8 ${isFa ? "leading-[1.6]" : "leading-[1.3] tracking-tight"}`}>
                 "{item.text}"
               </blockquote>
 
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/20 flex items-center justify-center text-[#D4A017] text-sm font-bold">
+                <div className="w-10 h-10 rounded-full bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center text-[#C9A84C] text-sm font-bold">
                   {item.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-white/80">
-                    {item.name}
-                  </p>
+                  <p className="text-sm font-medium text-white/80">{item.name}</p>
                 </div>
               </div>
             </motion.div>

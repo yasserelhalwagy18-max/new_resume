@@ -29,7 +29,8 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
 
   const navItems = [
     { label: t.work, href: "#projects" },
-    { label: isFa ? "بایگانی بصری" : "Archive", href: "#visual-works" },
+    { label: isFa ? "روش کار" : "Method", href: "#process" },
+    { label: isFa ? "آرشیو بصری" : "Archive", href: "#visual-works" },
     { label: t.about, href: "#about" },
     { label: isFa ? "مسیر" : "Path", href: "#experience" },
     { label: t.contact, href: "#contact" },
@@ -43,8 +44,8 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
     >
       <Logo />
 
-      {/* Desktop Nav — 5 Items */}
-      <nav className="hidden md:flex items-center gap-8 text-[13px] text-white/50">
+      {/* Desktop Nav — 6 Items */}
+      <nav className="hidden md:flex items-center gap-8 text-[13px] text-white/55">
         {navItems.map((item) => (
           <a
             key={item.href}
@@ -53,7 +54,7 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
             className="hover:text-white transition-colors relative group py-2"
           >
             {item.label}
-            <span className="absolute bottom-0 start-0 w-0 h-[1.5px] bg-[#D4A017] transition-all duration-300 group-hover:w-full" />
+            <span className="absolute bottom-0 start-0 w-0 h-[1.5px] bg-[#C9A84C] transition-all duration-300 group-hover:w-full" />
           </a>
         ))}
       </nav>
@@ -63,7 +64,7 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
         <motion.button
           onClick={() => setLang(lang === "en" ? "fa" : "en")}
           whileTap={{ scale: 0.95 }}
-          className="text-[11px] font-medium text-white/40 border border-white/[0.12] rounded-full px-3 py-1 hover:bg-white/[0.06] hover:text-white/70 transition-colors"
+          className="text-[11px] font-medium text-white/45 border border-white/[0.12] rounded-full px-3 py-1 hover:bg-white/[0.06] hover:text-white/70 transition-colors"
         >
           {lang === "en" ? "FA" : "EN"}
         </motion.button>
@@ -71,7 +72,7 @@ export const Header = memo(({ lang, setLang }: HeaderProps) => {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-white/60"
+          className="md:hidden p-2 min-w-[44px] min-h-[44px] text-white/60 flex items-center justify-center"
           aria-label="Toggle menu"
         >
           <div className="w-5 h-4 relative flex flex-col justify-between">

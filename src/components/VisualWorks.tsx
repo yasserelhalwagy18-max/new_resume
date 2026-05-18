@@ -13,7 +13,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
         className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}
         aria-hidden="true"
       >
-        {isFa ? "۰۳" : "03"}
+        {isFa ? "۰۴" : "04"}
       </div>
 
       <motion.div
@@ -24,14 +24,21 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
         className="relative z-10"
       >
         {/* Header */}
-        <div className="mb-12 md:mb-16 flex items-end justify-between">
-          <h2 className={`text-section-title font-bold text-[#F4F1EA] ${isFa ? "" : "tracking-tighter"}`}>
-            {t.title}
-          </h2>
+        <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <h2 className={`text-section-title font-bold text-[#F4F1EA] ${isFa ? "" : "tracking-tighter"}`}>
+              {t.title}
+            </h2>
+            {t.subtitle && (
+              <p className="text-sm text-white/50 mt-3 max-w-md font-light leading-relaxed">
+                {t.subtitle}
+              </p>
+            )}
+          </div>
           <div className="hidden md:block w-24 h-[2px] bg-white/[0.08]" />
         </div>
 
-        {/* Masonry Grid — Images Only, Titles as Overlay */}
+        {/* Masonry Grid */}
         <div className="masonry-grid">
           {t.items.map((item, i) => (
             <motion.div
@@ -40,7 +47,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-[#111]"
+              className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-[#111] film-frame-hover"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
@@ -55,7 +62,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
 
               {/* Title — Appears on Hover */}
               <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                <span className="text-xs uppercase tracking-widest text-[#D4A017] font-medium block mb-1">
+                <span className="text-xs uppercase tracking-widest text-[#C9A84C] font-medium block mb-1">
                   {isFa ? "مشاهده" : "View"}
                 </span>
                 <h3 className={`text-lg font-bold text-white ${isFa ? "" : "tracking-tight"}`}>

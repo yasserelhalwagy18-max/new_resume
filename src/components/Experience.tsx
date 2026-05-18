@@ -8,12 +8,8 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
 
   return (
     <section id="experience" className="px-6 max-w-6xl mx-auto section-padding relative">
-      {/* Watermark */}
-      <div
-        className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}
-        aria-hidden="true"
-      >
-        {isFa ? "۰۴" : "04"}
+      <div className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`} aria-hidden="true">
+        {isFa ? "۰۶" : "06"}
       </div>
 
       <motion.div
@@ -34,7 +30,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="w-12 h-[2px] bg-[#D4A017] origin-left rtl:origin-right"
+              className="w-12 h-[2px] bg-[#C9A84C] origin-left rtl:origin-right"
             />
           </div>
           <div className="lg:col-span-8">
@@ -57,14 +53,14 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
             >
               <div className="flex-1">
                 <div className="flex items-baseline gap-4 mb-2">
-                  <h3 className="text-xl md:text-2xl font-bold text-[#F4F1EA] group-hover:text-[#D4A017] transition-colors">
+                  <h3 className="text-xl md:text-2xl font-medium text-[#F4F1EA] group-hover:text-[#C9A84C] transition-colors">
                     {item.role}
                   </h3>
-                  <span className="text-xs text-white/30 font-mono hidden md:inline">
+                  <span className="text-xs text-white/40 font-mono hidden md:inline">
                     {item.date}
                   </span>
                 </div>
-                <p className="text-sm text-white/50">
+                <p className="text-sm text-white/55">
                   {item.company}
                 </p>
               </div>
@@ -73,7 +69,7 @@ export const Experience = memo(({ lang }: { lang: Language }) => {
                 <p className="text-sm text-white/60 leading-relaxed">
                   {item.description}
                 </p>
-                <span className="text-xs text-white/25 font-mono mt-2 block md:hidden">
+                <span className="text-xs text-white/35 font-mono mt-2 block md:hidden">
                   {item.date}
                 </span>
               </div>

@@ -48,7 +48,7 @@ ${formData.message}`);
           <h2 className={`text-section-title font-bold text-[#F4F1EA] mb-6 ${isFa ? "" : "tracking-tighter"}`}>
             {t.title}
           </h2>
-          <p className="text-lg text-white/60 font-light mb-12 max-w-md">
+          <p className="text-lg text-white/60 font-light mb-12 max-w-md leading-relaxed">
             {t.message}
           </p>
 
@@ -67,26 +67,26 @@ ${formData.message}`);
                 <span className="text-xs text-[#2A9D8F] block mb-0.5 font-medium">
                   {isFa ? "واتساپ (سریع‌ترین)" : "WhatsApp (Fastest)"}
                 </span>
-                <span className="text-sm text-white/80 font-mono" dir="ltr">
+                <span className="text-sm text-white/75 font-mono" dir="ltr">
                   {t.phone}
                 </span>
               </div>
-              <ExternalLink size={14} className="text-white/20 group-hover:text-[#2A9D8F] shrink-0" />
+              <ExternalLink size={14} className="text-white/25 group-hover:text-[#2A9D8F] shrink-0 transition-colors" />
             </a>
 
             {/* Email — Copy-to-clipboard + mailto */}
             <button
               onClick={copyEmail}
-              className="group flex items-center gap-4 p-4 rounded-2xl border border-white/[0.06] hover:border-[#D4A017]/30 hover:bg-[#D4A017]/5 transition-all text-left w-full"
+              className="group flex items-center gap-4 p-4 rounded-2xl border border-white/[0.06] hover:border-[#C9A84C]/30 hover:bg-[#C9A84C]/5 transition-all text-left w-full"
             >
-              <div className="w-10 h-10 rounded-full bg-[#D4A017]/10 flex items-center justify-center text-[#D4A017]">
+              <div className="w-10 h-10 rounded-full bg-[#C9A84C]/10 flex items-center justify-center text-[#C9A84C]">
                 <Mail size={18} />
               </div>
               <div className="flex-1 min-w-0">
-                <span className="text-xs text-white/40 block mb-0.5">
+                <span className="text-xs text-white/45 block mb-0.5">
                   {isFa ? "ایمیل" : "Email"}
                 </span>
-                <span className="text-sm text-white/80 font-mono" dir="ltr">
+                <span className="text-sm text-white/75 font-mono" dir="ltr">
                   {t.email}
                 </span>
               </div>
@@ -98,7 +98,7 @@ ${formData.message}`);
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                   >
-                    <CheckCircle2 size={14} className="text-[#D4A017] shrink-0" />
+                    <CheckCircle2 size={14} className="text-[#C9A84C] shrink-0" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -107,7 +107,7 @@ ${formData.message}`);
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                   >
-                    <Copy size={14} className="text-white/20 group-hover:text-white/50 shrink-0" />
+                    <Copy size={14} className="text-white/25 group-hover:text-white/50 shrink-0 transition-colors" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -118,7 +118,7 @@ ${formData.message}`);
                 href={t.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-full border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-[#D4A017] hover:border-[#D4A017]/30 transition-all"
+                className="w-11 h-11 rounded-full border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-[#C9A84C] hover:border-[#C9A84C]/30 transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
@@ -127,7 +127,7 @@ ${formData.message}`);
                 href={t.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-full border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-[#D4A017] hover:border-[#D4A017]/30 transition-all"
+                className="w-11 h-11 rounded-full border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-[#C9A84C] hover:border-[#C9A84C]/30 transition-all"
                 aria-label="GitHub"
               >
                 <Github size={18} />
@@ -144,7 +144,7 @@ ${formData.message}`);
               placeholder={isFa ? "نام" : "Name"}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#D4A017]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors text-sm"
+              className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#C9A84C]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors text-sm"
               required
             />
           </div>
@@ -155,7 +155,7 @@ ${formData.message}`);
               placeholder={isFa ? "ایمیل" : "Email"}
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className={`w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#D4A017]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors text-sm ${!isFa ? "" : "text-right"}`}
+              className={`w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#C9A84C]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors text-sm ${!isFa ? "" : "text-right"}`}
               dir="ltr"
               required
             />
@@ -167,7 +167,7 @@ ${formData.message}`);
               rows={4}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#D4A017]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors resize-none text-sm"
+              className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-[#C9A84C]/40 rounded-xl px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-colors resize-none text-sm"
               required
             />
           </div>
@@ -182,7 +182,7 @@ ${formData.message}`);
             </span>
           </button>
 
-          <p className="text-xs text-white/30 mt-1">
+          <p className="text-xs text-white/35 mt-1">
             {isFa
               ? "فرم کلاینت ایمیل شما را باز می‌کند. داده‌ای روی سرور ذخیره نمی‌شود."
               : "This opens your default email client. No data is stored on this server."}

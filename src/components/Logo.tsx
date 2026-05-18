@@ -2,9 +2,10 @@ import { motion } from "motion/react";
 
 interface LogoProps {
   className?: string;
+  isDrawing?: boolean;
 }
 
-export const Logo = ({ className = "w-8 h-8" }: LogoProps) => {
+export const Logo = ({ className = "w-8 h-8", isDrawing = false }: LogoProps) => {
   return (
     <motion.a
       href="#"
@@ -25,18 +26,22 @@ export const Logo = ({ className = "w-8 h-8" }: LogoProps) => {
         className={className}
         aria-label="Sadegh Shahid"
       >
-        {/* Geometric S — Saul Bass inspired, not literal */}
+        {/* Geometric S — Saul Bass inspired */}
         <motion.path
           d="M8 12C8 8 12 6 16 6C22 6 24 10 24 14C24 20 16 20 16 26C16 30 20 32 24 32C28 32 30 30 32 28"
-          stroke="#D4A017"
+          stroke="#C9A84C"
           strokeWidth="3"
           strokeLinecap="round"
           fill="none"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 1.2, ease: "easeInOut" }}
+          whileHover={{
+            pathLength: [1, 0.85, 1],
+            transition: { duration: 0.8, ease: "easeInOut" }
+          }}
         />
-        {/* Dot accent */}
+        {/* Dot accent — Teal for tech differentiation */}
         <motion.circle
           cx="8"
           cy="28"
@@ -45,6 +50,10 @@ export const Logo = ({ className = "w-8 h-8" }: LogoProps) => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.4, delay: 1 }}
+          whileHover={{
+            scale: [1, 1.3, 1],
+            transition: { duration: 0.6 }
+          }}
         />
       </svg>
     </motion.a>

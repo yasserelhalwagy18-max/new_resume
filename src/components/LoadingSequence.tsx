@@ -12,8 +12,8 @@ export const LoadingSequence = ({ onComplete }: LoadingSequenceProps) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-      setTimeout(onComplete, 200); // Allow exit animation to finish
-    }, 1200);
+      setTimeout(onComplete, 400); // Allow exit animation to finish
+    }, 1800);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -29,55 +29,46 @@ export const LoadingSequence = ({ onComplete }: LoadingSequenceProps) => {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] bg-[#08090A] flex items-center justify-center overflow-hidden"
         >
-          {/* Logo Drawing (0.0s - 0.8s) */}
           <motion.div
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{
-              scale: [1.2, 1.2, 1],
-              opacity: [0, 1, 1],
-              y: [0, 0, -20] // Move up slightly as it scales down
-            }}
-            transition={{
-              duration: 1.4,
-              times: [0, 0.4, 1],
-              ease: "easeInOut"
-            }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center"
           >
-            <Logo isDrawing={true} className="w-24 h-24 mb-8" />
+            {/* Logo with drawing animation */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Logo isDrawing={true} className="w-20 h-20 mb-10" />
+            </motion.div>
 
-            {/* Hero text simulation (0.6s - 2.0s) */}
-            <div className="flex flex-col items-center gap-4 mt-8">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="h-4 w-64 bg-white/5 rounded-full overflow-hidden relative"
-              >
-                 <motion.div
-                    initial={{ x: "-100%" }}
-                    animate={{ x: "100%" }}
-                    transition={{ delay: 0.6, duration: 1.4, ease: "easeInOut" }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-[#D6C7A8]/20 to-transparent"
-                 />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: .7, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="h-4 w-48 bg-white/5 rounded-full overflow-hidden relative"
-              >
+            {/* Name reveal — letter by letter */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col items-center gap-3"
+            >
+              <span className="text-sm font-light tracking-[0.3em] text-white/60 uppercase">
+                Sadegh Shahid
+              </span>
+
+              {/* Progress line */}
+              <div className="w-32 h-[1px] bg-white/10 rounded-full overflow-hidden mt-4">
                 <motion.div
-                    initial={{ x: "-100%" }}
-                    animate={{ x: "100%" }}
-                    transition={{ delay: .7, duration: 0.8, ease: "easeInOut" }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-[#D6C7A8]/20 to-transparent"
-                 />
-              </motion.div>
-            </div>
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1.2, delay: 0.6, ease: "easeInOut" }}
+                  className="h-full bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent origin-left"
+                  style={{ transformOrigin: "left" }}
+                />
+              </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       )}

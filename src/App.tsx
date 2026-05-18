@@ -4,16 +4,16 @@ import { Language, portfolioData } from "./data";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Projects } from "./components/Projects";
+import { Process } from "./components/Process";
 import { VisualWorks } from "./components/VisualWorks";
 import { About } from "./components/About";
 import { Services } from "./components/Services";
 import { Experience } from "./components/Experience";
 import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
-import { TransitionMoment } from "./components/TransitionMoment";
-import { HumanMoment } from "./components/HumanMoment";
 import { LoadingSequence } from "./components/LoadingSequence";
 import { CustomCursor } from "./components/CustomCursor";
+import { DepthEnvironment } from "./components/DepthEnvironment";
 import { ArrowUp } from "lucide-react";
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
 
   return (
     <div
-      className="min-h-screen selection:bg-[#D4A017] selection:text-[#0A0A0A] bg-[#0A0A0A]"
+      className="min-h-screen selection:bg-[#C9A84C] selection:text-[#050505] bg-[#050505]"
       dir={lang === "fa" ? "rtl" : "ltr"}
       lang={lang}
     >
@@ -45,43 +45,38 @@ export default function App() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
+            <DepthEnvironment />
             <CustomCursor />
             <Header lang={lang} setLang={setLang} />
 
-            <main>
+            <main className="relative z-10">
               <Hero lang={lang} />
               <Projects lang={lang} />
-              <HumanMoment lang={lang} />
+              <Process lang={lang} />
               <VisualWorks lang={lang} />
               <About lang={lang} />
               <Services lang={lang} />
-              <TransitionMoment lang={lang} />
               <Experience lang={lang} />
               <Testimonials lang={lang} />
               <Contact lang={lang} />
             </main>
 
-            {/* Footer */}
-            <footer className="relative w-full py-20 px-6 border-t border-white/[0.06] mt-24 overflow-hidden bg-[#0A0A0A]">
+            <footer className="relative z-10 w-full py-24 px-6 border-t border-white/[0.04] mt-32 overflow-hidden bg-[#050505]">
               <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8 relative z-10">
-                <p className={`text-sm font-light text-white/50 max-w-sm leading-relaxed ${lang === "fa" ? "leading-[2]" : ""}`}>
+                <p className={`text-sm font-light text-white/50 max-w-sm leading-relaxed ${lang === "fa" ? "leading-[1.75]" : ""}`}>
                   {portfolioData[lang].footer.tagline}
                 </p>
-                <p className="text-xs text-white/30 font-light tracking-widest">
+                <p className="text-xs text-white/40 font-light tracking-widest">
                   {portfolioData[lang].footer.copyright.replace("{year}", String(new Date().getFullYear()))}
                 </p>
               </div>
-              <div
-                className="absolute bottom-0 end-0 translate-y-1/3 text-[18vw] font-bold text-white/[0.015] leading-none pointer-events-none select-none z-0"
-                aria-hidden="true"
-              >
+              <div className="absolute bottom-0 end-0 translate-y-1/3 text-[18vw] font-bold text-white/[0.02] leading-none pointer-events-none select-none z-0" aria-hidden="true">
                 {lang === "fa" ? "پایان" : "END"}
               </div>
             </footer>
 
-            {/* Back to top */}
             <AnimatePresence>
               {showTop && (
                 <motion.button
@@ -89,10 +84,10 @@ export default function App() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                  className="fixed bottom-8 end-8 z-50 w-12 h-12 rounded-full border border-white/[0.12] bg-black/40 backdrop-blur-md flex items-center justify-center hover:border-[#D4A017]/50 hover:bg-[#D4A017]/10 transition-all group"
+                  className="fixed bottom-8 end-8 z-50 w-12 h-12 rounded-full border border-white/[0.08] bg-black/40 backdrop-blur-md flex items-center justify-center hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/5 transition-all group"
                   aria-label="Back to top"
                 >
-                  <ArrowUp size={18} className="text-white/40 group-hover:text-[#D4A017] transition-colors" />
+                  <ArrowUp size={18} className="text-white/40 group-hover:text-[#C9A84C] transition-colors" />
                 </motion.button>
               )}
             </AnimatePresence>

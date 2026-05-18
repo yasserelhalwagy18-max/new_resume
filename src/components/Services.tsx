@@ -30,15 +30,15 @@ export const Services = memo(({ lang }: { lang: Language }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group p-6 md:p-8 rounded-2xl border border-white/[0.06] bg-[#111] hover:border-[#D4A017]/20 hover:bg-[#141414] transition-all"
+              className="group p-6 md:p-8 rounded-2xl border border-white/[0.06] bg-[#111] hover:border-[#C9A84C]/20 hover:bg-[#141414] transition-all"
             >
-              <div className="w-10 h-10 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/20 flex items-center justify-center mb-6 text-[#D4A017] font-bold text-sm">
+              <div className="w-10 h-10 rounded-full bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center mb-6 text-[#C9A84C] font-bold text-sm">
                 0{i + 1}
               </div>
               <h3 className={`text-lg font-bold text-[#F4F1EA] mb-3 ${isFa ? "" : "tracking-tight"}`}>
                 {item.title}
               </h3>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-white/55 leading-relaxed">
                 {item.desc}
               </p>
             </motion.div>

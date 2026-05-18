@@ -13,7 +13,7 @@ export const VisualWorks = memo(({ lang }: { lang: Language }) => {
         className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}
         aria-hidden="true"
       >
-        {isFa ? "۰۴" : "04"}
+        {isFa ? "۰۳" : "03"}
       </div>
 
       <motion.div

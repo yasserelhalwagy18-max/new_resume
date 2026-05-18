@@ -1,3 +1,4 @@
+import React from "react";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 
@@ -6,6 +7,7 @@ interface ParallaxLayerProps {
   speed?: number; // 0 = static, 1 = moves with scroll, -0.5 = slower (depth)
   className?: string;
   zIndex?: number;
+  key?: React.Key;
 }
 
 export const ParallaxLayer = ({ children, speed = 0, className = "", zIndex = 0 }: ParallaxLayerProps) => {

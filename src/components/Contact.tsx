@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { portfolioData, Language } from "../data";
@@ -33,7 +34,7 @@ ${formData.message}`);
         className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}
         aria-hidden="true"
       >
-        {isFa ? "۰۶" : "06"}
+        {isFa ? "۰۸" : "08"}
       </div>
 
       <motion.div

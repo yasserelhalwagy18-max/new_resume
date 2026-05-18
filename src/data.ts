@@ -287,6 +287,9 @@ export const portfolioData = {
       tagline: "Restraint is more powerful than noise.",
       copyright: "© {year} Sadegh Shahid",
     },
+    humanMoment: {
+      quote: "Design is not just what it looks like and feels like. Design is how it works.",
+    },
   },
   fa: {
     nav: {
@@ -541,6 +544,9 @@ export const portfolioData = {
     footer: {
       tagline: "خویشتن‌داری قدرتمندتر از هیاهو است.",
       copyright: "© {year} صادق شهید",
+    },
+    humanMoment: {
+      quote: "طراحی فقط به این نیست که چطور به نظر می‌رسد و چه حسی دارد. طراحی به این است که چطور کار می‌کند.",
     },
   },
 };

@@ -45,7 +45,7 @@ export default function App() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <DepthEnvironment />
             <CustomCursor />
@@ -63,24 +63,16 @@ export default function App() {
               <Contact lang={lang} />
             </main>
 
-            <footer className="relative z-10 w-full pb-16 pt-5 px-6 border-t-4 border-white/[0.04] overflow-hidden bg-[#050505]">
+            <footer className="relative z-10 w-full py-24 px-6 border-t border-white/[0.04] mt-32 overflow-hidden bg-[#050505]">
               <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8 relative z-10">
-                <p
-                  className={`text-sm font-light text-white/50 max-w-sm leading-relaxed ${lang === "fa" ? "leading-[1.75]" : ""}`}
-                >
+                <p className={`text-sm font-light text-white/50 max-w-sm leading-relaxed ${lang === "fa" ? "leading-[1.75]" : ""}`}>
                   {portfolioData[lang].footer.tagline}
                 </p>
                 <p className="text-xs text-white/40 font-light tracking-widest">
-                  {portfolioData[lang].footer.copyright.replace(
-                    "{year}",
-                    String(new Date().getFullYear()),
-                  )}
+                  {portfolioData[lang].footer.copyright.replace("{year}", String(new Date().getFullYear()))}
                 </p>
               </div>
-              <div
-                className="absolute bottom-0 end-0 translate-y-1/3 text-[18vw] font-bold text-white/[0.02] leading-none pointer-events-none select-none z-0"
-                aria-hidden="true"
-              >
+              <div className="absolute bottom-0 end-0 translate-y-1/3 text-[18vw] font-bold text-white/[0.02] leading-none pointer-events-none select-none z-0" aria-hidden="true">
                 {lang === "fa" ? "پایان" : "END"}
               </div>
             </footer>
@@ -91,16 +83,11 @@ export default function App() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  onClick={() =>
-                    window.scrollTo({ top: 0, behavior: "smooth" })
-                  }
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                   className="fixed bottom-8 end-8 z-50 w-12 h-12 rounded-full border border-white/[0.08] bg-black/40 backdrop-blur-md flex items-center justify-center hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/5 transition-all group"
                   aria-label="Back to top"
                 >
-                  <ArrowUp
-                    size={18}
-                    className="text-white/40 group-hover:text-[#C9A84C] transition-colors"
-                  />
+                  <ArrowUp size={18} className="text-white/40 group-hover:text-[#C9A84C] transition-colors" />
                 </motion.button>
               )}
             </AnimatePresence>

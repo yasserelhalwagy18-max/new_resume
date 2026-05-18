@@ -27,13 +27,13 @@ ${formData.message}`);
   };
 
   return (
-    <section id="contact" className="px-6 max-w-6xl mx-auto section-padding-lg pb-0 relative">
+    <section id="contact" className="px-6 max-w-6xl mx-auto section-padding-lg relative">
       {/* Watermark */}
       <div
         className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`}
         aria-hidden="true"
       >
-        {isFa ? "۰۶" : "06"}
+        {isFa ? "۰۸" : "08"}
       </div>
 
       <motion.div
@@ -174,7 +174,7 @@ ${formData.message}`);
 
           <button
             type="submit"
-            className="btn-primary w-full md:w-auto justify-center"
+            className="btn-primary w-full md:w-auto self-start"
           >
             <span className="flex items-center gap-2">
               {isFa ? "باز کردن ایمیل کلاینت" : "Open Email Client"}

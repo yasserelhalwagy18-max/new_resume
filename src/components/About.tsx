@@ -10,7 +10,7 @@ export const About = memo(({ lang }: { lang: Language }) => {
   return (
     <section id="about" className="px-6 max-w-6xl mx-auto section-padding relative">
       <div className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-0`} aria-hidden="true">
-        {isFa ? "۰۵" : "05"}
+        {isFa ? "۰۴" : "04"}
       </div>
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

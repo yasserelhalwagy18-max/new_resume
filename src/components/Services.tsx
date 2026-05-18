@@ -8,6 +8,10 @@ export const Services = memo(({ lang }: { lang: Language }) => {
 
   return (
     <section id="services" className="px-6 max-w-6xl mx-auto section-padding-sm relative">
+            <div className={`watermark-num ${isFa ? "-right-4" : "-left-4"} top-8`} aria-hidden="true">
+        {isFa ? "۰۵" : "05"}
+      </div>
+
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

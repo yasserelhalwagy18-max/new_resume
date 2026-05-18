@@ -219,7 +219,8 @@ export const portfolioData = {
     },
     visual: {
       title: "Brand Archive",
-      subtitle: "Identity systems, photography, and art direction — the work between the projects.",
+      subtitle:
+        "Identity systems, photography, and art direction — the work between the projects.",
       items: [
         {
           id: 1,
@@ -366,14 +367,16 @@ export const portfolioData = {
     },
     experience: {
       title: "مسیر",
-      summary: "۱۰+ سال شکل‌دهی هویت بصری. ۴+ سال توسعه محصول وب. این ترکیب نادر است — و ارزشمند.",
+      summary:
+        "۱۰+ سال شکل‌دهی هویت بصری. ۴+ سال توسعه محصول وب. این ترکیب نادر است — و ارزشمند.",
       items: [
         {
           id: 1,
           role: "طراح ارشد و توسعه‌دهنده وب",
           company: "AFS (تهران)",
           date: "۱۴۰۳ — اکنون",
-          description: "هویت برند، UI/UX و پیاده‌سازی فول‌استک وب برای بزرگ‌ترین تأمین‌کننده انرژی خورشیدی ایران.",
+          description:
+            "هویت برند، UI/UX و پیاده‌سازی فول‌استک وب برای بزرگ‌ترین تأمین‌کننده انرژی خورشیدی ایران.",
         },
         {
           id: 2,
@@ -404,7 +407,8 @@ export const portfolioData = {
           role: "توسعه‌دهنده فرانت‌اند و طراح UI/UX",
           company: "رافد (قم)",
           date: "۱۴۰۰ — ۱۴۰۲",
-          description: "کتابخانه کامپوننت و بازطراحی سیستم‌های درون‌سازمانی در ۵+ پلتفرم.",
+          description:
+            "کتابخانه کامپوننت و بازطراحی سیستم‌های درون‌سازمانی در ۵+ پلتفرم.",
         },
       ],
     },
@@ -460,6 +464,7 @@ export const portfolioData = {
           id: 5,
           name: "سنگین CRM",
           year: "۱۴۰۲ — ۱۴۰۳",
+          link: "#",
           role: "فول‌استک · معماری ERP · طراحی محصول",
           stack: ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
           description:
@@ -474,7 +479,8 @@ export const portfolioData = {
     },
     visual: {
       title: "آرشیو هویت بصری",
-      subtitle: "سیستم‌های هویت، عکاسی، و جهت‌گیری هنری — کارهایی که بین پروژه‌ها انجام می‌شود.",
+      subtitle:
+        "سیستم‌های هویت، عکاسی، و جهت‌گیری هنری — کارهایی که بین پروژه‌ها انجام می‌شود.",
       items: [
         {
           id: 1,

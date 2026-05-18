@@ -452,3 +452,56 @@ a:hover { color: #C9A84C; }
 .film-frame-hover:hover::after {
   opacity: 1;
 }
+
+/* ============================================
+   MOBILE PERFORMANCE OVERRIDES
+   Remove expensive effects on low-power devices
+   ============================================ */
+
+/* Disable film grain on mobile */
+@media (pointer: coarse) {
+  body::before { display: none; }
+}
+
+/* Reduce vignette intensity on mobile */
+@media (pointer: coarse) {
+  body::after {
+    background: radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0,0,0,0.15) 100%);
+  }
+}
+
+/* Replace backdrop-blur with solid colors on mobile */
+@media (pointer: coarse) {
+  .backdrop-blur-xl,
+  .backdrop-blur-md,
+  .backdrop-blur-sm {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* GPU acceleration helpers */
+.gpu-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+/* Content visibility for off-screen sections */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Reduced motion comprehensive */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  body::before, body::after { display: none !important; }
+  .parallax-layer { transform: none !important; }
+  canvas { display: none !important; }
+}

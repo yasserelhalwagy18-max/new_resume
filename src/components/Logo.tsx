@@ -26,33 +26,50 @@ export const Logo = ({ className = "w-8 h-8", isDrawing = false }: LogoProps) =>
         className={className}
         aria-label="Sadegh Shahid"
       >
-        {/* Geometric S — Saul Bass inspired */}
+        {/* 
+          SAUL BASS-INSPIRED GEOMETRIC S
+          Reduced to 3 points + 1 accent
+          Upper diagonal → curve → lower diagonal
+          The dot is the "start point" — represents the origin of the design process
+        */}
         <motion.path
-          d="M8 12C8 8 12 6 16 6C22 6 24 10 24 14C24 20 16 20 16 26C16 30 20 32 24 32C28 32 30 30 32 28"
+          d="M12 10 L24 10 C28 10 30 13 28 16 L16 24 C12 27 14 30 18 30 L30 30"
           stroke="#C9A84C"
           strokeWidth="3"
           strokeLinecap="round"
+          strokeLinejoin="round"
           fill="none"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ 
+            pathLength: isDrawing ? [0, 1] : 1, 
+            opacity: 1 
+          }}
+          transition={{ 
+            duration: isDrawing ? 1.0 : 0, 
+            ease: "easeInOut",
+            delay: isDrawing ? 0.2 : 0
+          }}
           whileHover={{
-            pathLength: [1, 0.85, 1],
-            transition: { duration: 0.8, ease: "easeInOut" }
+            strokeWidth: 4,
+            transition: { duration: 0.3 }
           }}
         />
-        {/* Dot accent — Teal for tech differentiation */}
+
+        {/* Origin dot — represents the starting point of creation */}
         <motion.circle
-          cx="8"
-          cy="28"
-          r="3"
-          fill="#2A9D8F"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.4, delay: 1 }}
+          cx="10"
+          cy="30"
+          r="3.5"
+          fill="none"
+          stroke="#2A9D8F"
+          strokeWidth="2"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.3, delay: isDrawing ? 1.0 : 0.4 }}
           whileHover={{
-            scale: [1, 1.3, 1],
-            transition: { duration: 0.6 }
+            scale: 1.4,
+            fill: "#2A9D8F",
+            transition: { duration: 0.3 }
           }}
         />
       </svg>

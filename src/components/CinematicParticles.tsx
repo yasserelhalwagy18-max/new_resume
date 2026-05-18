@@ -1,150 +1,139 @@
-import React, { useEffect, useRef, memo } from "react";
+import React, { useEffect, useRef, memo, useCallback } from "react";
 
 interface Particle {
   x: number;
   y: number;
+  baseX: number;
+  baseY: number;
   size: number;
   speedY: number;
-  speedX: number;
+  phase: number;
   opacity: number;
   color: string;
-  noiseOffset: number;
 }
 
-const grad3 = [
-  [1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],
-  [1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],
-  [0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]
-];
-const p = new Uint8Array(512);
-const permutation = Array.from({ length: 256 }, () => Math.floor(Math.random() * 256));
-for (let i = 0; i < 512; i++) p[i] = permutation[i & 255];
-const dot = (g: number[], x: number, y: number, z: number) => g[0]*x + g[1]*y + g[2]*z;
-
-const t3 = (x: number, y: number, z: number, i: number, j: number, k: number) => {
-  let t = 0.6 - x*x - y*y - z*z;
-  if (t < 0) return 0;
-  t *= t;
-  return t*t*dot(grad3[p[i+p[j+p[k]]]%12], x, y, z);
-};
-
-const noise3D = (xin: number, yin: number, zin: number) => {
-  const F3 = 1/3, s = (xin+yin+zin)*F3;
-  const i = Math.floor(xin+s), j = Math.floor(yin+s), k = Math.floor(zin+s);
-  const G3 = 1/6, t = (i+j+k)*G3;
-  const X0 = i-t, Y0 = j-t, Z0 = k-t;
-  const x0 = xin-X0, y0 = yin-Y0, z0 = zin-Z0;
-  let i1,j1,k1,i2,j2,k2;
-  if (x0>=y0) {
-    if (y0>=z0) { i1=1;j1=0;k1=0;i2=1;j2=1;k2=0; }
-    else if (x0>=z0) { i1=1;j1=0;k1=0;i2=1;j2=0;k2=1; }
-    else { i1=0;j1=0;k1=1;i2=1;j2=0;k2=1; }
-  } else {
-    if (y0<z0) { i1=0;j1=0;k1=1;i2=0;j2=1;k2=1; }
-    else if (x0<z0) { i1=0;j1=1;k1=0;i2=0;j2=1;k2=1; }
-    else { i1=0;j1=1;k1=0;i2=1;j2=1;k2=0; }
-  }
-  const x1=x0-i1+G3, y1=y0-j1+G3, z1=z0-k1+G3;
-  const x2=x0-i2+2*G3, y2=y0-j2+2*G3, z2=z0-k2+2*G3;
-  const x3=x0-1+3*G3, y3=y0-1+3*G3, z3=z0-1+3*G3;
-  const ii=i&255, jj=j&255, kk=k&255;
-  return 32*(t3(x0,y0,z0,ii,jj,kk)+t3(x1,y1,z1,ii+i1,jj+j1,kk+k1)+t3(x2,y2,z2,ii+i2,jj+j2,kk+k2)+t3(x3,y3,z3,ii+1,jj+1,kk+1));
-};
+// Lightweight sine-based drift instead of Simplex noise
+const sinDrift = (t: number, phase: number, freq: number) => 
+  Math.sin(t * freq + phase) * 0.5;
 
 export const CinematicParticles: React.FC = memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestRef = useRef<number>(0);
-  const hasInitialized = useRef(false);
+  const particlesRef = useRef<Particle[]>([]);
+  const timeRef = useRef(0);
+  const isMobile = useRef(false);
+
+  const initParticles = useCallback((w: number, h: number) => {
+    const count = isMobile.current ? 6 : 10; // 6 on mobile, 10 on desktop
+    particlesRef.current = [];
+
+    for (let i = 0; i < count; i++) {
+      const isAmber = Math.random() > 0.7;
+      const x = Math.random() * w;
+      const y = Math.random() * h;
+      particlesRef.current.push({
+        x, y,
+        baseX: x,
+        baseY: y,
+        size: Math.random() * 1.2 + 0.4,
+        speedY: Math.random() * 0.02 + 0.008,
+        phase: Math.random() * Math.PI * 2,
+        opacity: Math.random() * 0.12 + 0.04,
+        color: isAmber ? "201, 168, 76" : "212, 210, 205",
+      });
+    }
+  }, []);
 
   useEffect(() => {
+    // Detect mobile/low-power devices
+    isMobile.current = window.matchMedia("(pointer: coarse)").matches || 
+                       window.innerWidth < 768 ||
+                       navigator.hardwareConcurrency <= 4;
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
+
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    let particles: Particle[] = [];
-    const particleCount = 35;
+    // Cap DPR on mobile to reduce GPU load
+    const dpr = isMobile.current ? 1 : Math.min(window.devicePixelRatio, 2);
 
-    const resizeCanvas = () => {
+    let w = 0, h = 0;
+
+    const resize = () => {
       const parent = canvas.parentElement;
       if (!parent) return;
-      const newW = parent.clientWidth;
-      const newH = parent.clientHeight;
-      if (Math.abs(canvas.width - newW) > 10 || Math.abs(canvas.height - newH) > 10 || !hasInitialized.current) {
-        canvas.width = newW;
-        canvas.height = newH;
-        if (!hasInitialized.current) { initParticles(); hasInitialized.current = true; }
+      w = parent.clientWidth;
+      h = parent.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
+      initParticles(w, h);
+    };
+
+    const animate = (timestamp: number) => {
+      // Throttle to ~30fps on mobile
+      if (isMobile.current && timeRef.current && timestamp - timeRef.current < 33) {
+        requestRef.current = requestAnimationFrame(animate);
+        return;
       }
-    };
+      timeRef.current = timestamp;
 
-    const initParticles = () => {
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(createParticle(true));
-      }
-    };
+      const t = timestamp * 0.0005;
+      ctx.clearRect(0, 0, w, h);
 
-    const createParticle = (isInitial = false): Particle => {
-      const isAmber = Math.random() > 0.7;
-      return {
-        x: Math.random() * canvas.width,
-        y: isInitial ? Math.random() * canvas.height : canvas.height + 20,
-        size: Math.random() * 1.5 + 0.5,
-        speedY: Math.random() * 0.03 + 0.01,
-        speedX: Math.random() * 0.02 + 0.005,
-        opacity: Math.random() * 0.15 + 0.05,
-        color: isAmber ? "201, 168, 76" : "212, 210, 205",
-        noiseOffset: Math.random() * 1000,
-      };
-    };
+      particlesRef.current.forEach((pt) => {
+        // Sine-based drift (CPU cost: ~10 ops vs 2000 for Simplex)
+        const driftX = sinDrift(t, pt.phase, 0.3) * 0.3;
+        const driftY = sinDrift(t, pt.phase + 1, 0.2) * 0.15;
 
-    const animate = (time: number) => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const t = time * 0.0003;
+        pt.x = pt.baseX + driftX * 20;
+        pt.y -= pt.speedY;
 
-      particles.forEach((pt, index) => {
-        const driftX = noise3D(pt.x * 0.002, pt.y * 0.002, t + pt.noiseOffset);
-        const driftY = noise3D(pt.y * 0.002, pt.x * 0.002, t + pt.noiseOffset + 100);
+        // Wrap around
+        if (pt.y < -10) {
+          pt.baseY = h + 10;
+          pt.y = pt.baseY;
+        }
+        if (pt.x < -20) pt.baseX = w + 20;
+        if (pt.x > w + 20) pt.baseX = -20;
 
-        pt.x += driftX * pt.speedX;
-        pt.y -= pt.speedY + driftY * 0.05;
-
-        if (pt.y < -30) particles[index] = createParticle(false);
-        if (pt.x < -30) pt.x = canvas.width + 30;
-        if (pt.x > canvas.width + 30) pt.x = -30;
-
-        // Soft radial glow — dust in light beam
-        const g = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, pt.size * 4);
-        g.addColorStop(0, `rgba(${pt.color}, ${pt.opacity})`);
-        g.addColorStop(1, `rgba(${pt.color}, 0)`);
-        ctx.fillStyle = g;
+        // Simple circle (no radial gradient = massive GPU savings)
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, pt.size * 2, 0, Math.PI * 2);
+        ctx.arc(pt.x, pt.y, pt.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${pt.color}, ${pt.opacity})`;
         ctx.fill();
       });
 
       requestRef.current = requestAnimationFrame(animate);
     };
 
+    // Debounced resize
     let resizeTimeout: ReturnType<typeof setTimeout>;
-    const debouncedResize = () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(resizeCanvas, 250); };
-    window.addEventListener("resize", debouncedResize);
-    resizeCanvas();
+    const onResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resize, 200);
+    };
+
+    window.addEventListener("resize", onResize);
+    resize();
     requestRef.current = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener("resize", debouncedResize);
+      window.removeEventListener("resize", onResize);
       clearTimeout(resizeTimeout);
       cancelAnimationFrame(requestRef.current);
     };
-  }, []);
+  }, [initParticles]);
 
   return (
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 1, willChange: "transform" }}
+      style={{ zIndex: 1 }}
     />
   );
 });

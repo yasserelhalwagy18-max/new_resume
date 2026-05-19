@@ -1,8 +1,9 @@
-import { memo, useMemo, useEffect, useState } from "react";
+import { memo, useMemo, useEffect, useState, lazy, Suspense } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowDownRight } from "lucide-react";
 import { portfolioData, Language } from "../data";
-import { CinematicParticles } from "./CinematicParticles";
+
+const CinematicParticles = lazy(() => import("./CinematicParticles").then(module => ({ default: module.CinematicParticles })));
 
 export const ImmersiveHero = memo(({ lang }: { lang: Language }) => {
   const t = portfolioData[lang].hero;
@@ -39,13 +40,15 @@ export const ImmersiveHero = memo(({ lang }: { lang: Language }) => {
       {/* Dust layer — disabled on mobile */}
       {!isMobile && (
         <div className="absolute inset-0 z-[1]">
-          <CinematicParticles />
+          <Suspense fallback={null}>
+            <CinematicParticles />
+          </Suspense>
         </div>
       )}
 
       {/* Content */}
       <motion.div style={{ y: textY, opacity: textOpacity }} className="relative z-10 w-full max-w-6xl mx-auto">
-        <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.6 }}
+        <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.1 }}
           className="cinematic-label block mb-8 md:mb-10">
           {t.role}
         </motion.span>

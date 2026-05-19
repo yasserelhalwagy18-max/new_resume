@@ -22,9 +22,10 @@
     <meta property="twitter:description" content="طراحی و توسعه تجربه‌های دیجیتال با نگاه سینمایی. ترکیب طراحی، تصویر و کد برای ساختن تجربه‌هایی که حس داشته باشند." />
     <meta property="twitter:image" content="/og-image.png" />
     
-    <!-- Preconnect to font sources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/playfair.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body class="overflow-x-hidden bg-[#0A0A0A] text-[#F3F1EB] selection:bg-[#D6C7A8] selection:text-[#0A0A0A]">
     <div id="root" class="overflow-x-hidden"></div>

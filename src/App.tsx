@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Language, portfolioData } from "./data";
 import { Header } from "./components/Header";
@@ -12,8 +12,9 @@ import { Experience } from "./components/Experience";
 import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { LoadingSequence } from "./components/LoadingSequence";
-import { DepthEnvironment } from "./components/DepthEnvironment";
 import { ArrowUp } from "lucide-react";
+
+const DepthEnvironment = lazy(() => import("./components/DepthEnvironment").then(module => ({ default: module.DepthEnvironment })));
 
 export default function App() {
   const [lang, setLang] = useState<Language>("fa");
@@ -26,7 +27,11 @@ export default function App() {
   }, [lang]);
 
   useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 800);
+    const onScroll = () => {
+      requestAnimationFrame(() => {
+        setShowTop(window.scrollY > 800);
+      });
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -46,7 +51,9 @@ export default function App() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <DepthEnvironment />
+            <Suspense fallback={null}>
+              <DepthEnvironment />
+            </Suspense>
             <Header lang={lang} setLang={setLang} />
 
             <main className="relative z-10">

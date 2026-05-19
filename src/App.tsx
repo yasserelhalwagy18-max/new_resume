@@ -12,7 +12,6 @@ import { Experience } from "./components/Experience";
 import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { LoadingSequence } from "./components/LoadingSequence";
-import { CustomCursor } from "./components/CustomCursor";
 import { DepthEnvironment } from "./components/DepthEnvironment";
 import { ArrowUp } from "lucide-react";
 
@@ -48,7 +47,6 @@ export default function App() {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <DepthEnvironment />
-            <CustomCursor />
             <Header lang={lang} setLang={setLang} />
 
             <main className="relative z-10">

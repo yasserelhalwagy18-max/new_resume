@@ -1,4 +1,4 @@
-import { memo, useRef, useState, useEffect, useCallback } from "react";
+import React, { memo, useRef, useState, useEffect, useCallback } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 
 interface SpatialCardProps {
@@ -26,9 +26,14 @@ export const SpatialCard = memo(({ children, className = "", intensity = 12 }: S
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current || isMobile) return;
-    const rect = ref.current.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width);
-    y.set((e.clientY - rect.top) / rect.height);
+
+    // Batch DOM reads in requestAnimationFrame to prevent forced reflows
+    requestAnimationFrame(() => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      x.set((e.clientX - rect.left) / rect.width);
+      y.set((e.clientY - rect.top) / rect.height);
+    });
   }, [isMobile, x, y]);
 
   // Mobile: no 3D tilt, just subtle scale on touch

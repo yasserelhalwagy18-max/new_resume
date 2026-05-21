@@ -17,7 +17,9 @@ import { ArrowUp } from "lucide-react";
 const DepthEnvironment = lazy(() => import("./components/DepthEnvironment").then(module => ({ default: module.DepthEnvironment })));
 
 export default function App() {
-  const [lang, setLang] = useState<Language>("fa");
+  const [lang, setLang] = useState<Language>(
+    (typeof document !== "undefined" && document.documentElement.lang as Language) || "fa"
+  );
   const [showTop, setShowTop] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
